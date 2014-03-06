@@ -80,7 +80,7 @@ Each top-level directory is then organized by data-type, and each data-type has 
     ├── cache 
     │   └── sopr 
     │       ├── 1999
-    │       │   ├── 1999_1.zip
+    │       │   ├── 1999_1.zip *(downloaded zip)*
     │       │   ├── 1999_2.zip
     │       │   ├── 1999_3.zip
     │       │   └── 1999_4.zip
