@@ -77,16 +77,27 @@ Because lobbying disclosures are both incomplete and a bit awkwardly formatted, 
 Each top-level directory is then organized by data-type, and each data-type has its own subfolder organization. In the case of SOPR filings (the output of `./run sopr`), the file tree is organized by year, quarter, month, day and filing type. Two data output files will be generated for each filing: the original XML (original.xml) a JSON version (data.json) and an XML version (data.xml). The result is the following folder structure:
 
     .
-    ├── original
+    ├── cache 
+    │   └── sopr 
+    │       ├── 1999
+    │       │   ├── 1999_1.zip
+    │       │   ├── 1999_2.zip
+    │       │   ├── 1999_3.zip
+    │       │   └── 1999_4.zip
+    │       ├ ...
+    │       └── 2014
+    │           ├── 2014_1.zip
+    │           ├── 2014_2.zip
+    │           ├── 2014_3.zip
+    │           └── 2014_4.zip
+    ├── original 
     │   └── sopr 
     │       ├── 1999 *(year)*
     │       │   ├── Q1 *(quarter)*
-    │       │   │   ├── 1999_1.zip *(downloaded zip)*
     │       │   │   ├── 1999_1_1_1.xml *(each XML file contains multiple filings)*
     │       │   │   ├── 1999_1_2_1.xml
     │       │   │   └── 1999_1_3_1.xml
     │       │   ├── Q2
-    │       │   │   ├── 1999_2.zip
     │       │   │   ├── 1999_2_4_1.xml
     │       │   │   ├ ...
     │       │   │   └── 1999_2_6_1.xml
