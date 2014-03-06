@@ -1,0 +1,20 @@
+# output directories
+output:
+  cache:
+  data: 
+
+# email settings
+email: 
+  
+  # smtp details
+  hostname: 
+  port: 
+  user_name:
+  password: 
+  starttls: 
+
+  # email content
+  subject: "[lobbying-domestic] Notice"
+  from: 
+  from_name: 
+  to: 
