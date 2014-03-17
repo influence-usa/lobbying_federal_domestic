@@ -60,8 +60,6 @@ The scripts will cache all downloaded pages and zip files, and it will not re-fe
 
     ./run bills --force
 
-The --force flag applies to all data types. Since the --force flag forces a download and parse of every object, the --fast flag for bills and votes will attempt to process only objects that are believed to have changed. Always use --fast with --force.
-
 Debugging messages are hidden by default. To include them, run with --log=info or --debug. To hide even warnings, run with --log=error.
 
 To get emailed with errors, copy config.yml.example to config.yml and fill in the SMTP options. The script will automatically use the details when a parsing or execution error occurs.
