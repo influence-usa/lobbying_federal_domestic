@@ -23,6 +23,7 @@ class EncodingFormatter(logging.Formatter):
 def set_up_logging(function_name, loglevel):
     format_string = ' - '.join(["%(asctime)s",
                                "%(name)s",
+                               "%(funcName)s",
                                "%(levelname)s",
                                "%(message)s"])
     # create logger

@@ -10,20 +10,22 @@ from settings import CACHE_DIR
 from .utils import mkdir_p
 from .log import set_up_logging
 
+log = set_up_logging('download', loglevel=logging.DEBUG)
 
 # GENERAL DOWNLOAD FUNCTIONS
 def download(url, output_loc):
-    request = requests.get(url, stream=True)
-    try:
-        with open(output_loc, 'wb') as output_file:
-            for chunk in request.iter_content():
-                output_file.write(chunk)
-        return request.headers['content-length']
-    except Exception as e:
-        if not request.ok:
-            request.raise_for_status()
-        else:
-            raise e
+    response = requests.get(url, stream=True)
+    if response.ok:
+        try:
+            with open(output_loc, 'wb') as output_file:
+                for chunk in response.iter_content():
+                    output_file.write(chunk)
+            return response.headers['content-length']
+        except Exception as e:
+            log.error(e)
+    else:
+        log.error('response not okay: '+response.reason)
+        response.raise_for_status()
 
 
 def download_all(url_loc_pairs):
@@ -33,16 +35,19 @@ def download_all(url_loc_pairs):
 
 def is_not_cached(url_loc_pair):
     url, output_loc = url_loc_pair
-    request = requests.get(url, stream=True)
+    response = requests.get(url, stream=True)
+    if not response.ok:
+        log.warn('response not okay: '+response.reason)
+        return False
     if os.path.exists(output_loc):
-        downloaded_size = os.path.getsize(output_loc)
-        logging.debug(
+        downloaded_size = int(os.path.getsize(output_loc))
+        log.debug(
             'found {output_loc}: {size}'.format(
                 output_loc=output_loc,
                 size=downloaded_size))
-        size_on_server = request.headers['content-length']
+        size_on_server = int(response.headers['content-length'])
         if downloaded_size != size_on_server:
-            logging.debug(
+            log.debug(
                 're-downloaded {url}: {size}'.format(
                     url=url,
                     size=size_on_server))
@@ -55,6 +60,9 @@ def is_not_cached(url_loc_pair):
 
 # SPECIFIC TASKS
 def download_sopr(options):
+    if options.get('loglevel',None):
+        log.setLevel(options['loglevel'])
+
     def _url_to_loc(url):
         fname = requests.utils.urlparse(url).path.split('/')[-1]
         year, quarter = fname.split('.')[0].split('_')
@@ -73,8 +81,6 @@ def download_sopr(options):
     downloaded = _urls >> map(_url_to_loc) \
                        >> filter(is_not_cached) \
                        >> ThreadPool(download_all, poolsize=4)
-
-    log = set_up_logging('download_sopr', loglevel=options.get('loglevel'))
 
     for url, output_loc, content_length in downloaded:
         log.info(
