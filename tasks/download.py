@@ -36,9 +36,6 @@ def download_all(url_loc_pairs):
 def is_not_cached(url_loc_pair):
     url, output_loc = url_loc_pair
     response = requests.get(url, stream=True)
-    if not response.ok:
-        log.warn('response not okay: '+response.reason)
-        return False
     if os.path.exists(output_loc):
         downloaded_size = int(os.path.getsize(output_loc))
         log.debug(
