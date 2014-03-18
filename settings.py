@@ -13,12 +13,14 @@ else:
 basedir = os.path.dirname(os.path.realpath(__file__))
 
 if not config:
+    LOG_DIR = os.path.join(basedir,'log')
+    LOGGING_EMAIL = None
     DATA_DIR = os.path.join(basedir,'data')
     CACHE_DIR = os.path.join(basedir,'cache')
     ORIG_DIR = os.path.join(basedir,'original')
 else:
-    DATA_DIR = os.path.realpath(config.output)
-    CACHE_DIR = os.path.realpath(config.cache)
-    ORIG_DIR = os.path.realpath(config.original)
-
-
+    LOG_DIR = os.path.realpath(config.log)
+    LOGGING_EMAIL = config.email
+    DATA_DIR = os.path.realpath(config.output.data)
+    CACHE_DIR = os.path.realpath(config.output.cache)
+    ORIG_DIR = os.path.realpath(config.output.original)

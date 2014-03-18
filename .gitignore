@@ -2,3 +2,5 @@
 *.pyc
 *.pyo
 data
+cache
+log
