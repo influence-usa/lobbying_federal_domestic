@@ -75,10 +75,11 @@ To get emailed with errors, copy config.yml.example to config.yml and fill in th
 Output 
 ------
 
-Because lobbying disclosures are both incomplete and a bit awkwardly formatted, the scripts included here make various decisions about how to alter them. While these alterations serve our purposes, they may not be what you're lookign for. In any case, however, we'll always be interested in what the original source documents are. For that reason, the top-level data directory ha
+Because lobbying disclosures are both incomplete and a bit awkwardly formatted, the scripts included here make various decisions about how to alter them. While these alterations serve our purposes, they may not be what you're lookign for. In any case, however, we'll always be interested in what the original source documents are. For that reason, the top-level `data` directory has several subdirectories.
 
-  - original data goes into the top-level `original` directory
-  - transformed data goes into a top-level `data` directory 
+  - downloaded data goes into the `data/cache` directory
+  - original extracted data goes into the `data/original` directory
+  - transformed data goes into the `data/transformed` directory
   
 Each top-level directory is then organized by data-type, and each data-type has its own subfolder organization. In the case of SOPR filings (the output of `./run sopr`), the file tree is organized by year, quarter, month, day and filing type. Two data output files will be generated for each filing: the original XML (original.xml) a JSON version (data.json) and an XML version (data.xml). The result is the following folder structure:
 
