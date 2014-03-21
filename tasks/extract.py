@@ -7,17 +7,10 @@ from stream import ThreadPool
 from stream import map, filter
 
 from settings import CACHE_DIR, ORIG_DIR
-from .utils import mkdir_p
+from .utils import mkdir_p, translate_dir
 from .log import set_up_logging
 
 log = set_up_logging('extract', loglevel=logging.DEBUG)
-
-
-def translate_dir(path, from_dir=None, to_dir=None):
-    destination_dir = os.path.dirname(path.replace(from_dir, to_dir))
-    if not os.path.exists(destination_dir):
-        mkdir_p(destination_dir)
-    return (path, destination_dir)
 
 
 def check_ext(path, ext=None):
