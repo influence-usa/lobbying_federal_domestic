@@ -13,7 +13,7 @@ loglevels = {'info': logging.INFO,
              'warn': logging.WARN}
 
 possible_actions = ['download', 'extract', 'transform']
-data_types = ['sopr', ]
+data_types = ['sopr', 'house_xml']
 
 parser = argparse.ArgumentParser(description='Run scripts')
 
@@ -25,5 +25,8 @@ parser.add_argument('--loglevel', default='debug')
 options = parser.parse_args().__dict__
 options['loglevel'] = loglevels[options['loglevel']]
 
-task_mod = getattr(tasks, '{action}_{data_type}'.format(**options))
+try:
+    task_mod = getattr(tasks, '{action}_{data_type}'.format(**options))
+except AttributeError:
+    "Not implemented yet, sorry!"
 task_mod(options)
