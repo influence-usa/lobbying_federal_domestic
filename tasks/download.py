@@ -4,8 +4,10 @@ import logging
 from itertools import product
 
 import requests
+# Importing from stream.py, but renaming to avoid confusion with built-ins
 from stream import ThreadPool
-from stream import map, filter
+from stream import map as st_map
+from stream import filter as st_filter
 
 from settings import CACHE_DIR
 from .utils import mkdir_p
@@ -77,8 +79,8 @@ def download_sopr(options):
              for year, quarter in
              product(xrange(1999, 2015), xrange(1, 5))]
 
-    downloaded = _urls >> map(_url_to_loc) \
-                       >> filter(is_not_cached) \
+    downloaded = _urls >> st_map(_url_to_loc) \
+                       >> st_filter(is_not_cached) \
                        >> ThreadPool(download_all, poolsize=4)
 
     for url, output_loc, content_length in downloaded:
