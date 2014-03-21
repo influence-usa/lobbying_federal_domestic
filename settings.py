@@ -10,14 +10,15 @@ if os.path.exists(path):
 else:
   config = None
 
-basedir = os.path.join(os.path.dirname(os.path.realpath(__file__)),'data')
+basedir = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+DATA_DIR = os.path.join(basedir, 'data')
 
 if not config:
     LOG_DIR = os.path.join(basedir,'log')
     LOGGING_EMAIL = None
-    TRANS_DIR = os.path.join(basedir,'transformed')
-    CACHE_DIR = os.path.join(basedir,'cache')
-    ORIG_DIR = os.path.join(basedir,'original')
+    TRANS_DIR = os.path.join(DATA_DIR,'transformed')
+    CACHE_DIR = os.path.join(DATA_DIR,'cache')
+    ORIG_DIR = os.path.join(DATA_DIR,'original')
 else:
     LOG_DIR = os.path.realpath(config.log)
     LOGGING_EMAIL = config.email
