@@ -5,9 +5,13 @@ from itertools import product
 
 import requests
 # Importing from stream.py, but renaming to avoid confusion with built-ins
-from stream import ThreadPool
+from stream import ThreadPool, Stream
 from stream import map as st_map
 from stream import filter as st_filter
+
+from pyquery import PyQuery as pq
+import cookielib
+import traceback
 
 from settings import CACHE_DIR
 from .utils import mkdir_p
@@ -17,8 +21,8 @@ log = set_up_logging('download', loglevel=logging.DEBUG)
 
 
 # GENERAL DOWNLOAD FUNCTIONS
-def download(url, output_loc):
-    response = requests.get(url, stream=True)
+def response_download(response_loc_pair):
+    response, output_loc = response_loc_pair
     if response.ok:
         try:
             with open(output_loc, 'wb') as output_file:
@@ -31,15 +35,16 @@ def download(url, output_loc):
         log.error('response not okay: '+response.reason)
         response.raise_for_status()
 
+def download(url, output_loc):
+    return response_download((requests.get(url, stream=True), output_loc))
+
 
 def download_all(url_loc_pairs):
     for url, output_loc in url_loc_pairs:
         yield url, output_loc, download(url, output_loc)
 
-
-def is_not_cached(url_loc_pair):
-    url, output_loc = url_loc_pair
-    response = requests.get(url, stream=True)
+def response_is_not_cached(response_loc_pair):
+    response, output_loc = response_loc_pair
     if os.path.exists(output_loc):
         downloaded_size = int(os.path.getsize(output_loc))
         log.debug(
@@ -49,15 +54,20 @@ def is_not_cached(url_loc_pair):
         size_on_server = int(response.headers['content-length'])
         if downloaded_size != size_on_server:
             log.debug(
-                're-downloaded {url}: {size}'.format(
-                    url=url,
+                're-downloaded {output_loc}: {size}'.format(
+                    output_loc=output_loc,
                     size=size_on_server))
             return True
         else:
+            response.close()
             return False
     else:
         return True
 
+def is_not_cached(url_loc_pair):
+    url, output_loc = url_loc_pair
+    response = requests.head(url)
+    return response_is_not_cached((response, output_loc))
 
 # SPECIFIC TASKS
 def download_sopr(options):
@@ -95,7 +105,7 @@ def download_sopr(options):
 
 
 def download_house_xml(options):
-    from selenium import webdriver
+    FORM_URL = 'http://disclosures.house.gov/ld/LDDownload.aspx?KeepThis=true'
 
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
@@ -105,30 +115,13 @@ def download_house_xml(options):
     if not os.path.exists(OUT_DIR):
         mkdir_p(OUT_DIR)
 
-    def _go_to_url(driver, url):
-        driver.get(search_url)
+    jar = cookielib.CookieJar()
+    form_page = requests.get(FORM_URL, cookies=jar)
+    d = pq(form_page.text, parser='html')
 
-    # ### Firefox profile for auto-downloading
-    fp = webdriver.FirefoxProfile()
+    form_data = {input.attr('name'): input.val() for input in d('input[name]').items()}
 
-    fp.set_preference("browser.download.folderList", 2)
-    fp.set_preference("browser.download.manager.showWhenStarting", False)
-    fp.set_preference("browser.download.dir", OUT_DIR)
-    fp.set_preference("browser.helperApps.neverAsk.saveToDisk",
-                      "application/x-octet-stream")
-
-    driver = webdriver.Firefox(firefox_profile=fp)
-
-    search_url = "http://disclosures.house.gov/ld/ldsearch.aspx"
-
-    _go_to_url(driver, search_url)
-    dl_button = driver.find_element_by_css_selector(
-                 'html body div#search_container div#downloadLink p a')
-    dl_button.click()
-
-    driver.switch_to_frame('TB_iframeContent')
-
-    filing_selector = driver.find_element_by_css_selector('select#selFilesXML')
+    filing_selector = d('select#selFilesXML')
 
     space = r'(\ )'
     filing_type = r'(?P<filing_type>(?P<filing_type_year>\d{4})\ (?P<filing_type_form>MidYear|Registrations|YearEnd|(1st|2nd|3rd|4th)Quarter))'
@@ -138,14 +131,38 @@ def download_house_xml(options):
 
     option_rgx = re.compile(filing_type+space+xml+space+date+space+time)
 
-    dl_options = filing_selector.find_elements_by_tag_name('option')
+    dl_options = filing_selector.find('option')
 
-    dl_options_with_metadata = zip(dl_options, (re.match(option_rgx,
-                                   o.get_attribute('value')).groupdict()
-                                   for o in dl_options))
+    def _get_request_loc_pair(value):
+        info = re.match(option_rgx, value).groupdict()
+        fields = dict(form_data, **{filing_selector.attr('name'): value})
 
-    for option, metadata in dl_options_with_metadata:
-        option.click()
-        driver.find_element_by_css_selector('#btnDownloadXML').click()
+        output_dir = os.path.join(CACHE_DIR, 'house_clerk')
+        mkdir_p(output_dir)
+        output_name = os.path.join(output_dir, "%s_%s_XML.zip" % (info['filing_type_year'], info['filing_type_form']))
 
-    driver.close()
+        log.info('starting download of {output_loc}'.format(output_loc=output_name))
+
+        response = requests.post(FORM_URL, data=fields, stream=True, cookies=jar)
+
+        return (response, output_name)
+
+    def _download_all(q):
+        for result in q:
+            yield result[1], response_download(result)
+
+    downloaded = \
+        (option.attr('value') for option in dl_options.items()) \
+        >> st_map(_get_request_loc_pair) \
+        >> st_filter(response_is_not_cached) \
+        >> ThreadPool(_download_all, poolsize=4)
+
+    for output_loc, content_length in downloaded:
+        log.info(
+            'successfully downloaded to {output_loc}({size})'.format(
+                output_loc=output_loc, size=content_length))
+
+    for (response, output_loc), exception in downloaded.failure:
+        log.error(
+            'downloading to {output_loc} failed: {exception}'.format(
+                output_loc=output_loc, exception=exception))
