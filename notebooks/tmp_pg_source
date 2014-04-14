@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><title>
+	Lobby Disclosure Search 
+</title><link href="css/LDSearchStyles.css" media="screen" type="text/css" rel="stylesheet" /><link href="css/thickbox.css" media="screen" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/ShowHide.js"></script>
+    <script type="text/javascript" src="js/SlidingPanel.js"></script>
+	<script type="text/javascript" src="js/jquery-1.1.3.1.pack.js"></script>
+	<script type="text/javascript" src="js/thickbox-compressed.js"></script>
+    <script type="text/javascript">
+     function setFocus(ctl) {
+        setTimeout(function () { document.getElementById(ctl).focus() }, 10); 
+    }
+    
+		function openwindow(){
+			window.open('pdfForm.aspx?ID={0}',null,'width=650,height=700,location=no,resizable=yes');
+		}
+		function issueData(j){
+		window.open('pdfForm.aspx?ID={' + j + '}',null,'width=650,height=700,location=no,resizable=yes');
+		}
+	</script>
+</head>
+<body>
+<div id="skip">
+<a onclick="javascript:setFocus('DropDownList1');" accesskey="g" href="#DropDownList1">Skip to Form</a>
+<a onclick="javascript:setFocus('cmdSearch');" accesskey="i" href="#cmdSearch">Skip to Search</a>
+</div>
+<div id="search_container">
+	<div id="header_wrapper">
+		<div id="search_header">
+			<h1><a class="neutral_h1" href="http://lobbyingdisclosure.house.gov/index.html">Lobbying Disclosure</a></h1>
+			<h3><a href="http://clerk.house.gov">Office of the Clerk, United States House of Representatives</a></h3>
+		</div>
+	</div>
+	
+	<div id="downloadLink">
+		<p><a class="thickbox" title="Download Past Filings" href="LDDownload.aspx?KeepThis=true&amp;TB_iframe=true&amp;height=100&amp;width=350">Download past filings in XML format</a></p>	
+	</div>
+	
+	<div id="form_wrapper">
+	
+		<h2>Search Past Filings</h2>
+		<span id="tip_link"><a onclick="initSlideLeftPanel();return false" href="#">Show Search Tips</a></span>
+		
+		<form id="form1" action="ldsearch.aspx" method="post" name="form1">
+<div>
+<input type="hidden" value="" id="__EVENTTARGET" name="__EVENTTARGET" />
+<input type="hidden" value="" id="__EVENTARGUMENT" name="__EVENTARGUMENT" />
+<input type="hidden" value="" id="__LASTFOCUS" name="__LASTFOCUS" />
+<input type="hidden" value="/wEPDwUKMTQ5NDU0NzQxOQ9kFgICAw9kFgwCAQ9kFhgCCQ8QDxYGHg1EYXRhVGV4dEZpZWxkBQtzZWFyY2hGaWVsZB4ORGF0YVZhbHVlRmllbGQFD3NlYXJjaEZpZWxkTmFtZR4LXyFEYXRhQm91bmRnZBAVGgxTZWFyY2ggRmllbGQPUmVnaXN0cmFudCBOYW1lC0NsaWVudCBOYW1lCEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFR5cGULRmlsaW5nIFllYXIKSXNzdWUgQ29kZQ1Mb2JieWlzdCBOYW1lEkFmZmlsaWF0ZWQgQ291bnRyeQ9BZmZpbGlhdGVkIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpcnkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBFHb3Zlcm5tZW50IEVudGl0eQpJc3N1ZSBEYXRhEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhxMb2JieWlzdHMgRnVsbCBOYW1lIEluYWN0aXZlElJlZ2lzdHJhbnQgQ291bnRyeRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5FRoAD1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC1JlcG9ydCBUeXBlC1JlcG9ydCBZZWFyCUFsaSBJc3N1ZRJMb2JieWlzdCBGdWxsIE5hbWUSQWZmaWxpYXRlZCBDb3VudHJ5HEFmZmlsaWF0ZWQgT3JnYW5pemF0aW9uIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpdHkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBNHb3Zlcm5tZW50IEFnZW5jaWVzGlNwZWNpZmljIElzc3VlIERlc2NyaXB0aW9uEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhtMb2JieWlzdCBGdWxsIE5hbWUgSW5hY3RpdmUSUmVnaXN0cmFudCBDb3VudHJ5FlJlZ2lzdHJhbnQgUFBCIENvdW50cnkUKwMaZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAINDxBkZBYAZAIPDxAPFgYfAAULc2VhcmNoRmllbGQfAQUPc2VhcmNoRmllbGROYW1lHwJnZBAVGgxTZWFyY2ggRmllbGQPUmVnaXN0cmFudCBOYW1lC0NsaWVudCBOYW1lCEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFR5cGULRmlsaW5nIFllYXIKSXNzdWUgQ29kZQ1Mb2JieWlzdCBOYW1lEkFmZmlsaWF0ZWQgQ291bnRyeQ9BZmZpbGlhdGVkIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpcnkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBFHb3Zlcm5tZW50IEVudGl0eQpJc3N1ZSBEYXRhEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhxMb2JieWlzdHMgRnVsbCBOYW1lIEluYWN0aXZlElJlZ2lzdHJhbnQgQ291bnRyeRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5FRoAD1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC1JlcG9ydCBUeXBlC1JlcG9ydCBZZWFyCUFsaSBJc3N1ZRJMb2JieWlzdCBGdWxsIE5hbWUSQWZmaWxpYXRlZCBDb3VudHJ5HEFmZmlsaWF0ZWQgT3JnYW5pemF0aW9uIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpdHkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBNHb3Zlcm5tZW50IEFnZW5jaWVzGlNwZWNpZmljIElzc3VlIERlc2NyaXB0aW9uEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhtMb2JieWlzdCBGdWxsIE5hbWUgSW5hY3RpdmUSUmVnaXN0cmFudCBDb3VudHJ5FlJlZ2lzdHJhbnQgUFBCIENvdW50cnkUKwMaZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAITDxBkZBYAZAIdDxAPFgYfAAULc2VhcmNoRmllbGQfAQUPc2VhcmNoRmllbGROYW1lHwJnZBAVGgxTZWFyY2ggRmllbGQPUmVnaXN0cmFudCBOYW1lC0NsaWVudCBOYW1lCEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFR5cGULRmlsaW5nIFllYXIKSXNzdWUgQ29kZQ1Mb2JieWlzdCBOYW1lEkFmZmlsaWF0ZWQgQ291bnRyeQ9BZmZpbGlhdGVkIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpcnkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBFHb3Zlcm5tZW50IEVudGl0eQpJc3N1ZSBEYXRhEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhxMb2JieWlzdHMgRnVsbCBOYW1lIEluYWN0aXZlElJlZ2lzdHJhbnQgQ291bnRyeRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5FRoAD1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC1JlcG9ydCBUeXBlC1JlcG9ydCBZZWFyCUFsaSBJc3N1ZRJMb2JieWlzdCBGdWxsIE5hbWUSQWZmaWxpYXRlZCBDb3VudHJ5HEFmZmlsaWF0ZWQgT3JnYW5pemF0aW9uIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpdHkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBNHb3Zlcm5tZW50IEFnZW5jaWVzGlNwZWNpZmljIElzc3VlIERlc2NyaXB0aW9uEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhtMb2JieWlzdCBGdWxsIE5hbWUgSW5hY3RpdmUSUmVnaXN0cmFudCBDb3VudHJ5FlJlZ2lzdHJhbnQgUFBCIENvdW50cnkUKwMaZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAIhDxBkZBYAZAIjDxAPFgYfAAULc2VhcmNoRmllbGQfAQUPc2VhcmNoRmllbGROYW1lHwJnZBAVGgxTZWFyY2ggRmllbGQPUmVnaXN0cmFudCBOYW1lC0NsaWVudCBOYW1lCEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFR5cGULRmlsaW5nIFllYXIKSXNzdWUgQ29kZQ1Mb2JieWlzdCBOYW1lEkFmZmlsaWF0ZWQgQ291bnRyeQ9BZmZpbGlhdGVkIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpcnkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBFHb3Zlcm5tZW50IEVudGl0eQpJc3N1ZSBEYXRhEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhxMb2JieWlzdHMgRnVsbCBOYW1lIEluYWN0aXZlElJlZ2lzdHJhbnQgQ291bnRyeRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5FRoAD1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC1JlcG9ydCBUeXBlC1JlcG9ydCBZZWFyCUFsaSBJc3N1ZRJMb2JieWlzdCBGdWxsIE5hbWUSQWZmaWxpYXRlZCBDb3VudHJ5HEFmZmlsaWF0ZWQgT3JnYW5pemF0aW9uIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpdHkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBNHb3Zlcm5tZW50IEFnZW5jaWVzGlNwZWNpZmljIElzc3VlIERlc2NyaXB0aW9uEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhtMb2JieWlzdCBGdWxsIE5hbWUgSW5hY3RpdmUSUmVnaXN0cmFudCBDb3VudHJ5FlJlZ2lzdHJhbnQgUFBCIENvdW50cnkUKwMaZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAImDxBkZBYAZAIwDxAPFgYfAAULc2VhcmNoRmllbGQfAQUPc2VhcmNoRmllbGROYW1lHwJnZBAVGgxTZWFyY2ggRmllbGQPUmVnaXN0cmFudCBOYW1lC0NsaWVudCBOYW1lCEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFR5cGULRmlsaW5nIFllYXIKSXNzdWUgQ29kZQ1Mb2JieWlzdCBOYW1lEkFmZmlsaWF0ZWQgQ291bnRyeQ9BZmZpbGlhdGVkIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpcnkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBFHb3Zlcm5tZW50IEVudGl0eQpJc3N1ZSBEYXRhEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhxMb2JieWlzdHMgRnVsbCBOYW1lIEluYWN0aXZlElJlZ2lzdHJhbnQgQ291bnRyeRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5FRoAD1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC1JlcG9ydCBUeXBlC1JlcG9ydCBZZWFyCUFsaSBJc3N1ZRJMb2JieWlzdCBGdWxsIE5hbWUSQWZmaWxpYXRlZCBDb3VudHJ5HEFmZmlsaWF0ZWQgT3JnYW5pemF0aW9uIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpdHkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBNHb3Zlcm5tZW50IEFnZW5jaWVzGlNwZWNpZmljIElzc3VlIERlc2NyaXB0aW9uEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhtMb2JieWlzdCBGdWxsIE5hbWUgSW5hY3RpdmUSUmVnaXN0cmFudCBDb3VudHJ5FlJlZ2lzdHJhbnQgUFBCIENvdW50cnkUKwMaZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAI0DxBkZBYAZAI2DxAPFgYfAAULc2VhcmNoRmllbGQfAQUPc2VhcmNoRmllbGROYW1lHwJnZBAVGgxTZWFyY2ggRmllbGQPUmVnaXN0cmFudCBOYW1lC0NsaWVudCBOYW1lCEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFR5cGULRmlsaW5nIFllYXIKSXNzdWUgQ29kZQ1Mb2JieWlzdCBOYW1lEkFmZmlsaWF0ZWQgQ291bnRyeQ9BZmZpbGlhdGVkIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpcnkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBFHb3Zlcm5tZW50IEVudGl0eQpJc3N1ZSBEYXRhEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhxMb2JieWlzdHMgRnVsbCBOYW1lIEluYWN0aXZlElJlZ2lzdHJhbnQgQ291bnRyeRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5FRoAD1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC1JlcG9ydCBUeXBlC1JlcG9ydCBZZWFyCUFsaSBJc3N1ZRJMb2JieWlzdCBGdWxsIE5hbWUSQWZmaWxpYXRlZCBDb3VudHJ5HEFmZmlsaWF0ZWQgT3JnYW5pemF0aW9uIE5hbWUPQW1vdW50IFJlcG9ydGVkDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGUaRm9yZWlnbiBFbnRpdHkgUFBCIENvdW50cnkWRm9yZWlnbiBFbnRpdHkgQ291bnRyeRNGb3JlaWduIEVudGl0eSBOYW1lGEZvcmVpZ24gRW50aXR5IE93bmVyc2hpcBNHb3Zlcm5tZW50IEFnZW5jaWVzGlNwZWNpZmljIElzc3VlIERlc2NyaXB0aW9uEExvYmJ5aXN0IENvdmVyZWQZTG9iYnlpc3QgQ292ZXJlZCBQb3NpdGlvbhtMb2JieWlzdCBGdWxsIE5hbWUgSW5hY3RpdmUSUmVnaXN0cmFudCBDb3VudHJ5FlJlZ2lzdHJhbnQgUFBCIENvdW50cnkUKwMaZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dkZAI6DxBkZBYAZAIDD2QWAgIDDxBkZBYBAgFkAgUPZBYEAgEPEA8WBh8ABQtzZWFyY2hGaWVsZB8BBQ1zb3J0ZmllbGRuYW1lHwJnZBAVDQ9SZWdpc3RyYW50IE5hbWULQ2xpZW50IE5hbWUWUmVnaXN0cmFudCBQUEIgQ291bnRyeQhIb3VzZSBJRA1GaWxpbmcgUGVyaW9kC0ZpbGluZyBZZWFyDkNsaWVudCBDb3VudHJ5EkNsaWVudCBQUEIgQ291bnRyeQxDbGllbnQgU3RhdGULRmlsaW5nIFR5cGURR292ZXJubWVudCBFbnRpdHkQTG9iYnlpc3QgQ292ZXJlZBJSZWdpc3RyYW50IENvdW50cnkVDQ5yZWdpc3RyYW50TmFtZQpjbGllbnROYW1lFHJlZ2lzdHJhbnRQUEJDb3VudHJ5B2hvdXNlSUQMZmlsaW5nUGVyaW9kCnJlcG9ydFllYXINY2xpZW50Q291bnRyeRBjbGllbnRQUEJDb3VudHJ5C2NsaWVudFN0YXRlCnJlcG9ydFR5cGUMZ292X2FnZW5jaWVzD2xvYmJ5aXN0Q292ZXJlZBFyZWdpc3RyYW50Q291bnRyeRQrAw1nZ2dnZ2dnZ2dnZ2dnZGQCAw8QDxYGHwAFC3NlYXJjaEZpZWxkHwEFDXNvcnRmaWVsZG5hbWUfAmdkEBUND1JlZ2lzdHJhbnQgTmFtZQtDbGllbnQgTmFtZRZSZWdpc3RyYW50IFBQQiBDb3VudHJ5CEhvdXNlIElEDUZpbGluZyBQZXJpb2QLRmlsaW5nIFllYXIOQ2xpZW50IENvdW50cnkSQ2xpZW50IFBQQiBDb3VudHJ5DENsaWVudCBTdGF0ZQtGaWxpbmcgVHlwZRFHb3Zlcm5tZW50IEVudGl0eRBMb2JieWlzdCBDb3ZlcmVkElJlZ2lzdHJhbnQgQ291bnRyeRUNDnJlZ2lzdHJhbnROYW1lCmNsaWVudE5hbWUUcmVnaXN0cmFudFBQQkNvdW50cnkHaG91c2VJRAxmaWxpbmdQZXJpb2QKcmVwb3J0WWVhcg1jbGllbnRDb3VudHJ5EGNsaWVudFBQQkNvdW50cnkLY2xpZW50U3RhdGUKcmVwb3J0VHlwZQxnb3ZfYWdlbmNpZXMPbG9iYnlpc3RDb3ZlcmVkEXJlZ2lzdHJhbnRDb3VudHJ5FCsDDWdnZ2dnZ2dnZ2dnZ2dkZAIHD2QWCgIJDxBkZBYBZmQCDw8PFgIeB1Zpc2libGVoZGQCEQ8PFgIfA2hkZAITDw8WAh8DaGRkAhUPDxYCHwNoZGQCCQ9kFgICAQ8PFgIfA2hkZAILD2QWCAIDDw8WAh8DaGRkAgUPDxYCHwNoZGQCBw8PFgIfA2hkZAIJDw8WAh8DaGRkGAEFCUdyaWRWaWV3MQ9nZI3JyQTRFdlgMSlEeuDzEOSbu/2e" id="__VIEWSTATE" name="__VIEWSTATE" />
+</div>
+
+<script type="text/javascript">
+//&lt;![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]&gt;
+</script>
+
+
+<script type="text/javascript" src="/LD/WebResource.axd?d=s9zoML5e5TniY1CNolG7uEYSZ32wWZO3duQCSQFGki9KSW8CjPX4_3QXjWwsK2njakfocBD9XBObflogOmHsm_0-fww1&amp;t=635199614887188881"></script>
+
+<div>
+
+	<input type="hidden" value="/wEWzQECiqXZ1gMCneSP5QoCneSP5QoCp8fdqwoC2beAjAMC2PSHXQLq/pfLCALH1bffDgK2wcmHCgLHytfJCgLZlPPVBAKmkez9DgK8wOL0CALi5vpVApidvFIC39ae9QIC85mRuQIC3J7X7woC75q2/Q4Ckob++wEClfrzyA8C/P7H9AUC3sm/aAKX2OGyAgK/zsH5CAKTvu+JAwLJ87S6CgLhlvzrAgLs0bLrBgKg5I/lCgKg5I/lCgKax92rCgLkt4CMAwLl9IddAtf+l8sIAvrVt98OAovByYcKAvrK18kKAuSU89UEApuR7P0OAoHA4vQIAt/m+lUCpZ28UgLi1p71AgLOmZG5AgLhntfvCgLSmrb9DgKvhv77AQKo+vPIDwLB/sf0BQLjyb9oAqrY4bICAoLOwfkIAq6+74kDAvTztLoKAtyW/OsCAuzR7nwCnuSP5QoCnuSP5QoCpMfdqwoC2reAjAMC2/SHXQLp/pfLCALE1bffDgK1wcmHCgLEytfJCgLalPPVBAKlkez9DgK/wOL0CALh5vpVApudvFIC3Nae9QIC8JmRuQIC357X7woC7Jq2/Q4CkYb++wEClvrzyA8C//7H9AUC3cm/aAKU2OGyAgK8zsH5CAKQvu+JAwLK87S6CgLilvzrAgLs0fbZDAKh5I/lCgKh5I/lCgKbx92rCgLlt4CMAwLk9IddAtb+l8sIAvvVt98OAorByYcKAvvK18kKAuWU89UEApqR7P0OAoDA4vQIAt7m+lUCpJ28UgLj1p71AgLPmZG5AgLgntfvCgLTmrb9DgKuhv77AQKp+vPIDwLA/sf0BQLiyb9oAqvY4bICAoPOwfkIAq++74kDAvXztLoKAt2W/OsCAuzRgtgJAp/kj+UKAp/kj+UKAqXH3asKAtu3gIwDAtr0h10C6P6XywgCxdW33w4CtMHJhwoCxcrXyQoC25Tz1QQCpJHs/Q4CvsDi9AgC4Ob6VQKanbxSAt3WnvUCAvGZkbkCAt6e1+8KAu2atv0OApCG/vsBApf688gPAv7+x/QFAtzJv2gCldjhsgICvc7B+QgCkb7viQMCy/O0ugoC45b86wIC7NGKtQUCouSP5QoCouSP5QoCmMfdqwoC5reAjAMC5/SHXQLV/pfLCAL41bffDgKJwcmHCgL4ytfJCgLmlPPVBAKZkez9DgKDwOL0CALd5vpVAqedvFIC4Nae9QICzJmRuQIC457X7woC0Jq2/Q4CrYb++wECqvrzyA8Cw/7H9AUC4cm/aAKo2OGyAgKAzsH5CAKsvu+JAwL287S6CgLelvzrAgLs0cbGDwLQ2++4BgLh9s+mBAK/y+qDCwLChKToAQK1n6DHBQKR5YaJBwK82IPbAQKT5OohAob4jrUPAsSZl/AMAojZhbEMAs6omrgBAqqN3KoEAtyXxvkNAr+D5mICt9Ox1wwC/6ijnggCyIa0uQgC7PyS9woCwcGXpQwC7v3+3w0C++GaywICuYCDjgEC9cCRzwECs7GOxgwC15TI1AkCoY7SBwLCmvKcDQLKyqWpAQKCsbfgBQLbxvf1BwKu1+DpAQLSq6PbDwLBpbKWCAKOvaeVBQL3jKLTDT5wEJvSD+hl5/jQMavBEHGuh3vR" id="__EVENTVALIDATION" name="__EVENTVALIDATION" />
+</div>
+		
+				
+            	                  
+			<div style="width:560px;" id="Panel1">
+	
+				<table>
+					<tbody><tr>
+						<td class="sub_head"><label id="Label1" for="DropDownList1">Search Field</label></td>
+						<td class="sub_head"><label id="Label3" for="TextBox1">Criteria</label></td>
+						<td class="spacer"> </td>
+						<td class="sub_head"><label id="Label4" for="DropDownList4">Search Field</label></td>
+						<td class="sub_head"><label id="Label5" for="TextBox4">Criteria</label></td>
+					</tr>
+					<tr>
+						<td>
+							<select id="DropDownList1" onchange="javascript:setTimeout('__doPostBack(\'DropDownList1\',\'\')', 0)" name="DropDownList1">
+		<option value="" selected="selected">Search Field</option>
+		<option value="Registrant Name">Registrant Name</option>
+		<option value="Client Name">Client Name</option>
+		<option value="House ID">House ID</option>
+		<option value="Filing Period">Filing Period</option>
+		<option value="Report Type">Filing Type</option>
+		<option value="Report Year">Filing Year</option>
+		<option value="Ali Issue">Issue Code</option>
+		<option value="Lobbyist Full Name">Lobbyist Name</option>
+		<option value="Affiliated Country">Affiliated Country</option>
+		<option value="Affiliated Organization Name">Affiliated Name</option>
+		<option value="Amount Reported">Amount Reported</option>
+		<option value="Client Country">Client Country</option>
+		<option value="Client PPB Country">Client PPB Country</option>
+		<option value="Client State">Client State</option>
+		<option value="Foreign Entity PPB Country">Foreign Entiry PPB Country</option>
+		<option value="Foreign Entity Country">Foreign Entity Country</option>
+		<option value="Foreign Entity Name">Foreign Entity Name</option>
+		<option value="Foreign Entity Ownership">Foreign Entity Ownership</option>
+		<option value="Government Agencies">Government Entity</option>
+		<option value="Specific Issue Description">Issue Data</option>
+		<option value="Lobbyist Covered">Lobbyist Covered</option>
+		<option value="Lobbyist Covered Position">Lobbyist Covered Position</option>
+		<option value="Lobbyist Full Name Inactive">Lobbyists Full Name Inactive</option>
+		<option value="Registrant Country">Registrant Country</option>
+		<option value="Registrant PPB Country">Registrant PPB Country</option>
+
+	</select>
+						</td>  
+						<td>
+							<input type="text" id="TextBox1" name="TextBox1" /> 
+							
+						</td>
+						<td class="spacer"> </td>     
+						<td>
+							<select id="DropDownList4" onchange="javascript:setTimeout('__doPostBack(\'DropDownList4\',\'\')', 0)" name="DropDownList4">
+		<option value="" selected="selected">Search Field</option>
+		<option value="Registrant Name">Registrant Name</option>
+		<option value="Client Name">Client Name</option>
+		<option value="House ID">House ID</option>
+		<option value="Filing Period">Filing Period</option>
+		<option value="Report Type">Filing Type</option>
+		<option value="Report Year">Filing Year</option>
+		<option value="Ali Issue">Issue Code</option>
+		<option value="Lobbyist Full Name">Lobbyist Name</option>
+		<option value="Affiliated Country">Affiliated Country</option>
+		<option value="Affiliated Organization Name">Affiliated Name</option>
+		<option value="Amount Reported">Amount Reported</option>
+		<option value="Client Country">Client Country</option>
+		<option value="Client PPB Country">Client PPB Country</option>
+		<option value="Client State">Client State</option>
+		<option value="Foreign Entity PPB Country">Foreign Entiry PPB Country</option>
+		<option value="Foreign Entity Country">Foreign Entity Country</option>
+		<option value="Foreign Entity Name">Foreign Entity Name</option>
+		<option value="Foreign Entity Ownership">Foreign Entity Ownership</option>
+		<option value="Government Agencies">Government Entity</option>
+		<option value="Specific Issue Description">Issue Data</option>
+		<option value="Lobbyist Covered">Lobbyist Covered</option>
+		<option value="Lobbyist Covered Position">Lobbyist Covered Position</option>
+		<option value="Lobbyist Full Name Inactive">Lobbyists Full Name Inactive</option>
+		<option value="Registrant Country">Registrant Country</option>
+		<option value="Registrant PPB Country">Registrant PPB Country</option>
+
+	</select>
+						</td>
+						<td>
+							<input type="text" id="TextBox4" name="TextBox4" />
+							
+					   </td>    
+					</tr>
+					<tr>
+						<td class="sub_head"><label id="Label6" for="DropDownList2">Search Field</label></td>
+						<td class="sub_head"><label id="Label7" for="TextBox2">Criteria</label></td>
+						<td class="spacer"> </td>
+						<td class="sub_head"><label id="Label8" for="DropDownList5">Search Field</label></td>
+						<td class="sub_head"><label id="Label9" for="TextBox5">Criteria</label></td>
+					</tr>
+					<tr>
+						<td>
+							<select id="DropDownList2" onchange="javascript:setTimeout('__doPostBack(\'DropDownList2\',\'\')', 0)" name="DropDownList2">
+		<option value="" selected="selected">Search Field</option>
+		<option value="Registrant Name">Registrant Name</option>
+		<option value="Client Name">Client Name</option>
+		<option value="House ID">House ID</option>
+		<option value="Filing Period">Filing Period</option>
+		<option value="Report Type">Filing Type</option>
+		<option value="Report Year">Filing Year</option>
+		<option value="Ali Issue">Issue Code</option>
+		<option value="Lobbyist Full Name">Lobbyist Name</option>
+		<option value="Affiliated Country">Affiliated Country</option>
+		<option value="Affiliated Organization Name">Affiliated Name</option>
+		<option value="Amount Reported">Amount Reported</option>
+		<option value="Client Country">Client Country</option>
+		<option value="Client PPB Country">Client PPB Country</option>
+		<option value="Client State">Client State</option>
+		<option value="Foreign Entity PPB Country">Foreign Entiry PPB Country</option>
+		<option value="Foreign Entity Country">Foreign Entity Country</option>
+		<option value="Foreign Entity Name">Foreign Entity Name</option>
+		<option value="Foreign Entity Ownership">Foreign Entity Ownership</option>
+		<option value="Government Agencies">Government Entity</option>
+		<option value="Specific Issue Description">Issue Data</option>
+		<option value="Lobbyist Covered">Lobbyist Covered</option>
+		<option value="Lobbyist Covered Position">Lobbyist Covered Position</option>
+		<option value="Lobbyist Full Name Inactive">Lobbyists Full Name Inactive</option>
+		<option value="Registrant Country">Registrant Country</option>
+		<option value="Registrant PPB Country">Registrant PPB Country</option>
+
+	</select>
+						</td>
+						<td>
+							<input type="text" id="TextBox2" name="TextBox2" /> 
+							
+						</td>   
+						<td class="spacer"></td>
+						<td>
+							<select id="DropDownList5" onchange="javascript:setTimeout('__doPostBack(\'DropDownList5\',\'\')', 0)" name="DropDownList5">
+		<option value="" selected="selected">Search Field</option>
+		<option value="Registrant Name">Registrant Name</option>
+		<option value="Client Name">Client Name</option>
+		<option value="House ID">House ID</option>
+		<option value="Filing Period">Filing Period</option>
+		<option value="Report Type">Filing Type</option>
+		<option value="Report Year">Filing Year</option>
+		<option value="Ali Issue">Issue Code</option>
+		<option value="Lobbyist Full Name">Lobbyist Name</option>
+		<option value="Affiliated Country">Affiliated Country</option>
+		<option value="Affiliated Organization Name">Affiliated Name</option>
+		<option value="Amount Reported">Amount Reported</option>
+		<option value="Client Country">Client Country</option>
+		<option value="Client PPB Country">Client PPB Country</option>
+		<option value="Client State">Client State</option>
+		<option value="Foreign Entity PPB Country">Foreign Entiry PPB Country</option>
+		<option value="Foreign Entity Country">Foreign Entity Country</option>
+		<option value="Foreign Entity Name">Foreign Entity Name</option>
+		<option value="Foreign Entity Ownership">Foreign Entity Ownership</option>
+		<option value="Government Agencies">Government Entity</option>
+		<option value="Specific Issue Description">Issue Data</option>
+		<option value="Lobbyist Covered">Lobbyist Covered</option>
+		<option value="Lobbyist Covered Position">Lobbyist Covered Position</option>
+		<option value="Lobbyist Full Name Inactive">Lobbyists Full Name Inactive</option>
+		<option value="Registrant Country">Registrant Country</option>
+		<option value="Registrant PPB Country">Registrant PPB Country</option>
+
+	</select>
+						</td>
+						<td>
+							<input type="text" id="TextBox5" name="TextBox5" />
+						</td>
+					</tr>
+					<tr>
+						<td class="sub_head"><label id="Label11" for="DropDownList3">Search Field</label></td>
+						<td class="sub_head"><label id="Label12" for="TextBox3">Criteria</label></td>
+						<td class="spacer"> </td>
+						<td class="sub_head"><label id="Label13" for="DropDownList6">Search Field</label></td>
+						<td class="sub_head"><label id="Label14" for="TextBox6">Criteria</label></td>
+					</tr>
+					<tr>
+						<td>
+							<select id="DropDownList3" onchange="javascript:setTimeout('__doPostBack(\'DropDownList3\',\'\')', 0)" name="DropDownList3">
+		<option value="" selected="selected">Search Field</option>
+		<option value="Registrant Name">Registrant Name</option>
+		<option value="Client Name">Client Name</option>
+		<option value="House ID">House ID</option>
+		<option value="Filing Period">Filing Period</option>
+		<option value="Report Type">Filing Type</option>
+		<option value="Report Year">Filing Year</option>
+		<option value="Ali Issue">Issue Code</option>
+		<option value="Lobbyist Full Name">Lobbyist Name</option>
+		<option value="Affiliated Country">Affiliated Country</option>
+		<option value="Affiliated Organization Name">Affiliated Name</option>
+		<option value="Amount Reported">Amount Reported</option>
+		<option value="Client Country">Client Country</option>
+		<option value="Client PPB Country">Client PPB Country</option>
+		<option value="Client State">Client State</option>
+		<option value="Foreign Entity PPB Country">Foreign Entiry PPB Country</option>
+		<option value="Foreign Entity Country">Foreign Entity Country</option>
+		<option value="Foreign Entity Name">Foreign Entity Name</option>
+		<option value="Foreign Entity Ownership">Foreign Entity Ownership</option>
+		<option value="Government Agencies">Government Entity</option>
+		<option value="Specific Issue Description">Issue Data</option>
+		<option value="Lobbyist Covered">Lobbyist Covered</option>
+		<option value="Lobbyist Covered Position">Lobbyist Covered Position</option>
+		<option value="Lobbyist Full Name Inactive">Lobbyists Full Name Inactive</option>
+		<option value="Registrant Country">Registrant Country</option>
+		<option value="Registrant PPB Country">Registrant PPB Country</option>
+
+	</select>
+						</td>
+						<td>
+							<input type="text" id="TextBox3" name="TextBox3" />
+							
+						</td>
+	                    <td class="spacer"> </td>
+						<td>
+							<select id="DropDownList6" onchange="javascript:setTimeout('__doPostBack(\'DropDownList6\',\'\')', 0)" name="DropDownList6">
+		<option value="" selected="selected">Search Field</option>
+		<option value="Registrant Name">Registrant Name</option>
+		<option value="Client Name">Client Name</option>
+		<option value="House ID">House ID</option>
+		<option value="Filing Period">Filing Period</option>
+		<option value="Report Type">Filing Type</option>
+		<option value="Report Year">Filing Year</option>
+		<option value="Ali Issue">Issue Code</option>
+		<option value="Lobbyist Full Name">Lobbyist Name</option>
+		<option value="Affiliated Country">Affiliated Country</option>
+		<option value="Affiliated Organization Name">Affiliated Name</option>
+		<option value="Amount Reported">Amount Reported</option>
+		<option value="Client Country">Client Country</option>
+		<option value="Client PPB Country">Client PPB Country</option>
+		<option value="Client State">Client State</option>
+		<option value="Foreign Entity PPB Country">Foreign Entiry PPB Country</option>
+		<option value="Foreign Entity Country">Foreign Entity Country</option>
+		<option value="Foreign Entity Name">Foreign Entity Name</option>
+		<option value="Foreign Entity Ownership">Foreign Entity Ownership</option>
+		<option value="Government Agencies">Government Entity</option>
+		<option value="Specific Issue Description">Issue Data</option>
+		<option value="Lobbyist Covered">Lobbyist Covered</option>
+		<option value="Lobbyist Covered Position">Lobbyist Covered Position</option>
+		<option value="Lobbyist Full Name Inactive">Lobbyists Full Name Inactive</option>
+		<option value="Registrant Country">Registrant Country</option>
+		<option value="Registrant PPB Country">Registrant PPB Country</option>
+
+	</select>
+						</td>
+						<td>
+							<input type="text" id="TextBox6" name="TextBox6" />
+							
+						</td>                        
+					</tr>
+				</tbody></table>
+			  
+</div>
+ 
+
+<div id="Panel5">
+	
+<table>
+<tbody><tr>
+<td><span accesskey="p" id="Label2">Filing Type to search:</span></td><td style="width: 165px"><table border="0" id="radioFilingType">
+		<tbody><tr>
+			<td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'radioFilingType$0\',\'\')', 0)" value="Paper" name="radioFilingType" id="radioFilingType_0" /><label for="radioFilingType_0">Paper</label></td><td><input type="radio" checked="checked" value="Electronic" name="radioFilingType" id="radioFilingType_1" /><label for="radioFilingType_1">Electronic</label></td><td><input type="radio" onclick="javascript:setTimeout('__doPostBack(\'radioFilingType$2\',\'\')', 0)" value="All" name="radioFilingType" id="radioFilingType_2" /><label for="radioFilingType_2">All</label></td>
+		</tr>
+	</tbody></table>
+                            </td>
+</tr>
+</tbody></table>
+
+
+</div>
+	          <div id="Panel3">
+	
+			   
+			   
+			   <fieldset>
+			  
+                    <legend>Sort</legend>
+			    <label class="sub_head" for="ddsort"> Primary Sort </label> 
+			    
+			   
+				 
+				  <select id="ddSort" name="ddSort">
+		<option value="registrantName">Registrant Name</option>
+		<option value="clientName">Client Name</option>
+		<option value="registrantPPBCountry">Registrant PPB Country</option>
+		<option value="houseID">House ID</option>
+		<option value="filingPeriod">Filing Period</option>
+		<option value="reportYear">Filing Year</option>
+		<option value="clientCountry">Client Country</option>
+		<option value="clientPPBCountry">Client PPB Country</option>
+		<option value="clientState">Client State</option>
+		<option value="reportType">Filing Type</option>
+		<option value="gov_agencies">Government Entity</option>
+		<option value="lobbyistCovered">Lobbyist Covered</option>
+		<option value="registrantCountry">Registrant Country</option>
+
+	</select>
+				   <label class="sub_head" for="ddsort1"> Secondary Sort </label> 
+				   <select id="ddSort1" name="ddSort1">
+		<option value="registrantName">Registrant Name</option>
+		<option value="clientName" selected="selected">Client Name</option>
+		<option value="registrantPPBCountry">Registrant PPB Country</option>
+		<option value="houseID">House ID</option>
+		<option value="filingPeriod">Filing Period</option>
+		<option value="reportYear">Filing Year</option>
+		<option value="clientCountry">Client Country</option>
+		<option value="clientPPBCountry">Client PPB Country</option>
+		<option value="clientState">Client State</option>
+		<option value="reportType">Filing Type</option>
+		<option value="gov_agencies">Government Entity</option>
+		<option value="lobbyistCovered">Lobbyist Covered</option>
+		<option value="registrantCountry">Registrant Country</option>
+
+	</select>
+				   
+				  
+				   
+				  </fieldset> 
+				  
+				  
+</div> <br />
+				  
+				  <div id="panel9">
+	
+				  	     
+				     
+						  <table>
+                      <tbody><tr>
+<td> <input type="submit" style="width:80px;" class="btn1" id="cmdSearch" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("cmdSearch", "", true, "", "", false, false))' value="Search" name="cmdSearch" /></td>
+
+<td>  <input type="submit" style="width:96px;" class="btn1" id="cmdClear" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("cmdClear", "", true, "", "", false, false))' value="Clear" name="cmdClear" /></td>
+</tr>
+<tr>
+
+<td>  <input type="submit" class="btn1" disabled="disabled" id="cmdDownload" value="Download" name="cmdDownload" /></td>
+
+<td>   <span disabled="disabled" id="Label10">Download Format:</span> </td>
+
+<td> <table border="0" class="btn1" disabled="disabled" id="RadioButtonList1">
+		<tbody><tr>
+			<td><span disabled="disabled"><input type="radio" disabled="disabled" checked="checked" value="XML" name="RadioButtonList1" id="RadioButtonList1_0" /><label for="RadioButtonList1_0">XML</label></span></td><td><span disabled="disabled"><input type="radio" disabled="disabled" value="CSV" name="RadioButtonList1" id="RadioButtonList1_1" /><label for="RadioButtonList1_1">CSV</label></span></td>
+		</tr>
+	</tbody></table>
+                      </td>
+
+</tr>
+</tbody></table>
+				  
+                
+				  <hr />
+				  
+				  <span id="lblPageCounter"></span>          
+				  <span id="lblTotalRecords"></span>        
+				  
+				  <table>
+						<tbody><tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						
+				   </tbody></table>   
+			
+</div>
+					
+            <div style="height:20px;width:544px;" id="Panel4">
+	
+            <table><tbody><tr><td style="height: 16px"> </td></tr></tbody></table>
+			            
+</div>
+			<div id="Panel2">
+	
+				<div>
+
+	</div>
+				<table>
+						<tbody><tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						
+				   </tbody></table>  
+			
+</div>
+			
+			<!-- JMA 1/28/08, 
+				Moved the validators below search fields, because they were rendering as &nbsp;'s pushing the search fields further down the page -->
+			       
+			      
+			 
+			 
+			 
+			  
+        
+             
+        <div>
+             
+                 
+    </div>
+			
+		</form>
+	</div>
+
+</div>
+<div id="footer">
+	<ul>
+		<li><a href="http://disclosures.house.gov/lc/lcsearch.aspx">Contribution Search</a></li>
+		<li><a href="http://lobbyingdisclosure.house.gov/software.html">Windows</a></li>
+		<li><a href="http://lobbyingdisclosure.house.gov/mac/software.html">Macintosh</a></li>
+		<li><a href="http://lobbyingdisclosure.house.gov/subscribe.html">Subscribe</a></li>
+		<li><a href="http://lobbyingdisclosure.house.gov/contact_home.html">Contact</a></li>
+	</ul>
+	<p><a href="http://clerk.house.gov">Office of the Clerk</a><br />
+			United States House of Representatives<br />
+			U.S. Capitol, Room H-154<br />
+			Washington D.C., 20515-6601<br />
+
+			202-225-7000
+	</p>
+</div>
+
+
+<!-- Code for the left panel -->
+<div id="dhtmlgoodies_leftPanel">
+	<div id="top_links">
+		<a target="_blank" href="searchTips.pdf" class="printLink">Print Search Tips</a>
+		<a onclick="initSlideLeftPanel();return false" href="#" class="closeLink">Close</a>
+		<hr class="clearer" />
+	</div>
+	<h4>Search Tips</h4>
+	<div id="leftPanelContent">
+	
+	
+		<div class="dhtmlgoodies_question" id="dhtmlgoodies_q1"><a href="#">How to Search for Filings</a></div>
+		<div class="dhtmlgoodies_answer" id="dhtmlgoodies_a1" style="display: none; height: 1px;">
+			<div style="top: 0px;" class="dhtmlgoodies_answer_content" id="dhtmlgoodies_ac1">
+				<p>You may search for lobbying disclosure registrations and  reports filed with the Office of the Clerk within the last six (6) years.</p>
+				<p>To search for filings:</p>
+				<ul>
+					<li>  Select up to six (6) specific search criteria in  the <strong>Search  Fields</strong> and enter the appropriate values in each field;</li>
+					<li>Select Paper, Electronic or All in the <strong>Filing Type</strong> field;</li>
+					<li>Click the <strong>Search</strong> button.</li>
+				</ul>
+				<p>The results will be listed in a grid below the search  button.  Up to 1000 results may be  displayed for each search.  If you wish  to search again with different criteria, you can reset the search screen by  clicking the <strong>Clear</strong> button.</p>
+				<p>Listed below are several tips to assist you in locating  filings.</p>
+			</div>
+		</div>
+		
+		<div class="dhtmlgoodies_question" id="dhtmlgoodies_q2"><a href="#">Selecting Search Criteria</a></div>
+		<div class="dhtmlgoodies_answer" id="dhtmlgoodies_a2" style="display: none; height: 1px;">
+			<div style="top: 0px;" class="dhtmlgoodies_answer_content" id="dhtmlgoodies_ac2">
+				<p>If your search does not display any results, or if your  search locates more than 1000 filings, you may need to refine your search  criteria.  Several options are available  to assist you:</p>
+				<ul>		
+					<li>Search fields are specific for <strong>Paper</strong> and <strong>Electronic</strong> filings.  If you select <strong>All</strong> you will only be able to select paper filing search fields;  If you select more than one search field with  the same value, the search will look for all filings that contain either  value.  An example of this would be to  select registrant name = “ab” and a second field with registrant name =  “cd”.  The search engine will return all  filings that contain ab or cd in the registrant name field;</li>
+					<li>You may use a question mark as a wildcard in any  text field;</li>
+					<li>If you select <strong>Issue Code</strong> you should also  select a filing year and type to display results;</li>
+					<li><strong>Registrant Name</strong> and <strong>Client Name</strong> searches  are text specific and you must enter the name correctly to obtain results.  You may also enter partial names as the  search will look for all filings that contain that value;</li>
+					<li>If you want to see all of the filings for a  registrant or client regardless of the name, you may also search by the <strong>House ID</strong>. 
+                        A list of active registrant/client House IDs  are available on the Lobbying Disclosure website;</li>
+					<li><strong>Lobbyist Name</strong> search is text specific and will  only return results that match the names entered on each form.  You may enter the lobbyist first or last  name, but if you are going to enter the full name it is recommended that you enter  it in the field using the format “Lastname, Firstname”;</li>
+					<li><strong>Amount Reported</strong> is currency  field on the LD2 Lobbying Report form only.  The search results will display any filing with an amount <u>greater</u> than the value you enter in this field;</li>
+					<li><strong>Government Entity</strong> is a new requirement that will  be available in 2008 for quarterly reports only.  If you select this for previous years or semi  annual filing periods no results will be found.</li>
+				</ul>	
+			</div>		
+		</div>
+		<div class="dhtmlgoodies_question" id="dhtmlgoodies_q3"><a href="#">Electronic VS Paper Filings</a></div>
+		<div class="dhtmlgoodies_answer" id="dhtmlgoodies_a3" style="display: none; height: 1px;">
+			<div style="top: 0px;" class="dhtmlgoodies_answer_content" id="dhtmlgoodies_ac3">
+				<p>The Office of the Clerk has been accepting electronic  filings since January 01, 2006 and all filings received before this date were  submitted on paper.  However, some  filings were submitted on paper after this date.  If you are looking for a specific filing that  does not show up in the search results, select <strong>All</strong> in the <strong>Filing Type</strong> field, refine your search  criteria if necessary, and click the <strong>Search</strong> button again.</p>
+			</div>			
+		</div>
+		<div class="dhtmlgoodies_question" id="dhtmlgoodies_q4"><a href="#">Search Results and Sorting</a></div>
+		<div class="dhtmlgoodies_answer" id="dhtmlgoodies_a4" style="display: none; height: 1px;">
+			<div style="top: 0px;" class="dhtmlgoodies_answer_content" id="dhtmlgoodies_ac4">
+				<p>By default, search results are displayed in a grid below  the search button and sorted in ascending order by House ID.  Each listing displays the House ID,  registrant name, client name, filing year and period, as well as a pull down  list of lobbyist names for each filing.   If you have selected additional fields, it will be added to the display  for each filing.</p>
+				<p>  You may sort the list in a different order by selecting  sort criteria from the <strong>Sort By</strong> drop down  list.  You may select the order search  results before you search for it, or changing the sort criteria and clicking  the <strong>Search</strong> button again.</p>
+				<p>  To view a filing, click on the <strong>House ID</strong>.  An image of the filing will be displayed in  Adobe Reader. </p>
+			</div>
+		</div>
+		<div class="dhtmlgoodies_question" id="dhtmlgoodies_q5"><a href="#">Downloading Data</a></div>
+		<div class="dhtmlgoodies_answer" id="dhtmlgoodies_a5" style="display: none; height: 1px;">
+			<div style="top: 0px;" class="dhtmlgoodies_answer_content" id="dhtmlgoodies_ac5">
+				<p>The Office of the Clerk provides a downloadable zip file  that contains the XML data or an image of each filing received by filing period  and year.  To download filings:</p>
+				<ul>		
+					<li>  Click the <strong>Download past filings in XML format</strong> button  located on the search screen;</li>
+					<li>Select the filing year and period from the  dropdown list and click the <strong>Download</strong> button;    </li>
+					<li>Select <strong>Open</strong> or <strong>Save</strong> from the <strong>Download</strong> screen.</li>
+				</ul>
+				<p><strong><em>Note:  It is  recommended that you Save the file instead of opening it</em></strong> A screen is displayed that allows you to  navigate to the network or local folder to store your file.  Click the <strong>Save</strong> button to download the  file;
+		Repeat these steps until you are finished  downloading;  Click <strong>Close</strong> to return to the  search page.</p>
+			</div>
+		</div>
+		
+		
+	</div>
+</div>
+<!-- End code for the left panel -->
+
+
+
+
+
+
+<div id="TB_overlay" class="TB_overlayBG"></div><div id="TB_window" style="margin-left: -190px; width: 380px; margin-top: -70px; display: block;"><div id="TB_title"><div id="TB_ajaxWindowTitle">Download Past Filings</div><div id="TB_closeAjaxWindow"><a title="Close" id="TB_closeWindowButton" href="#">close</a> or Esc Key</div></div><iframe frameborder="0" style="width:379px;height:112px;" onload="tb_showIframe()" name="TB_iframeContent23" id="TB_iframeContent" src="http://disclosures.house.gov/ld/LDDownload.aspx?KeepThis=true&amp;" hspace="0"> </iframe></div></body></html>

@@ -1,0 +1,6 @@
+tornado>=2.0
+Sphinx>=0.3
+pygments
+jinja2
+pyzmq>=2.1.11
+nose>=0.10.1
