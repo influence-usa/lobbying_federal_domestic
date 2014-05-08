@@ -53,4 +53,4 @@ def extract_sopr(options):
 
     for url, exception in extracted.failure:
         log.error("extracting from {path} failed: {exception}".format(
-            url=url, exception=exception))
+            path=url, exception=exception))
