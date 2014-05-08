@@ -43,8 +43,9 @@ def download_all(url_loc_pairs):
     for url, output_loc in url_loc_pairs:
         yield url, output_loc, download(url, output_loc)
 
-def response_is_not_cached(response_loc_pair):
-    response, output_loc = response_loc_pair
+def is_not_cached(url_loc_pair):
+    url, output_loc = url_loc_pair
+    response = requests.get(url, stream=True)
     if os.path.exists(output_loc):
         downloaded_size = int(os.path.getsize(output_loc))
         log.debug(
@@ -54,8 +55,8 @@ def response_is_not_cached(response_loc_pair):
         size_on_server = int(response.headers['content-length'])
         if downloaded_size != size_on_server:
             log.debug(
-                're-downloaded {output_loc}: {size}'.format(
-                    output_loc=output_loc,
+                're-downloading {url}: {size}'.format(
+                    url=url,
                     size=size_on_server))
             return True
         else:
@@ -64,10 +65,6 @@ def response_is_not_cached(response_loc_pair):
     else:
         return True
 
-def is_not_cached(url_loc_pair):
-    url, output_loc = url_loc_pair
-    response = requests.head(url)
-    return response_is_not_cached((response, output_loc))
 
 # SPECIFIC TASKS
 def download_sopr(options):
@@ -137,7 +134,7 @@ def download_house_xml(options):
         info = re.match(option_rgx, value).groupdict()
         fields = dict(form_data, **{filing_selector.attr('name'): value})
 
-        output_dir = os.path.join(CACHE_DIR, 'house_clerk')
+        output_dir = os.path.join(CACHE_DIR, 'house_xml')
         mkdir_p(output_dir)
         output_name = os.path.join(output_dir, "%s_%s_XML.zip" % (info['filing_type_year'], info['filing_type_form']))
 
