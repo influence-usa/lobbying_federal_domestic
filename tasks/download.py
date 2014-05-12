@@ -1,17 +1,15 @@
 import os
+import sys
 import re
 import logging
+import time
 from itertools import product
+from multiprocessing.dummy import Pool as ThreadPool
 
 import requests
-# Importing from stream.py, but renaming to avoid confusion with built-ins
-from stream import ThreadPool, Stream
-from stream import map as st_map
-from stream import filter as st_filter
 
 from pyquery import PyQuery as pq
 import cookielib
-import traceback
 
 from settings import CACHE_DIR
 from .utils import mkdir_p
@@ -21,8 +19,7 @@ log = set_up_logging('download', loglevel=logging.DEBUG)
 
 
 # GENERAL DOWNLOAD FUNCTIONS
-def response_download(response_loc_pair):
-    response, output_loc = response_loc_pair
+def response_download(response, output_loc):
     if response.ok:
         try:
             with open(output_loc, 'wb') as output_file:
@@ -33,19 +30,65 @@ def response_download(response_loc_pair):
             log.error(e)
     else:
         log.error('response not okay: '+response.reason)
-        response.raise_for_status()
-
-def download(url, output_loc):
-    return response_download((requests.get(url, stream=True), output_loc))
+        raise Exception('didn''t work, trying again')
 
 
-def download_all(url_loc_pairs):
-    for url, output_loc in url_loc_pairs:
-        yield url, output_loc, download(url, output_loc)
+def log_result(result):
+    if result[0] == 'success':
+        url, loc, content_length = result[1:]
+        log.info(
+            'success: {source} => {dest}({size})'.format(
+                source=url, dest=loc, size=content_length))
+    elif result[0] == 'failure':
+        url, loc, exception = result[1:]
+        log.info(
+            'failure: {source} => {dest}\n {e}'.format(
+                source=url, dest=loc, e=str(exception)))
+    else:
+        raise Exception
 
-def is_not_cached(url_loc_pair):
-    url, output_loc = url_loc_pair
-    response = requests.get(url, stream=True)
+
+def download(val, get_response_loc_pair):
+    for i in xrange(5):
+        _response, _loc = get_response_loc_pair(val)
+        if is_not_cached(_response, _loc):
+            try:
+                content_length = response_download(_response, _loc)
+                _url = _response.url
+                return ('success', _url, _loc, content_length)
+            except Exception:
+                log.warn('{url} something went wrong, trying again ' +
+                         '({code} - {reason})'.format(
+                             url=_response.url,
+                             code=_response.status_code,
+                             reason=_response.reason))
+                time.sleep(5)
+        else:
+            log.info('cached, not re-downloading')
+            return('success', _url, _loc, 'cached')
+    return ('failure', _response.url, _loc, '[{code}] {reason}'.format(
+        code=_response.status_code, reason=_response.reason))
+
+
+def download_all(vals, get_response_loc_pair, options):
+    threaded = options.get('threaded', False)
+    thread_num = options.get('thread_num', 4)
+
+    if threaded:
+        pool = ThreadPool(thread_num)
+        for val in vals:
+            pool.apply_async(download, args=(val, get_response_loc_pair),
+                             callback=log_result)
+        pool.close()
+        pool.join()
+    else:
+        for val in vals:
+            response_loc_pair = get_response_loc_pair(val)
+            log_result(download(response_loc_pair))
+
+
+def is_not_cached(response, output_loc):
+    response, output_loc
     if os.path.exists(output_loc):
         downloaded_size = int(os.path.getsize(output_loc))
         log.debug(
@@ -56,7 +99,7 @@ def is_not_cached(url_loc_pair):
         if downloaded_size != size_on_server:
             log.debug(
                 're-downloading {url}: {size}'.format(
-                    url=url,
+                    url=response.url,
                     size=size_on_server))
             return True
         else:
@@ -71,14 +114,15 @@ def download_sopr(options):
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
 
-    def _url_to_loc(url):
+    def _get_response_loc_pair(url):
         fname = requests.utils.urlparse(url).path.split('/')[-1]
         year, quarter = fname.split('.')[0].split('_')
         output_dir = os.path.join(CACHE_DIR, 'sopr', year, 'Q' + quarter)
         if not os.path.exists(output_dir):
             mkdir_p(output_dir)
         output_loc = os.path.join(output_dir, fname)
-        return (url, output_loc)
+        response = requests.get(url, stream=True)
+        return (response, output_loc)
 
     _url_template = 'http://soprweb.senate.gov/downloads/{year}_{quarter}.zip'
 
@@ -86,23 +130,23 @@ def download_sopr(options):
              for year, quarter in
              product(xrange(1999, 2015), xrange(1, 5))]
 
-    downloaded = _urls >> st_map(_url_to_loc) \
-                       >> st_filter(is_not_cached) \
-                       >> ThreadPool(download_all, poolsize=4)
+    # response_loc_pairs = (_get_response_loc_pair(url) for url in _urls)
 
-    for url, output_loc, content_length in downloaded:
-        log.info(
-            'successfully downloaded {url} to {output_loc}({size})'.format(
-                url=url, output_loc=output_loc, size=content_length))
-
-    for url, exception in downloaded.failure:
-        log.error(
-            'downloading from {url} failed: {exception}'.format(
-                url=url, exception=exception))
+    download_all(_urls, _get_response_loc_pair, options)
 
 
 def download_house_xml(options):
     FORM_URL = 'http://disclosures.house.gov/ld/LDDownload.aspx?KeepThis=true'
+
+    filing_type_form_map = {
+        'Registrations':    {'form': 'LD1', 'quarter': 'ALL'},
+        'MidYear':          {'form': 'LD2', 'quarter': 'Q2'},
+        'YearEnd':          {'form': 'LD2', 'quarter': 'Q4'},
+        '1stQuarter':       {'form': 'LD2', 'quarter': 'Q1'},
+        '2ndQuarter':       {'form': 'LD2', 'quarter': 'Q2'},
+        '3rdQuarter':       {'form': 'LD2', 'quarter': 'Q3'},
+        '4thQuarter':       {'form': 'LD2', 'quarter': 'Q4'},
+    }
 
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
@@ -116,50 +160,51 @@ def download_house_xml(options):
     form_page = requests.get(FORM_URL, cookies=jar)
     d = pq(form_page.text, parser='html')
 
-    form_data = {input.attr('name'): input.val() for input in d('input[name]').items()}
+    form_data = {input.attr('name'): input.val() for input in
+                 d('input[name]').items()}
 
     filing_selector = d('select#selFilesXML')
 
     space = r'(\ )'
     filing_type = r'(?P<filing_type>(?P<filing_type_year>\d{4})\ (?P<filing_type_form>MidYear|Registrations|YearEnd|(1st|2nd|3rd|4th)Quarter))'
     xml = '(XML)'
-    date = r'(\(\ (?P<updated_date>(?P<updated_date_day>\d{1,2})\/(?P<updated_date_month>\d{2})\/(?P<updated_date_year>\d{4})))'
+    date = r'(\(\ (?P<updated_date>(?P<updated_date_month>\d{1,2})\/(?P<updated_date_day>\d{1,2})\/(?P<updated_date_year>\d{4})))'
     time = r'(?P<updated_time>(?P<updated_time_hour>\d{1,2}):(?P<updated_time_min>\d{2}):(?P<updated_time_sec>\d{2})\ (?P<updated_time_am_pm>PM|AM)\))'
 
     option_rgx = re.compile(filing_type+space+xml+space+date+space+time)
 
     dl_options = filing_selector.find('option')
 
-    def _get_request_loc_pair(value):
-        info = re.match(option_rgx, value).groupdict()
+    def _get_response_loc_pair(value):
+        try:
+            info = re.match(option_rgx, value).groupdict()
+        except AttributeError:
+            sys.stderr.write(value)
+            raise
         fields = dict(form_data, **{filing_selector.attr('name'): value})
 
-        output_dir = os.path.join(CACHE_DIR, 'house_xml')
-        mkdir_p(output_dir)
-        output_name = os.path.join(output_dir, "%s_%s_XML.zip" % (info['filing_type_year'], info['filing_type_form']))
+        form_type = filing_type_form_map[info['filing_type_form']]
+        output_dir = os.path.join(CACHE_DIR,
+                                  'house_xml',
+                                  form_type['form'],
+                                  info['filing_type_year'],
+                                  form_type['quarter'])
+        if not os.path.exists(output_dir):
+            mkdir_p(output_dir)
+        output_name = os.path.join(output_dir,
+                                   "{year}_{form}_XML.zip".format(
+                                       year=info['filing_type_year'],
+                                       form=info['filing_type_form']))
 
-        log.info('starting download of {output_loc}'.format(output_loc=output_name))
+        log.info('starting download of {output_loc}'.format(
+            output_loc=output_name))
 
-        response = requests.post(FORM_URL, data=fields, stream=True, cookies=jar)
+        response = requests.post(FORM_URL, data=fields, stream=True,
+                                 cookies=jar)
 
         return (response, output_name)
 
-    def _download_all(q):
-        for result in q:
-            yield result[1], response_download(result)
+    values = [option.attr('value') for option in dl_options.items()]
+    # response_loc_pairs = [_get_response_loc_pair(value) for value in values]
 
-    downloaded = \
-        (option.attr('value') for option in dl_options.items()) \
-        >> st_map(_get_request_loc_pair) \
-        >> st_filter(response_is_not_cached) \
-        >> ThreadPool(_download_all, poolsize=4)
-
-    for output_loc, content_length in downloaded:
-        log.info(
-            'successfully downloaded to {output_loc}({size})'.format(
-                output_loc=output_loc, size=content_length))
-
-    for (response, output_loc), exception in downloaded.failure:
-        log.error(
-            'downloading to {output_loc} failed: {exception}'.format(
-                output_loc=output_loc, exception=exception))
+    download_all(values, _get_response_loc_pair, options)
