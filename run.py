@@ -29,6 +29,6 @@ options['loglevel'] = loglevels[options['loglevel']]
 
 try:
     task_mod = getattr(tasks, '{action}_{data_type}'.format(**options))
+    task_mod(options)
 except AttributeError:
     "Not implemented yet, sorry!"
-task_mod(options)
