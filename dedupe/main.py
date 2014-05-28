@@ -1,7 +1,8 @@
-import collections, csv, dedupe, json, name_cleaver, os, re, uuid
+import collections, csv, dedupe, json, os, re, uuid
 from numpy  import nan
 from pprint import pprint
 from glob   import glob
+import dedupe.serializer as serializer
 
 settings_file = 'learned_settings'
 training_file = 'trained.json'
@@ -24,43 +25,67 @@ def preProcess(column):
     """
 
     column = column.encode("ascii","replace")
-    column = dedupe.asciiDammit(column)
+#    column = dedupe.asciiDammit(column)
     column = re.sub('  +', ' ', column)
     column = re.sub('\n', ' ', column)
     column = column.strip().strip('"').strip("'").lower().strip()
     return column
 
-def processName(str):
-    ImmaLetYouFinish = ["on behalf of","livingston group","livingston group, llc (for",
-                        "capitol strategies, llc ",  "alcalde & fay","white house consulting",
-                        "the ickes and enright group"]
-    #if length > 3 then change string otherwise don't
-    for s in ImmaLetYouFinish:
-        if s in str:
-            a = str.split(s)[-1]
-            if len(a) > 2:
-                str = a
+def processName(name):
+    name = preProcess(re.sub('[-\.,()]', ' ', name))
 
-    #St. Joesph's
-    #national x asscn
     
+    Goodbye = {"&": "and",
+               "twenty first century": "21st century"}
+    for k,v in Goodbye.iteritems():
+        if k in name:
+            name = re.sub(k,v,name)        
+        
+    ImmaLetYouFinish = ["on behalf of","livingston group for","livingston group",
+                        "capitol strategies ",  "alcalde and fay","white house consulting",
+                        "the ickes and enright group","corporation", 
+                        "dla piper us for", "obo" ]
+    for s in ImmaLetYouFinish:
+        if s in name:
+            a = name.split(s)[-1]
+            if len(a) > 2:
+                name = preProcess(a)
+
+    GetOuttaHere = ["american"," l p","corporation","international","national",
+                    "association","incorporated"," l l c", "tribe", " u s "
+                    "university of", "coalition", "professional","town of",
+                    "group","technologies"," u s a","company","limited",
+                    "political action committee","city of","informal coalitions",
+                    "associates"    ]
+    for s in GetOuttaHere:
+        if s in name:
+            a = re.sub(s,' ',name)
+            if len(a) > 2:
+                name = preProcess(a)
+
+    Shwaties =["llc","inc","corp","llp","of","the"]
+    for s in Shwaties:
+        if s in name.split():
+            a = re.sub(s,' ',name)
+            if len(a) > 2:
+                name = preProcess(a)
+                
+            
+    return name
+    #St. Joesph's    
     #remove stray end )?
     #strip out
-    #informal coalitions
-    #llc
-    #city of
     #tribal reservations
-    #obo - on behalf of
     #fka - formerly known as
     #through
     #prev. rptd - previously reported
-    return str
+
 
 def loadData():
     print 'Reading into clients ...'
     corruption = "{http://www.PureEdge.com/XFDL/Custom}"
     clients = {}
-    for f in glob(os.environ["HOUSEXML"]+"/LD1/2013/*/*.json"):
+    for f in glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json"):
         jOb = {}
         try:
             jOb = json.loads(open(f).read())[u'LOBBYINGDISCLOSURE1']
@@ -88,7 +113,7 @@ def loadData():
             
             "houseID":     go("houseID"),
             "senate":      go("senateID"),            
-
+            "filename": f,
             "description": go("clientGeneralDescription"),
             "specific_issues":      go("specific_issues"),
         }
@@ -97,51 +122,54 @@ def loadData():
 
 # Training
 def train(clients):
+    
     if os.path.exists(settings_file):
         print 'reading from', settings_file
         return dedupe.StaticDedupe(settings_file)
 
     else:
-        fields = {'address':     {'type': 'String',
-                                  'Has Missing': True},
-                  'city':        {'type': 'String',
-                                  'Has Missing': True},
-                  'country':     {'type': 'Custom',
-                                  'Has Missing': True,
-                                  'comparator': sameOrNotComparator},
-                  'description': {'type': 'String',
-                                  'Has Missing': True},
-                  'specific_issues': {'type': 'String',
-                                      'Has Missing': True},                            
+        fields = {'city':        {'type': 'ShortString', 'Has Missing': True},
+                  'country':     {'type': 'ShortString', 'Has Missing': True},
+                  'zip':         {'type': 'ShortString', 'Has Missing': True},
+                  'houseID':     {'type': 'ShortString', 'Has Missing': True},
+                  'state':       {'type': 'ShortString', 'Has Missing': True},                  
+                  'address':     {'type': 'Text', 'Has Missing': True,
+                                  'corpus': map(lambda x: x['address'],clients.values())},
+                  
+                  'description': {'type': 'Text', 'Has Missing': True,
+                                  'corpus': map(lambda x: x['description'],clients.values())},
+                  'specific_issues': {'type': 'Text', 'Has Missing': True,
+                                      'corpus': map(lambda x: x['specific_issues'],clients.values())},
+                  'rough_name':  {'type': 'Text',
+                                  'corpus': map(lambda x: x['rough_name'],clients.values())},
+                  'alis':     {'type': 'Set',
+                               'corpus': map(lambda x: x['alis'],clients.values())},
+
                   'exact_name':  {'type': 'Custom',
                                   'comparator': sameOrNotComparator},
-                  'rough_name':  {'type': 'String'},                            
-                  'state':       {'type': 'Custom',
-                                  'Has Missing': True, 
-                                  'comparator': sameOrNotComparator},
-                  'zip':         {'type': 'Custom',
-                                  'Has Missing': True, 
-                                  'comparator': sameOrNotComparator},
-                  'houseID':     {'type': 'Custom',
-                                  'Has Missing': True,
-                                  'comparator': sameOrNotComparator},
-                  'alis':     {'type': 'Set'}
         }
-
+        for k,v in list(fields.iteritems()):
+            if k != 'exact_name':
+                fields[k+"-exact_name"] = {'type':'Interaction',
+                                           'Interaction Fields': ["exact_name", k]}
         # Create a new deduper object and pass our data model to it.
         deduper = dedupe.Dedupe(fields)
 
         # To train dedupe, we feed it a random sample of records.
         deduper.sample(clients, 150000)
 
-
+        
         # If we have training data saved from a previous run of dedupe,
         # look for it an load it in.
         # __Note:__ if you want to train from scratch, delete the training_file
         if os.path.exists(training_file):
             print 'reading labeled examples from ', training_file
             deduper.readTraining(training_file)
-
+            
+        for f in ["closenames","exactnames"]:
+            labels = json.load(open(f+".json"), cls=serializer.dedupe_decoder)            
+            deduper.markPairs(labels)
+            
         # ## Active learning
         # Dedupe will find the next pair of records
         # it is least certain about and ask you to label them as duplicates
@@ -178,7 +206,7 @@ def cluster(deduper):
     # `match` will return sets of record IDs that dedupe
     # believes are all referring to the same entity.
     print 'clustering...'
-    return deduper.match(clients, threshold)
+    return deduper.match(clients, 0.50)
      
 if __name__ == "__main__":
     clients = loadData()
@@ -186,15 +214,17 @@ if __name__ == "__main__":
     clustered_dupes = cluster(deduper)
 
     print '# duplicate sets', len(clustered_dupes)
+    print '# duplicate sets', map(len,clustered_dupes)    
     # ## Writing Results
 
     # Write our original data back out to a CSV with a new column called 
     # 'Cluster ID' which indicates which records refer to each other.    
+#    import pdb; pdb.set_trace()
 
-    for (cluster_id, cluster) in enumerate(clustered_dupes):
-        print("Group {}".format(cluster_id))
-        for uuid in cluster:
-            pprint(clients[uuid])
-        print("\n")
+    # for (cluster_id, cluster) in enumerate(clustered_dupes):
+    #     print("Group {}".format(cluster_id))
+    #     for uuid in cluster:
+    #         pprint(clients[uuid])
+    #     print("\n")
 
 

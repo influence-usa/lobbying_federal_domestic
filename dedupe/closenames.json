@@ -1,0 +1,303 @@
+{
+  "match": [
+    [
+      {
+        "rough_name": "general motors",
+        "specific_issues": "application for change of control of general motors\nacceptance corporation before fdic.",
+        "alis": {
+          "__value__": [
+            "FIN"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "25 massachusetts avenue, nw, suite 400",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2006\/ALL\/100051559.json",
+        "exact_name": "general motors corporation",
+        "country": "usa",
+        "senate": "289410",
+        "zip": "20001",
+        "description": "diversified manufacturing and financial services",
+        "houseID": "37129",
+        "city": "washington"
+      },
+      {
+        "rough_name": "general motors",
+        "specific_issues": "issues and legislation related to the automobile\nindustry",
+        "alis": {
+          "__value__": [
+            "AUT"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "25 massachusetts ave., nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2010\/ALL\/300383724.json",
+        "exact_name": "general\nmotors company",
+        "country": "usa",
+        "senate": "85071-1003364",
+        "zip": "20001",
+        "description": "automobile manufacturing and sales",
+        "houseID": "364880074",
+        "city": "washington"
+      }
+    ],
+    [
+      {
+        "rough_name": "atandt",
+        "specific_issues": "",
+        "alis": {
+          "__value__": [
+            "TEC"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "",
+        "state": "",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2004\/ALL\/8048455.json",
+        "exact_name": "at&t",
+        "country": "",
+        "senate": "",
+        "zip": "",
+        "description": "",
+        "houseID": "369890001",
+        "city": ""
+      },
+      {
+        "rough_name": "atandt services",
+        "specific_issues": "issues pertaining to the at&t and t-mobile merger.",
+        "alis": {
+          "__value__": [
+            "TEC"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1133 21st street, nw, suite 900",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2011\/ALL\/300382718.json",
+        "exact_name": "at&t services, inc.",
+        "country": "usa",
+        "senate": "51478",
+        "zip": "20036",
+        "description": "telecommunications",
+        "houseID": "349270075",
+        "city": "washington"
+      }
+    ],
+    [
+      {
+        "rough_name": "u s chamber institute for legal reform",
+        "specific_issues": "u.s. department of justice policies, guidance, and reporting regarding declination decisions and related reforms.",
+        "alis": {
+          "__value__": [
+            "LAW"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1615 h street nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2013\/ALL\/300588709.json",
+        "exact_name": "u.s. chamber institute for legal reform",
+        "country": "usa",
+        "senate": "25818-366",
+        "zip": "20062",
+        "description": "trade association for business",
+        "houseID": "307580035",
+        "city": "washington"
+      },
+      {
+        "rough_name": "u s chamber commerce",
+        "specific_issues": "intellectual property",
+        "alis": {
+          "__value__": [
+            "ENV",
+            "MAN"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1615 h street, nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2009\/ALL\/300166905.json",
+        "exact_name": "u.s. chamber of commerce",
+        "country": "usa",
+        "senate": "315717-1004654",
+        "zip": "20062",
+        "description": "represents ideas and interests of businesses, chambers, and associations",
+        "houseID": "392150016",
+        "city": "washington"
+      }
+    ],
+    [
+      {
+        "rough_name": "reynolds",
+        "specific_issues": "issues affecting the regulation of the tobacco industry",
+        "alis": {
+          "__value__": [
+            "TOB"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1201 f street, nw, suite 1000",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2009\/ALL\/300144766.json",
+        "exact_name": "reynolds american inc.",
+        "country": "usa",
+        "senate": "87814",
+        "zip": "20004",
+        "description": "manufacturer of tobacco products",
+        "houseID": "366330033",
+        "city": "washington"
+      },
+      {
+        "rough_name": "r j reynolds tobacco co",
+        "specific_issues": "",
+        "alis": {
+          "__value__": [
+            "TOB"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "",
+        "state": "",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2005\/ALL\/8079430.json",
+        "exact_name": "r.j. reynolds tobacco co",
+        "country": "",
+        "senate": "",
+        "zip": "",
+        "description": "",
+        "houseID": "315640189",
+        "city": ""
+      }
+    ],
+    [
+      {
+        "rough_name": "roche diagnostics",
+        "specific_issues": "issues related to medicaid modernization act of 2003, medicare and medicaid reconciliation provisions and regulations.",
+        "alis": {
+          "__value__": [
+            "MMM"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "9115 hague road",
+        "state": "in",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2006\/ALL\/100024639.json",
+        "exact_name": "roche diagnostics",
+        "country": "usa",
+        "senate": "1182",
+        "zip": "46250",
+        "description": "health care",
+        "houseID": "31748",
+        "city": "indianapolis"
+      },
+      {
+        "rough_name": "hoffmann la roche",
+        "specific_issues": "",
+        "alis": {
+          "__value__": [
+            "MMM",
+            "PHA"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "",
+        "state": "",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2006\/ALL\/8128594.json",
+        "exact_name": "hoffmann-la roche, inc",
+        "country": "",
+        "senate": "",
+        "zip": "",
+        "description": "",
+        "houseID": "363990010",
+        "city": ""
+      }
+    ],
+    [
+      {
+        "rough_name": "u s chamber institute for legal reform",
+        "specific_issues": "u.s. department of justice policies, guidance, and reporting regarding declination decisions and related reforms.",
+        "alis": {
+          "__value__": [
+            "LAW"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1615 h street nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2013\/ALL\/300588709.json",
+        "exact_name": "u.s. chamber institute for legal reform",
+        "country": "usa",
+        "senate": "25818-366",
+        "zip": "20062",
+        "description": "trade association for business",
+        "houseID": "307580035",
+        "city": "washington"
+      },
+      {
+        "rough_name": "u s chamber commerce",
+        "specific_issues": "intellectual property",
+        "alis": {
+          "__value__": [
+            "ENV",
+            "MAN"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1615 h street, nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2009\/ALL\/300166905.json",
+        "exact_name": "u.s. chamber of commerce",
+        "country": "usa",
+        "senate": "315717-1004654",
+        "zip": "20062",
+        "description": "represents ideas and interests of businesses, chambers, and associations",
+        "houseID": "392150016",
+        "city": "washington"
+      }
+    ],
+    [
+      {
+        "rough_name": "pharmaceutical research and manufacturers america",
+        "specific_issues": "",
+        "alis": {
+          "__value__": [
+            "HCR",
+            "MMM"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "",
+        "state": "",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2005\/ALL\/8108643.json",
+        "exact_name": "pharmaceutical research and manufacturers of america",
+        "country": "",
+        "senate": "",
+        "zip": "",
+        "description": "",
+        "houseID": "378010002",
+        "city": ""
+      },
+      {
+        "rough_name": "pharmaceutical research and manufacturers america phrma",
+        "specific_issues": "issues related to the 2008 department of defense authorization act and the deficit reduction act of 2005.",
+        "alis": {
+          "__value__": [
+            "HCR"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "950 f street, nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2007\/ALL\/300017325.json",
+        "exact_name": "the pharmaceutical research and manufacturers of america (phrma)",
+        "country": "usa",
+        "senate": "4301",
+        "zip": "20004",
+        "description": "trade association that acts on behalf of brand-name drug manufacturers",
+        "houseID": "313810145",
+        "city": "washington"
+      }
+    ]           
+  ],
+  "distinct": []
+}

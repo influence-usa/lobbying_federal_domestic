@@ -1,0 +1,353 @@
+{
+  "match": [
+    [
+      {
+        "city": "washington",
+        "houseID": "358880098",
+        "description": "association",
+        "zip": "20006",
+        "senate": "72975-2105",
+        "country": "usa",
+        "exact_name": "national association of real estate investment trusts",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2012\/ALL\/300525126.json",
+        "state": "dc",
+        "address": "1875 i street, nw - suite 600",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "TAX"
+          ]
+        },
+        "specific_issues": "tax reform",
+        "rough_name": "real estate investment trusts"
+      },
+      {
+        "city": "washington",
+        "houseID": "34980",
+        "description": "advocating tax proposals relating to reits",
+        "zip": "20006",
+        "senate": "54197",
+        "country": "usa",
+        "exact_name": "national association of real estate investment trusts",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2006\/ALL\/100023575.json",
+        "state": "dc",
+        "address": "1875 eye street, nw, suite 600",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "GOV",
+            "TAX"
+          ]
+        },
+        "specific_issues": "hr 1578 and companion bill in the senate tax proposals relating to reits",
+        "rough_name": "real estate investment trusts"
+      }
+    ],
+    [
+      {
+        "city": "",
+        "houseID": "331690001",
+        "description": "",
+        "zip": "",
+        "senate": "",
+        "country": "",
+        "exact_name": "nielsen media research",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2004\/ALL\/8055694.json",
+        "state": "",
+        "address": "",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "COM"
+          ]
+        },
+        "specific_issues": "",
+        "rough_name": "nielsen media research"
+      },
+      {
+        "city": "",
+        "houseID": "351140005",
+        "description": "",
+        "zip": "",
+        "senate": "",
+        "country": "",
+        "exact_name": "nielsen media research",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2005\/ALL\/8084009.json",
+        "state": "",
+        "address": "",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "MIA"
+          ]
+        },
+        "specific_issues": "",
+        "rough_name": "nielsen media research"
+      }
+    ],
+    [
+      {
+        "city": "brussels",
+        "houseID": "391670030",
+        "description": "development of numismatic commercial trade",
+        "zip": "b-1000",
+        "senate": "313794",
+        "country": "bel",
+        "exact_name": "international association of professional numismatists, llc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2010\/ALL\/300280968.json",
+        "state": "",
+        "address": "14, rue de al bourse, b-1000",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "TRD"
+          ]
+        },
+        "specific_issues": "commerce issues involving coins",
+        "rough_name": "numismatists"
+      },
+      {
+        "city": "",
+        "houseID": "371600001",
+        "description": "",
+        "zip": "",
+        "senate": "",
+        "country": "",
+        "exact_name": "international association of professional numismatists",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2004\/ALL\/8066979.json",
+        "state": "",
+        "address": "",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "TRD"
+          ]
+        },
+        "specific_issues": "",
+        "rough_name": "numismatists"
+      }
+    ],
+    [
+      {
+        "city": "reston",
+        "houseID": "356620020",
+        "description": "information technology consulting services and solutions",
+        "zip": "20036",
+        "senate": "66658",
+        "country": "usa",
+        "exact_name": "unisys",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2007\/ALL\/200062625.json",
+        "state": "va",
+        "address": "11720 plaza america drive",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "CPI",
+            "HOM"
+          ]
+        },
+        "specific_issues": "homeland security and information technology",
+        "rough_name": "unisys"
+      },
+      {
+        "city": "reston",
+        "houseID": "406700007",
+        "description": "computer systems integration and government services",
+        "zip": "20190",
+        "senate": "400426039-90",
+        "country": "usa",
+        "exact_name": "unisys corporation",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2010\/ALL\/300333242.json",
+        "state": "va",
+        "address": "11720 plaza american drive",
+        "alis": {
+          "__class__": "frozenset",
+          "__value__": [
+            "CPI",
+            "HOM",
+            "DEF",
+            "AGR",
+            "BUD"
+          ]
+        },
+        "specific_issues": "department of defense appropriations and authorizations bills, r&d, it policy; department of homeland security appropriations bills; customs and border security issues; food safety issues, general it policy issues",
+        "rough_name": "unisys"
+      }
+    ],
+    [
+      {
+        "rough_name": "general motors",
+        "specific_issues": "application for change of control of general motors\nacceptance corporation before fdic.",
+        "alis": {
+          "__value__": [
+            "FIN"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "25 massachusetts avenue, nw, suite 400",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2006\/ALL\/100051559.json",
+        "exact_name": "general motors corporation",
+        "country": "usa",
+        "senate": "289410",
+        "zip": "20001",
+        "description": "diversified manufacturing and financial services",
+        "houseID": "37129",
+        "city": "washington"
+      },
+      {
+        "rough_name": "general motors",
+        "specific_issues": "issues and legislation related to the automobile\nindustry",
+        "alis": {
+          "__value__": [
+            "AUT"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "25 massachusetts ave., nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2010\/ALL\/300383724.json",
+        "exact_name": "general\nmotors company",
+        "country": "usa",
+        "senate": "85071-1003364",
+        "zip": "20001",
+        "description": "automobile manufacturing and sales",
+        "houseID": "364880074",
+        "city": "washington"
+      }
+    ],
+    [
+      {
+        "rough_name": "glaxosmithkline",
+        "specific_issues": "medicare and medicaid implementation, food and drug regulation, and public health issues.",
+        "alis": {
+          "__value__": [
+            "HCR",
+            "MMM"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1050 k street, nw, suite 800",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2010\/ALL\/300478203.json",
+        "exact_name": "glaxosmithkline, inc.",
+        "country": "usa",
+        "senate": "400646949-048",
+        "zip": "20001",
+        "description": "biotechnology pharmaceutical product discovery and development.",
+        "houseID": "414060005",
+        "city": "washington"
+      },
+      {
+        "rough_name": "glaxosmithkline",
+        "specific_issues": "",
+        "alis": {
+          "__value__": [
+            "HCR",
+            "MED"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "",
+        "state": "",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2005\/ALL\/8091171.json",
+        "exact_name": "glaxosmithkline",
+        "country": "",
+        "senate": "",
+        "zip": "",
+        "description": "",
+        "houseID": "322290307",
+        "city": ""
+      }
+    ],
+    [
+      {
+        "rough_name": "publicly traded partnerships",
+        "specific_issues": "tax treatment of partnerships; alternative fuels; energy pipeline regulations; investment and securities issues related to publicly traded partnerships",
+        "alis": {
+          "__value__": [
+            "FIN",
+            "FUE",
+            "TAX",
+            "ENG"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "1801 k street, nw suite 500",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2008\/ALL\/300084700.json",
+        "exact_name": "national association of publicly traded partnerships",
+        "country": "usa",
+        "senate": "8828-75",
+        "zip": "20006",
+        "description": "trade association",
+        "houseID": "308640001",
+        "city": "washington"
+      },
+      {
+        "rough_name": "publicly traded partnerships",
+        "specific_issues": "",
+        "alis": {
+          "__value__": [
+            "TAX"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "",
+        "state": "",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2005\/ALL\/8102356.json",
+        "exact_name": "coalition of publicly traded partnerships",
+        "country": "",
+        "senate": "",
+        "zip": "",
+        "description": "",
+        "houseID": "308640001",
+        "city": ""
+      }
+    ],
+    [
+      {
+        "rough_name": "pew charitable trusts",
+        "specific_issues": "issues related to clean energy tax incentives",
+        "alis": {
+          "__value__": [
+            "TAX"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "2005 market street, suite 2800",
+        "state": "pa",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2013\/ALL\/300588751.json",
+        "exact_name": "the pew charitable trusts",
+        "country": "usa",
+        "senate": "313271",
+        "zip": "19103",
+        "description": "public policy analysis and analytic studies",
+        "houseID": "391280072",
+        "city": "philadelphia"
+      },
+      {
+        "rough_name": "pew charitable trusts",
+        "specific_issues": "issues pertaining to health care reform, physician payment transparency and drug supply chain safety.",
+        "alis": {
+          "__value__": [
+            "HCR",
+            "PHA"
+          ],
+          "__class__": "frozenset"
+        },
+        "address": "901 e st. nw",
+        "state": "dc",
+        "filename": "\/home\/zmaril\/data\/house_xml\/LD1\/2009\/ALL\/300213460.json",
+        "exact_name": "the pew charitable trusts",
+        "country": "usa",
+        "senate": "86196",
+        "zip": "20004",
+        "description": "a non profit charitable organization providing grants to improve public policy",
+        "houseID": "365480058",
+        "city": "washington"
+      }
+    ]      
+  ],
+  "distinct": []
+}
