@@ -1,9 +1,10 @@
-import collections, csv, dedupe, json, os, re, uuid
+import collections, csv, dedupe, json, os, pickle, re, uuid
 from numpy  import nan
 from pprint import pprint
 from glob   import glob
 import dedupe.serializer as serializer
 
+processed_files = 'processed_files'
 settings_file = 'learned_settings'
 training_file = 'trained.json'
 
@@ -16,6 +17,9 @@ def sameOrNotComparator(field_1, field_2) :
     else :
         return nan
 
+def replaceWhitespace(str):
+    return re.sub('  +', ' ', str)
+
 def preProcess(column):
     """
     Do a little bit of data cleaning with the help of
@@ -25,15 +29,12 @@ def preProcess(column):
     """
 
     column = column.encode("ascii","replace")
-#    column = dedupe.asciiDammit(column)
-    column = re.sub('  +', ' ', column)
     column = re.sub('\n', ' ', column)
-    column = column.strip().strip('"').strip("'").lower().strip()
-    return column
+    column = column.strip().strip('"').strip("'").lower().strip()    
+    return replaceWhitespace(column)
 
 def processName(name):
-    name = preProcess(re.sub('[-\.,()]', ' ', name))
-
+    name = replaceWhitespace(re.sub('[-\.,()]', ' ', name))
     
     Goodbye = {"&": "and",
                "twenty first century": "21st century"}
@@ -49,7 +50,7 @@ def processName(name):
         if s in name:
             a = name.split(s)[-1]
             if len(a) > 2:
-                name = preProcess(a)
+                name = replaceWhitespace(a)
 
     GetOuttaHere = ["american"," l p","corporation","international","national",
                     "association","incorporated"," l l c", "tribe", " u s "
@@ -61,14 +62,14 @@ def processName(name):
         if s in name:
             a = re.sub(s,' ',name)
             if len(a) > 2:
-                name = preProcess(a)
+                name = replaceWhitespace(a)
 
     Shwaties =["llc","inc","corp","llp","of","the"]
     for s in Shwaties:
         if s in name.split():
             a = re.sub(s,' ',name)
             if len(a) > 2:
-                name = preProcess(a)
+                name = replaceWhitespace(a)
                 
             
     return name
@@ -80,45 +81,56 @@ def processName(name):
     #through
     #prev. rptd - previously reported
 
-
-def loadData():
-    print 'Reading into clients ...'
-    corruption = "{http://www.PureEdge.com/XFDL/Custom}"
-    clients = {}
-    for f in glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json"):
-        jOb = {}
+def loadFile(f):
+    jOb = {}
+    corruption = "{http://www.PureEdge.com/XFDL/Custom}"    
+    try:
+        jOb = json.loads(open(f).read())[u'LOBBYINGDISCLOSURE1']
+    except KeyError:
         try:
-            jOb = json.loads(open(f).read())[u'LOBBYINGDISCLOSURE1']
+            corruptedjOb = json.loads(open(f).read())[corruption+u'LOBBYINGDISCLOSURE1']
+            jOb = {}
+            for (k,v) in corruptedjOb.iteritems():
+                jOb[k.split(corruption)[-1]]=v
         except KeyError:
-            try:
-                corruptedjOb = json.loads(open(f).read())[corruption+u'LOBBYINGDISCLOSURE1']
-                jOb = {}
-                for (k,v) in corruptedjOb.iteritems():
-                    jOb[k.split(corruption)[-1]]=v
-            except KeyError:
-                # We'll do it live
-                continue
-                
-        go = lambda x: preProcess(jOb[x])
-        client = {
-            "exact_name":        go("clientName"),
-            "rough_name":  processName(go("clientName")),            
-            "address":     go("clientAddress"),
-            "city":        go("clientCity"),
-            "country":     go("clientCountry"),
-            "state":       go("clientState"),
-            "zip":         go("clientZip"),
-            
-            "alis":        frozenset(filter(lambda x: x != u"",jOb["alis"])),
-            
-            "houseID":     go("houseID"),
-            "senate":      go("senateID"),            
-            "filename": f,
-            "description": go("clientGeneralDescription"),
-            "specific_issues":      go("specific_issues"),
-        }
-        clients[uuid.uuid4().hex] = client
-    return clients
+            # We'll do it live
+            return None
+
+    client = {
+        "exact_name":  preProcess(jOb["clientName"]),
+        "rough_name":  processName(preProcess(jOb["clientName"])),            
+        "address":     preProcess(jOb["clientAddress"]),
+        "city":        preProcess(jOb["clientCity"]),
+        "country":     preProcess(jOb["clientCountry"]),
+        "state":       preProcess(jOb["clientState"]),
+        "zip":         preProcess(jOb["clientZip"]),
+        
+        "alis":        frozenset(filter(lambda x: x != u"",jOb["alis"])),
+        
+        "houseID":     preProcess(jOb["houseID"]),
+        "senate":      preProcess(jOb["senateID"]),            
+        "filename": f,
+        "description":     preProcess(jOb["clientGeneralDescription"]),
+        "specific_issues": preProcess(jOb["specific_issues"]),
+    }
+    return client
+
+    
+def loadData():
+    print 'Reading into clients ...'    
+    if os.path.exists(processed_files):
+        print ("File %s exists reading now" % processed_files)
+        with open(processed_files,"r") as f:
+            return pickle.load(f)
+    else:
+        print "Loading and processing files now"
+        clients = {}
+        for c in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")):
+            if c != None:
+                clients[uuid.uuid4().hex] = c
+        with open(processed_files,"w") as f:
+            pickle.dump(clients,f,2)
+        return clients
 
 # Training
 def train(clients):
@@ -128,22 +140,27 @@ def train(clients):
         return dedupe.StaticDedupe(settings_file)
 
     else:
-        fields = {'city':        {'type': 'ShortString', 'Has Missing': True},
-                  'country':     {'type': 'ShortString', 'Has Missing': True},
-                  'zip':         {'type': 'ShortString', 'Has Missing': True},
-                  'houseID':     {'type': 'ShortString', 'Has Missing': True},
-                  'state':       {'type': 'ShortString', 'Has Missing': True},                  
+        fields = {'city':        {'type': 'String', 'Has Missing': True},
+                  'country':     {'type': 'String', 'Has Missing': True},
+                  'zip':         {'type': 'String', 'Has Missing': True},
+                  'houseID':     {'type': 'String', 'Has Missing': True},
+                  'state':       {'type': 'String', 'Has Missing': True},                  
                   'address':     {'type': 'Text', 'Has Missing': True,
-                                  'corpus': map(lambda x: x['address'],clients.values())},
+                                  'corpus': [] #map(lambda x: x['address'],clients.values())
+                              },
                   
                   'description': {'type': 'Text', 'Has Missing': True,
-                                  'corpus': map(lambda x: x['description'],clients.values())},
+                                  'corpus': [] #map(lambda x: x['description'],clients.values())
+                              },
                   'specific_issues': {'type': 'Text', 'Has Missing': True,
-                                      'corpus': map(lambda x: x['specific_issues'],clients.values())},
+                                      'corpus': [] #map(lambda x: x['specific_issues'],clients.values())
+                                  },
                   'rough_name':  {'type': 'Text',
-                                  'corpus': map(lambda x: x['rough_name'],clients.values())},
+                                  'corpus': [] #map(lambda x: x['rough_name'],clients.values())
+                              },
                   'alis':     {'type': 'Set',
-                               'corpus': map(lambda x: x['alis'],clients.values())},
+                               'corpus': [] #map(lambda x: x['alis'],clients.values())
+                           },
 
                   'exact_name':  {'type': 'Custom',
                                   'comparator': sameOrNotComparator},
@@ -206,7 +223,7 @@ def cluster(deduper):
     # `match` will return sets of record IDs that dedupe
     # believes are all referring to the same entity.
     print 'clustering...'
-    return deduper.match(clients, 0.50)
+    return deduper.match(clients, threshold)
      
 if __name__ == "__main__":
     clients = loadData()
@@ -221,10 +238,10 @@ if __name__ == "__main__":
     # 'Cluster ID' which indicates which records refer to each other.    
 #    import pdb; pdb.set_trace()
 
-    # for (cluster_id, cluster) in enumerate(clustered_dupes):
-    #     print("Group {}".format(cluster_id))
-    #     for uuid in cluster:
-    #         pprint(clients[uuid])
-    #     print("\n")
+    for (cluster_id, cluster) in enumerate(clustered_dupes):
+         print("Group {}".format(cluster_id))
+         for uuid in cluster:
+             pprint(clients[uuid])
+         print("\n")
 
 
