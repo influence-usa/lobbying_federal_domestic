@@ -137,7 +137,7 @@ def train(clients):
     
     if os.path.exists(settings_file):
         print 'reading from', settings_file
-        return dedupe.StaticDedupe(settings_file)
+        return dedupe.StaticDedupe(settings_file,num_processes=8)
 
     else:
         fields = {'city':        {'type': 'String', 'Has Missing': True},
@@ -170,7 +170,7 @@ def train(clients):
                 fields[k+"-exact_name"] = {'type':'Interaction',
                                            'Interaction Fields': ["exact_name", k]}
         # Create a new deduper object and pass our data model to it.
-        deduper = dedupe.Dedupe(fields)
+        deduper = dedupe.Dedupe(fields,num_processes=8)
 
         # To train dedupe, we feed it a random sample of records.
         deduper.sample(clients, 150000)
@@ -195,7 +195,7 @@ def train(clients):
         # press 'f' when you are finished
         print 'starting active labeling...'
 
-        dedupe.consoleLabel(deduper)
+        #dedupe.consoleLabel(deduper)
 
         deduper.train()
 
@@ -205,30 +205,17 @@ def train(clients):
         # Save our weights and predicates to disk.  If the settings file
         # exists, we will skip all the training and learning next time we run
         # this file.
-        deduper.writeSettings(settings_file)
+        #deduper.writeSettings(settings_file)
         return deduper
-
-def cluster(deduper):
-    # ## Clustering
-
-    # Find the threshold that will maximize a weighted average of our precision and recall. 
-    # When we set the recall weight to 2, we are saying we care twice as much
-    # about recall as we do precision.
-    #
-    # If we had more data, we would not pass in all the blocked data into
-    # this function but a representative sample.
-
-    threshold = deduper.threshold(clients, recall_weight=2)
-
-    # `match` will return sets of record IDs that dedupe
-    # believes are all referring to the same entity.
-    print 'clustering...'
-    return deduper.match(clients, threshold)
-     
-if __name__ == "__main__":
+    
+def main():
     clients = loadData()
     deduper = train(clients)
-    clustered_dupes = cluster(deduper)
+
+    print 'threshold...'    
+    threshold = deduper.threshold(clients, recall_weight=2)
+    print 'matchering...'        
+    clustered_dupes = deduper.match(clients, threshold)
 
     print '# duplicate sets', len(clustered_dupes)
     print '# duplicate sets', map(len,clustered_dupes)    
@@ -236,12 +223,13 @@ if __name__ == "__main__":
 
     # Write our original data back out to a CSV with a new column called 
     # 'Cluster ID' which indicates which records refer to each other.    
-#    import pdb; pdb.set_trace()
 
     for (cluster_id, cluster) in enumerate(clustered_dupes):
          print("Group {}".format(cluster_id))
          for uuid in cluster:
              pprint(clients[uuid])
          print("\n")
-
+    
+if __name__ == "__main__":
+    main()
 
