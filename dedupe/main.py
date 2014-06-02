@@ -1,4 +1,4 @@
-import collections, csv, dedupe, json, os, pickle, re, uuid
+import collections, csv, dedupe, json, os, pickle, re, time, uuid
 from numpy  import nan
 from pprint import pprint
 from glob   import glob
@@ -7,6 +7,7 @@ import dedupe.serializer as serializer
 processed_files = 'processed_files'
 settings_file = 'learned_settings'
 training_file = 'trained.json'
+output_pickle = 'clusters.pickle'
 
 def sameOrNotComparator(field_1, field_2) :
     if field_1 and field_2 :
@@ -229,7 +230,10 @@ def main():
          for uuid in cluster:
              pprint(clients[uuid])
          print("\n")
-    
+         
+    with open(output_pickle+int(time.time()),"w") as f:
+            pickle.dump(clustered_dupes,f,2)
+         
 if __name__ == "__main__":
     main()
 
