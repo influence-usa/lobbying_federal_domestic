@@ -8,7 +8,7 @@ processed_files = 'processed_files'
 settings_file = 'learned_settings'
 training_file = 'trained.json'
 output_pickle = 'clusters.pickle'
-nprocess = os.environ["NPROCESS"]
+nprocess = int(os.environ["NPROCESS"])
 
 def sameOrNotComparator(field_1, field_2) :
     if field_1 and field_2 :
