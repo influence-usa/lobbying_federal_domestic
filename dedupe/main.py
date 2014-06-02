@@ -8,6 +8,7 @@ processed_files = 'processed_files'
 settings_file = 'learned_settings'
 training_file = 'trained.json'
 output_pickle = 'clusters.pickle'
+nprocesses = os.environ["NPROCESS"]
 
 def sameOrNotComparator(field_1, field_2) :
     if field_1 and field_2 :
@@ -138,7 +139,7 @@ def train(clients):
     
     if os.path.exists(settings_file):
         print 'reading from', settings_file
-        return dedupe.StaticDedupe(settings_file,num_processes=8)
+        return dedupe.StaticDedupe(settings_file,num_processes=nprocess)
 
     else:
         fields = {'city':        {'type': 'String', 'Has Missing': True},
@@ -171,7 +172,7 @@ def train(clients):
                 fields[k+"-exact_name"] = {'type':'Interaction',
                                            'Interaction Fields': ["exact_name", k]}
         # Create a new deduper object and pass our data model to it.
-        deduper = dedupe.Dedupe(fields,num_processes=8)
+        deduper = dedupe.Dedupe(fields,num_processes=nprocess)
 
         # To train dedupe, we feed it a random sample of records.
         deduper.sample(clients, 150000)
