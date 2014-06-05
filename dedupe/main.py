@@ -6,7 +6,7 @@ import dedupe.serializer as serializer
 
 processed_files = 'processed_files'
 settings_file = 'learned_settings'
-training_file = 'trained.json'
+training_file = 'bootstrapping.json'
 output_pickle = 'clusters.pickle'
 nprocess = int(os.environ["NPROCESS"])
 
@@ -185,11 +185,7 @@ def train(clients):
         if os.path.exists(training_file):
             print 'reading labeled examples from ', training_file
             deduper.readTraining(training_file)
-            
-        for f in ["closenames","exactnames"]:
-            labels = json.load(open(f+".json"), cls=serializer.dedupe_decoder)            
-            deduper.markPairs(labels)
-            
+                        
         # ## Active learning
         # Dedupe will find the next pair of records
         # it is least certain about and ask you to label them as duplicates
@@ -234,6 +230,7 @@ def main():
     with open(filename,"w") as f:
             pickle.dump(clustered_clients,f,2)
     print("Saved clients to %s" % filename)
+    
 if __name__ == "__main__":
     main()
 
