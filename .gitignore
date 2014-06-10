@@ -4,3 +4,7 @@
 data
 cache
 log
+*~
+dedupe/clustered
+dedupe/jsons
+dedupe/processed_files

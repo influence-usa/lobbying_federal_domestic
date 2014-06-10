@@ -6,7 +6,7 @@ import dedupe.serializer as serializer
 
 processed_files = 'processed_files'
 settings_file = 'learned_settings'
-training_file = 'trained.json'
+training_file = 'bootstrapping.json'
 output_pickle = 'clusters.pickle'
 nprocess = int(os.environ["NPROCESS"])
 
@@ -123,7 +123,8 @@ def loadData():
     if os.path.exists(processed_files):
         print ("File %s exists reading now" % processed_files)
         with open(processed_files,"r") as f:
-            return pickle.load(f)
+            d = pickle.load(f)
+            return d
     else:
         print "Loading and processing files now"
         clients = {}
@@ -184,11 +185,7 @@ def train(clients):
         if os.path.exists(training_file):
             print 'reading labeled examples from ', training_file
             deduper.readTraining(training_file)
-            
-        for f in ["closenames","exactnames"]:
-            labels = json.load(open(f+".json"), cls=serializer.dedupe_decoder)            
-            deduper.markPairs(labels)
-            
+                        
         # ## Active learning
         # Dedupe will find the next pair of records
         # it is least certain about and ask you to label them as duplicates
@@ -219,22 +216,21 @@ def main():
     print 'matchering...'        
     clustered_dupes = deduper.match(clients, threshold)
 
-    print '# duplicate sets', len(clustered_dupes)
-    print '# duplicate sets', map(len,clustered_dupes)    
     # ## Writing Results
+    # for (cluster_id, cluster) in enumerate(clustered_dupes):
+    #      print("Group {}".format(cluster_id))
+    #      for uuid in cluster:
+    #          pprint(clients[uuid])
+    #      print("\n")
 
-    # Write our original data back out to a CSV with a new column called 
-    # 'Cluster ID' which indicates which records refer to each other.    
-
-    for (cluster_id, cluster) in enumerate(clustered_dupes):
-         print("Group {}".format(cluster_id))
-         for uuid in cluster:
-             pprint(clients[uuid])
-         print("\n")
-         
-    with open(output_pickle+int(time.time()),"w") as f:
-            pickle.dump(clustered_dupes,f,2)
-         
+    clustered_clients = []
+    for s in clustered_dupes:
+        clustered_clients.append(map(lambda x: clients[x],s))
+    filename = output_pickle+str(int(time.time()))
+    with open(filename,"w") as f:
+            pickle.dump(clustered_clients,f,2)
+    print("Saved clients to %s" % filename)
+    
 if __name__ == "__main__":
     main()
 
