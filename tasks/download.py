@@ -142,10 +142,8 @@ def download_sopr_report_types(options):
     form_page = requests.post(FORM_URL, cookies=jar,
                               data={"searchCriteria": "reportType"})
     d = pq(form_page.text, parser='html')
-    reportTypes = map(lambda x: (x.text, x.attrib["value"]),
-                      d('select#reportType > option'))
-    reportTypes = filter(lambda x: x[1] != "select one", reportTypes)
-    reportTypes = dict(reportTypes)
+    reportTypes = {x.text: x.attrib["value"] for x in
+                   d('select#reportType > option') if x.text != "select one"}
     return reportTypes
 
 
