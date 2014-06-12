@@ -63,7 +63,7 @@ def extract_all_zips(cache_paths, options):
             log_result(extract_zip(old_path, new_path))
 
 
-def extract_sopr(options):
+def extract_sopr_xml(options):
     if not os.path.exists(ORIG_DIR):
         mkdir_p(ORIG_DIR)
 

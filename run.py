@@ -13,7 +13,7 @@ loglevels = {'info': logging.INFO,
              'warn': logging.WARN}
 
 possible_actions = ['download', 'extract', 'transform']
-data_types = ['sopr', 'house_xml','sopr_report_types']
+data_types = ['sopr_xml', 'house_xml', 'sopr_report_types']
 
 parser = argparse.ArgumentParser(description='Run scripts')
 

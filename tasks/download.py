@@ -110,7 +110,7 @@ def is_not_cached(response, output_loc):
 
 
 # SPECIFIC TASKS
-def download_sopr(options):
+def download_sopr_xml(options):
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
 

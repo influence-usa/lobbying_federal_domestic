@@ -13,7 +13,7 @@ from .log import set_up_logging
 log = set_up_logging('transform', loglevel=logging.DEBUG)
 
 
-def transform_sopr(options):
+def transform_sopr_xml(options):
     def _is_array(element):
         return element.getchildren() != []
 
