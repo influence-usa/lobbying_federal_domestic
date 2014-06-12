@@ -54,7 +54,7 @@ def transform_sopr_xml(options):
                   'Lobbyists',
                   'Registrant']
 
-    xml_files = glob(os.path.join(s.ORIG_DIR, 'sopr/*/*/*.xml'))
+    xml_files = glob(os.path.join(s.ORIG_DIR, 'sopr_xml/*/*/*.xml'))
 
     for xml_filepath in xml_files:
         for filing in etree.parse(open(xml_filepath)).getroot().iterchildren():

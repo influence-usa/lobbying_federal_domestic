@@ -117,7 +117,7 @@ def download_sopr_xml(options):
     def _get_response_loc_pair(url):
         fname = requests.utils.urlparse(url).path.split('/')[-1]
         year, quarter = fname.split('.')[0].split('_')
-        output_dir = os.path.join(CACHE_DIR, 'sopr', year, 'Q' + quarter)
+        output_dir = os.path.join(CACHE_DIR, 'sopr_xml', year, 'Q' + quarter)
         if not os.path.exists(output_dir):
             mkdir_p(output_dir)
         output_loc = os.path.join(output_dir, fname)

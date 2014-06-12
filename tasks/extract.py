@@ -68,7 +68,7 @@ def extract_sopr_xml(options):
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
 
-    cache_paths = glob(os.path.join(CACHE_DIR, 'sopr/*/*/*.zip'))
+    cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_xml/*/*/*.zip'))
     log.debug("cache paths ({num}):".format(num=len(cache_paths)) +
               "\n\t".join(cache_paths))
 
