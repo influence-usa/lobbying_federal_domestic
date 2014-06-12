@@ -58,9 +58,7 @@ def extract_all_zips(cache_paths, options):
         pool.join()
     else:
         for path in cache_paths:
-            old_path, new_path = translate_dir(path, from_dir=CACHE_DIR,
-                                               to_dir=ORIG_DIR)
-            log_result(extract_zip(old_path, new_path))
+            log_result(extract_zip(path))
 
 
 def extract_sopr_xml(options):
