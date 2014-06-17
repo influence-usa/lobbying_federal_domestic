@@ -130,20 +130,29 @@ def download_sopr(options):
              for year, quarter in
              product(xrange(1999, 2015), xrange(1, 5))]
 
-    # response_loc_pairs = (_get_response_loc_pair(url) for url in _urls)    
+    # response_loc_pairs = (_get_response_loc_pair(url) for url in _urls)
     download_all(_urls, _get_response_loc_pair, options)
+
 
 def download_sopr_report_types(options):
     FORM_URL = 'http://soprweb.senate.gov/index.cfm?event=processSelectFields'
 
     jar = cookielib.CookieJar()
     requests.get(FORM_URL, cookies=jar)
-    form_page = requests.post(FORM_URL, cookies=jar, data={"searchCriteria":"reportType"})
-    d = pq(form_page.text,parser='html')
-    reportTypes = map(lambda x: (x.text,x.attrib["value"]),d('select#reportType > option'))
-    reportTypes = filter(lambda x: x[1] != "select one", reportTypes)
-    reportTypes = dict(reportTypes)
+    form_page = requests.post(FORM_URL, cookies=jar,
+                              data={"searchCriteria": "reportType"})
+    d = pq(form_page.text, parser='html')
+    reportTypes = {x.text: x.attrib["value"] for x in
+                   d('select#reportType > option') if x.text != "select one"}
     return reportTypes
+
+
+def download_sopr_html(options):
+    if options.get('loglevel', None):
+        log.setLevel(options['loglevel'])
+
+    url_template = 'http://soprweb.senate.gov/index.cfm?event=getFilingDetails&filingID={filing_id}&filingTypeID={filing_type_id}'
+
 
 def download_house_xml(options):
     FORM_URL = 'http://disclosures.house.gov/ld/LDDownload.aspx?KeepThis=true'
