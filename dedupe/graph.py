@@ -2,15 +2,10 @@ from glob   import glob
 import networkx as nx
 import json
 import os
+from pprint import pprint
 import re
 import subprocess
 import uuid
-
-def display(g):
-    A = nx.to_agraph(g)
-    A.layout()
-    stream = subprocess.Popen(["dot","-Tpng","-Gsize=20,20","-Gdpi=1000","-oresolutiongraph.png"],stdin=subprocess.PIPE)
-    stream.communicate(A.draw())
 
 #Lobbyists
 #"lobbyists"
@@ -60,7 +55,9 @@ def loadFile(f):
     client = {
         #Display data
         "label":       preProcess(jOb["clientName"]),
-
+        "fillcolor": "darkolivegreen1",
+        "style": "filled",
+        
         #Type
         "type":"client",
         
@@ -85,7 +82,8 @@ def loadFile(f):
     firm = {
         #Display code
         "label":     preProcess(jOb["organizationName"]),
-
+        "fillcolor": "deepskyblue",
+        "style": "filled",
         #Type
         "type":"firm",
 
@@ -129,7 +127,7 @@ beingr = {"label":"represents", "relation":"represents"}
 def loadData():
     print 'Reading into clients ...'    
     universe = nx.Graph()
-    for (client,firm,employs) in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")[1:40]):
+    for (client,firm,employs) in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")[1:10]):
         cnode = str(uuid.uuid1())
         fnode = str(uuid.uuid1())
         cbeing = str(uuid.uuid1())
@@ -146,13 +144,10 @@ def loadData():
         universe.add_edge(fnode,cnode,employs)
     return universe
 
-#from pprint import pprint
-
 def mergeBeings(universe,a,b):
     for v in nx.neighbors(universe,b):
         universe.add_edge(v,a,beingr)
-        #remove edge?
-        #universe.remove_node(b)
+        universe.remove_edge(v,b)
     return None
 
 def findBeing(l,universe):
@@ -161,7 +156,6 @@ def findBeing(l,universe):
             return lb
     raise Exception("Cannot find a being for \"{}\"".format(l))
 
-from pprint import pprint
 def mergeExactMatches(universe):
     nodes = universe.nodes(data=True)
     l = len(nodes)
@@ -172,27 +166,36 @@ def mergeExactMatches(universe):
             lb, b = nodes[j]            
             if la != lb:
                 if a["type"] == "client" and b["type"] == "client" and a["name"] == b["name"]:
-                    sames.append((findBeing(la,universe),findBeing(lb,universe)))
-                    pprint(a)
-                    pprint(b)                    
-                    
+                    sames.append((findBeing(la,universe),findBeing(lb,universe)))                    
                 if a["type"] == "firm"   and b["type"] == "firm" and a["printedname"] == b["printedname"] and a["printedname"] != "":
-                    pprint(a)
-                    pprint(b)                    
                     sames.append((findBeing(la,universe),findBeing(lb,universe)))                    
                 if a["type"] == "firm"   and b["type"] == "firm" and a["orgname"] == b["orgname"] and a["orgname"] != "":
                     sames.append((findBeing(la,universe),findBeing(lb,universe)))
-                    pprint(a)
-                    pprint(b)                    
-
+                    
     [mergeBeings(universe,u,v) for u,v in sames]
 
+    for u,v in sames:
+        if u in universe and len(nx.neighbors(universe,u)) == 0:
+            universe.remove_node(u)
+        if v in universe and len(nx.neighbors(universe,v)) == 0:
+            universe.remove_node(v)
 
-                    
+
+def save(universe):
+    for k1,k2,v in universe.edges(data=True):
+        if "alis" in v:
+            v["alis"] = ",".join(list(v["alis"]))
+    import pdb; pdb.set_trace()            
+    nx.write_graphml(universe,"output.graphml")
+    
 def main():
+    print("Loading data")
     universe = loadData()
+    print("Matching")
     mergeExactMatches(universe)
-    display(universe)
+    print("Saving")
+    save(universe)
+
 
  
 if __name__ == "__main__":
