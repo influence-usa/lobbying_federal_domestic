@@ -1,8 +1,12 @@
-import collections, csv, dedupe, json, os, pickle, re, time, uuid
+import dedupe
+import json
+import os
+import pickle
+import re
+import time
+import uuid
 from numpy  import nan
-from pprint import pprint
 from glob   import glob
-import dedupe.serializer as serializer
 
 processed_files = 'processed_files'
 settings_file = 'learned_settings'
@@ -19,8 +23,8 @@ def sameOrNotComparator(field_1, field_2) :
     else :
         return nan
 
-def replaceWhitespace(str):
-    return re.sub('  +', ' ', str)
+def replaceWhitespace(s):
+    return re.sub('  +', ' ', s)
 
 def preProcess(column):
     """
