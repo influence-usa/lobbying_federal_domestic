@@ -127,7 +127,7 @@ beingr = {"label":"represents", "relation":"represents"}
 def loadData():
     print 'Reading into clients ...'    
     universe = nx.Graph()
-    for (client,firm,employs) in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")[1:10]):
+    for (client,firm,employs) in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")):
         cnode = str(uuid.uuid1())
         fnode = str(uuid.uuid1())
         cbeing = str(uuid.uuid1())
