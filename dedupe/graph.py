@@ -127,7 +127,10 @@ beingr = {"label":"represents", "relation":"represents"}
 def loadData():
     print 'Reading into clients ...'    
     universe = nx.Graph()
-    for (client,firm,employs) in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")):
+    for col in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")):
+        if col == None:
+            continue
+        (client,firm,employs) = col        
         cnode = str(uuid.uuid1())
         fnode = str(uuid.uuid1())
         cbeing = str(uuid.uuid1())
@@ -185,7 +188,6 @@ def save(universe):
     for k1,k2,v in universe.edges(data=True):
         if "alis" in v:
             v["alis"] = ",".join(list(v["alis"]))
-    import pdb; pdb.set_trace()            
     nx.write_graphml(universe,"output.graphml")
     
 def main():
