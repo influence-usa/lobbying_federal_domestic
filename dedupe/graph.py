@@ -1,3 +1,5 @@
+from collections import defaultdict
+import datetime
 from glob   import glob
 import networkx as nx
 import json
@@ -5,6 +7,7 @@ import os
 from pprint import pprint
 import re
 import subprocess
+import time
 import uuid
 
 #Lobbyists
@@ -28,12 +31,61 @@ import uuid
 def replaceWhitespace(s):
     return re.sub('  +', ' ', s)
 
-def preProcess(column):
-    column = column.encode("ascii","replace")
-    column = re.sub('\n', ' ', column)
-    column = column.strip().strip('"').strip("'").lower().strip()    
-    return replaceWhitespace(column)
+#Questions
+#alliance of/ alliance to?
+#how to handle formely?
+#center for/to'
+#city of
+#d/b/a doing business as 
+# if there is a 3-5 letter nonsense verb at the end of a word, remove it?
+#ad hoc informal coalitions
 
+def preProcess(s):
+    s = s.encode("ascii","replace")
+    s = re.sub('\n', ' ', s)
+    s = s.strip().strip('"').strip("'").lower().strip()
+    return replaceWhitespace(s)
+
+#processClientName(preProcess("assn of J.H.Christ & The-All-Mighty l c llc lp"))
+#'asociation of j h christ and the all mighty'
+def processClientName(s):
+    s = re.sub('\?','\'',s)       #replace ? with '            
+    s = re.sub('[-,\.]',' ',s)    #replace -,. with space
+    s = re.sub('\\bu s a\\b','usa',s) #replace u.s.a. with usa
+    s = re.sub('\\bu s\\b','us',s) #replace u.s.a. with usa    
+    s = re.sub('\\bassn\\b','asociation',s) # replace "assn" with "association"
+    s = re.sub('&',' and ',s)#replace "&" with " and "
+
+    useless =  ["l l c","llc",
+                "l c","lc",
+                "l l p","llp",
+                "l p","lp",
+                "ltd","l t d","company","corporation","corp","companies","incorporated","inc"] 
+    #remove various stopwords
+    for sub in useless:
+        s=re.sub("\\b"+sub+"\\b"," ",s) #TODO: look into "co" company vs. colorado
+
+    if "on behalf of" in s:
+        s = s.split("on behalf of")[-1]
+        if ")" == s[-1] and "(" not in s:
+            s = s[0:-1]
+            
+    #ImmaLetYouFinish = ["on behalf of","livingston group for","livingston group",
+    #                     "capitol strategies ",  "alcalde and fay \(","white house consulting",
+    #                     "the ickes and enright group","corporation", 
+    #                     "dla piper us for", "obo" ]
+    #remove "alcalde & fay (" "alenxander strategy group (" "apco worldwide ("    
+    # for s in ImmaLetYouFinish:
+    #     if s in name:
+    #         a = name.split(s)[-1]
+    #         if len(a) > 2:
+    #             name = replaceWhitespace(a)
+
+    #remove on behalf of
+    return preProcess(s)
+
+
+    
 def loadFile(f):
     jOb = {}
     corruption = "{http://www.PureEdge.com/XFDL/Custom}"    
@@ -51,10 +103,11 @@ def loadFile(f):
     #Client node
     #"clientAddress","clientCity","clientCountry","clientGeneralDescription","clientGovtEntity",
     #"clientName","clientState","clientZip","clientZipExt","prinClientCity","prinClientCountry",
-    #"prinClientState","prinClientZip","prinClientZipExt"    
+    #"prinClientState","prinClientZip","prinClientZipExt"
+    clientname = processClientName(preProcess(jOb["clientName"]))
     client = {
         #Display data
-        "label":       preProcess(jOb["clientName"]),
+        "label": clientname,
         "fillcolor": "darkolivegreen1",
         "style": "filled",
         
@@ -62,7 +115,8 @@ def loadFile(f):
         "type":"client",
         
         #Acutal data
-        "name":        preProcess(jOb["clientName"]),
+        "rawname":     preProcess(jOb["clientName"]),
+        "name":        clientname,
         "address":     preProcess(jOb["clientAddress"]),
         "city":        preProcess(jOb["clientCity"]),
         "country":     preProcess(jOb["clientCountry"]),
@@ -148,47 +202,60 @@ def loadData():
     return universe
 
 def mergeBeings(universe,a,b):
-    for v in nx.neighbors(universe,b):
-        universe.add_edge(v,a,beingr)
-        universe.remove_edge(v,b)
-    return None
+    if a != b:
+        for v in nx.neighbors(universe,b):
+            universe.add_edge(v,a,beingr)
+            universe.remove_edge(v,b)
+    return a
 
-def findBeing(l,universe):
+def findBeing(universe,l):
+    beings = []
     for lb,d in universe[l].iteritems():
         if d["relation"] == "represents":
-            return lb
-    raise Exception("Cannot find a being for \"{}\"".format(l))
+            beings.append(lb)
+            
+    if len(beings) == 0:
+        raise Exception("Cannot find a being for \"{}\"".format(l))
+    elif len(beings) == 1:
+        return beings[0]
+    else:
+        raise Exception("Found {} beings for {}: {}".format(len(beings),l,",".join(beings)))
 
 def mergeExactMatches(universe):
     nodes = universe.nodes(data=True)
     l = len(nodes)
-    sames = []
-    for i in range(0,l):
-        for j in range(i,l):
-            la, a = nodes[i]
-            lb, b = nodes[j]            
-            if la != lb:
-                if a["type"] == "client" and b["type"] == "client" and a["name"] == b["name"]:
-                    sames.append((findBeing(la,universe),findBeing(lb,universe)))                    
-                if a["type"] == "firm"   and b["type"] == "firm" and a["printedname"] == b["printedname"] and a["printedname"] != "":
-                    sames.append((findBeing(la,universe),findBeing(lb,universe)))                    
-                if a["type"] == "firm"   and b["type"] == "firm" and a["orgname"] == b["orgname"] and a["orgname"] != "":
-                    sames.append((findBeing(la,universe),findBeing(lb,universe)))
-                    
-    [mergeBeings(universe,u,v) for u,v in sames]
+    
+    firmsOrg = defaultdict(list)
+    firmsPrinted = defaultdict(list)    
+    clients = defaultdict(list)    
+    
+    for k,v in nodes:
+        if v["type"] == "client":
+            if v["name"] != "":
+                clients[v["name"]].append(findBeing(universe,k))
+        if v["type"] == "firm":
+            b = findBeing(universe,k)
+            if v["orgname"] != "":
+                firmsOrg[v["orgname"]].append(b)
+            if v["printedname"] != "":                
+                firmsPrinted[v["printedname"]].append(b)
 
-    for u,v in sames:
-        if u in universe and len(nx.neighbors(universe,u)) == 0:
-            universe.remove_node(u)
-        if v in universe and len(nx.neighbors(universe,v)) == 0:
-            universe.remove_node(v)
+    for grouping in [firmsOrg,firmsPrinted,clients]:
+        for k,v in grouping.iteritems():
+            reduce(lambda x,y: mergeBeings(universe,x,y),v)
+
+    for (k,v) in universe.nodes(data=True):            
+        if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
+            universe.remove_node(k)
 
 
 def save(universe):
     for k1,k2,v in universe.edges(data=True):
         if "alis" in v:
             v["alis"] = ",".join(list(v["alis"]))
-    nx.write_graphml(universe,"output.graphml")
+    stamp = re.sub("[ :\.]","-",str(datetime.datetime.now()))[:-7]
+    nx.write_graphml(universe,"output-{}.graphml".format(stamp))
+
     
 def main():
     print("Loading data")
