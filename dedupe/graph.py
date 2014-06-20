@@ -1,3 +1,4 @@
+import copy
 from collections import defaultdict
 import datetime
 from glob   import glob
@@ -48,14 +49,18 @@ def preProcess(s):
 
 #processClientName(preProcess("assn of J.H.Christ & The-All-Mighty l c llc lp"))
 #'asociation of j h christ and the all mighty'
-def processClientName(s):
+# preprocess ("aia") out
+def processClientName(org):
+    s = org
     s = re.sub('\?','\'',s)       #replace ? with '            
-    s = re.sub('[-,\.]',' ',s)    #replace -,. with space
+    s = re.sub('[,\.]',' ',s)    #replace ,. with space
     s = re.sub('\\bu s a\\b','usa',s) #replace u.s.a. with usa
     s = re.sub('\\bu s\\b','us',s) #replace u.s.a. with usa    
     s = re.sub('\\bassn\\b','asociation',s) # replace "assn" with "association"
     s = re.sub('&',' and ',s)#replace "&" with " and "
-
+    if "city" not in s:
+        s = re.sub("\bco\b"," ",s)
+        
     useless =  ["l l c","llc",
                 "l c","lc",
                 "l l p","llp",
@@ -65,12 +70,43 @@ def processClientName(s):
     for sub in useless:
         s=re.sub("\\b"+sub+"\\b"," ",s) #TODO: look into "co" company vs. colorado
 
-    if "on behalf of" in s:
-        s = s.split("on behalf of")[-1]
-        if ")" == s[-1] and "(" not in s:
-            s = s[0:-1]
-            
-    #ImmaLetYouFinish = ["on behalf of","livingston group for","livingston group",
+        # reverse chicago, city of
+    #on behalf of cassidy & associates
+    #on behalf of akin gump
+    #"on behalf of akin gump strauss hauer & feld"
+    breakers = ["on behalf of", "obo","o/b/o", "on behalf",
+                "public policy partners (",
+                "the livingston group - (client",                                                
+                "the livingston group (client:",
+                "the livingston group (for ",
+                "the livingston group ( for ",                
+                "the livingston group (",
+                "the livingston group(",
+                "the livingston group/",
+                "akin gump strauss hauer and feld ("
+                "(the livingston group)",                                                
+                "the livingston group-",
+                "van scoyoc associates (",
+                "the implementation group (",
+                "jefferson consulting group (",                
+                "alcalde and fay (",
+                "govbiz advantage (for",
+                "govbiz advantage ("                
+    ]
+    for b in breakers:
+        if b in s:
+            s = s.split(b)[-1]
+    while ")" == s[0]:
+        s = s[1:]
+    while "(" == s[-1]:
+        s = s[:-1]        
+    while ")" == s[-1] and "(" not in s:
+        s = s[:-1]
+    while "(" == s[-1] and ")" not in s:
+        s = s[:-1]
+
+        
+    #ImmaLetYouFinish = [
     #                     "capitol strategies ",  "alcalde and fay \(","white house consulting",
     #                     "the ickes and enright group","corporation", 
     #                     "dla piper us for", "obo" ]
@@ -104,10 +140,9 @@ def loadFile(f):
     #"clientAddress","clientCity","clientCountry","clientGeneralDescription","clientGovtEntity",
     #"clientName","clientState","clientZip","clientZipExt","prinClientCity","prinClientCountry",
     #"prinClientState","prinClientZip","prinClientZipExt"
-    clientname = processClientName(preProcess(jOb["clientName"]))
     client = {
         #Display data
-        "label": clientname,
+        "label": processClientName(preProcess(jOb["clientName"])),
         "fillcolor": "darkolivegreen1",
         "style": "filled",
         
@@ -115,8 +150,7 @@ def loadFile(f):
         "type":"client",
         
         #Acutal data
-        "rawname":     preProcess(jOb["clientName"]),
-        "name":        clientname,
+        "name":        preProcess(jOb["clientName"]),
         "address":     preProcess(jOb["clientAddress"]),
         "city":        preProcess(jOb["clientCity"]),
         "country":     preProcess(jOb["clientCountry"]),
@@ -190,23 +224,31 @@ def loadData():
         cbeing = str(uuid.uuid1())
         fbeing = str(uuid.uuid1())        
 
-        universe.add_node(cbeing, being)
+        universe.add_node(cbeing,copy.copy(being))
         universe.add_node(cnode,client)
-        universe.add_edge(cnode,cbeing,beingr)
+        universe.add_edge(cnode,cbeing,copy.copy(beingr))
         
-        universe.add_node(fbeing,being)        
+        universe.add_node(fbeing,copy.copy(being))
         universe.add_node(fnode,firm)
-        universe.add_edge(fnode,fbeing,beingr)
+        universe.add_edge(fnode,fbeing,copy.copy(beingr))
         
         universe.add_edge(fnode,cnode,employs)
     return universe
 
-def mergeBeings(universe,a,b):
+def mergeTheirBeings(universe,al,bl):
+    a = findBeing(universe,al)
+    b = findBeing(universe,bl)        
     if a != b:
         for v in nx.neighbors(universe,b):
-            universe.add_edge(v,a,beingr)
+            universe.add_edge(v,a,copy.copy(beingr))
             universe.remove_edge(v,b)
-    return a
+        av = universe.node[a]
+        bv = universe.node[b]        
+        if "names" in av and "names" in bv:    
+            av["names"] = av["names"].union(bv["names"])
+        elif "names" not in av and "names" in bv:    
+            av["names"] = bv["names"]            
+    return al
 
 def findBeing(universe,l):
     beings = []
@@ -221,6 +263,24 @@ def findBeing(universe,l):
     else:
         raise Exception("Found {} beings for {}: {}".format(len(beings),l,",".join(beings)))
 
+def formerSplitter(name):
+    splitters = ["\"fka\"","fka:","fka","f/k/a/",
+                 "formerly known as",
+                 "formerly know as",
+                 "formerly filed as",
+                 "formerly reported as",                                  
+                 "formerly",
+                 "formally known as",                 
+                 "formally",
+                 "former",
+                 "d/b/a",
+                 "dba ",
+    ]
+    for s in splitters:
+        if s in name:
+            return name.split("\b"+s+"\b")
+    return [name]
+
 def mergeExactMatches(universe):
     nodes = universe.nodes(data=True)
     l = len(nodes)
@@ -232,17 +292,22 @@ def mergeExactMatches(universe):
     for k,v in nodes:
         if v["type"] == "client":
             if v["name"] != "":
-                clients[v["name"]].append(findBeing(universe,k))
+                for split in map(processClientName,formerSplitter(v["name"])):
+                    clients[split].append(k)
         if v["type"] == "firm":
-            b = findBeing(universe,k)
             if v["orgname"] != "":
-                firmsOrg[v["orgname"]].append(b)
+                firmsOrg[v["orgname"]].append(k)
             if v["printedname"] != "":                
-                firmsPrinted[v["printedname"]].append(b)
+                firmsPrinted[v["printedname"]].append(k)
 
     for grouping in [firmsOrg,firmsPrinted,clients]:
         for k,v in grouping.iteritems():
-            reduce(lambda x,y: mergeBeings(universe,x,y),v)
+            merged = reduce(lambda x,y: mergeTheirBeings(universe,x,y),v)
+            found = findBeing(universe,merged)
+            if "names" in universe.node[found]:
+                universe.node[found]["names"].add(k)
+            else:
+                universe.node[found]["names"] = set([k])        
 
     for (k,v) in universe.nodes(data=True):            
         if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
@@ -252,9 +317,15 @@ def mergeExactMatches(universe):
 def save(universe):
     for k1,k2,v in universe.edges(data=True):
         if "alis" in v:
-            v["alis"] = ",".join(list(v["alis"]))
+            v["alis"] = ", ".join(list(v["alis"]))
+            
+    for k,v in universe.nodes(data=True):            
+        if "names" in v:
+            v["names"] = ", ".join(sorted(list(v["names"])))            
     stamp = re.sub("[ :\.]","-",str(datetime.datetime.now()))[:-7]
-    nx.write_graphml(universe,"output-{}.graphml".format(stamp))
+    f = "output-{}.graphml".format(stamp)
+    nx.write_graphml(universe,f)
+    print("Saved in {}".format(f))
 
     
 def main():
