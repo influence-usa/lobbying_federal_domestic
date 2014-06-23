@@ -93,12 +93,13 @@ def processClientName(org):
     for b in breakers:
         if b in s:
             s = s.split(b)[-1]
+    s = preProcess(s)
     for c in [")",":","/","for"]:
-        while c == s[0:len(c)+1]:
-            s = s[1:]
+        while c == s[0:len(c)]:
+            s = s[len(c):]
     for c in ["(",":","/"]:
-        while c == s[-1]:
-            s = s[:-1]
+        while c == s[-len(c)]:
+            s = s[:-len(c)]
         
     while ")" == s[-1] and "(" not in s:
         s = s[:-1]
