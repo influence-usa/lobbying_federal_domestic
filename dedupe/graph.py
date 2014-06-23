@@ -52,14 +52,14 @@ def preProcess(s):
 # preprocess ("aia") out
 def processClientName(org):
     s = org
+    if "city" not in s:
+        s = re.sub("\\bco\\b"," ",s)    
     s = re.sub('\?','\'',s)       #replace ? with '            
     s = re.sub('[,\.]',' ',s)    #replace ,. with space
     s = re.sub('\\bu s a\\b','usa',s) #replace u.s.a. with usa
     s = re.sub('\\bu s\\b','us',s) #replace u.s.a. with usa    
     s = re.sub('\\bassn\\b','asociation',s) # replace "assn" with "association"
     s = re.sub('&',' and ',s)#replace "&" with " and "
-    if "city" not in s:
-        s = re.sub("\bco\b"," ",s)
         
     useless =  ["l l c","llc",
                 "l c","lc",
@@ -78,8 +78,6 @@ def processClientName(org):
                 "public policy partners (",
                 "the livingston group - (client",                                                
                 "the livingston group (client:",
-                "the livingston group (for ",
-                "the livingston group ( for ",                
                 "the livingston group (",
                 "the livingston group(",
                 "the livingston group/",
@@ -90,16 +88,18 @@ def processClientName(org):
                 "the implementation group (",
                 "jefferson consulting group (",                
                 "alcalde and fay (",
-                "govbiz advantage (for",
-                "govbiz advantage ("                
+                "govbiz advantage (",
     ]
     for b in breakers:
         if b in s:
             s = s.split(b)[-1]
-    while ")" == s[0]:
-        s = s[1:]
-    while "(" == s[-1]:
-        s = s[:-1]        
+    for c in [")",":","/","for"]:
+        while c == s[0:len(c)+1]:
+            s = s[1:]
+    for c in ["(",":","/"]:
+        while c == s[-1]:
+            s = s[:-1]
+        
     while ")" == s[-1] and "(" not in s:
         s = s[:-1]
     while "(" == s[-1] and ")" not in s:
@@ -271,14 +271,14 @@ def formerSplitter(name):
                  "formerly reported as",                                  
                  "formerly",
                  "formally known as",                 
-                 "formally",
-                 "former",
+                 "formally", 
+                 "former", #united natural products alliance (former utah natural products alliance)?
                  "d/b/a",
-                 "dba ",
-    ]
+                 "dba",
+    ]#todo: compile regex ahead of times
     for s in splitters:
-        if s in name:
-            return name.split("\b"+s+"\b")
+        if s in name and name != "dba international":
+            return re.split("\\b"+s+"\\b",name)
     return [name]
 
 def mergeExactMatches(universe):
@@ -325,6 +325,7 @@ def save(universe):
     stamp = re.sub("[ :\.]","-",str(datetime.datetime.now()))[:-7]
     f = "output-{}.graphml".format(stamp)
     nx.write_graphml(universe,f)
+    nx.write_graphml(universe,"fresh-output.graphml")    
     print("Saved in {}".format(f))
 
     
