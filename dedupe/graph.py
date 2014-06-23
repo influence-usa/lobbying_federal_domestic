@@ -75,25 +75,23 @@ def processClientName(org):
     #on behalf of akin gump
     #"on behalf of akin gump strauss hauer & feld"
     breakers = ["on behalf of", "obo","o/b/o", "on behalf",
-                "public policy partners (",
-                "the livingston group - (client",                                                
-                "the livingston group (client:",
-                "the livingston group (",
-                "the livingston group(",
-                "the livingston group/",
-                "akin gump strauss hauer and feld ("
-                "(the livingston group)",                                                
-                "the livingston group-",
-                "van scoyoc associates (",
-                "the implementation group (",
-                "jefferson consulting group (",                
-                "alcalde and fay (",
-                "govbiz advantage (",
+                "public policy partners",
+                "the livingston group",                                                
+                "akin gump strauss hauer and feld"
+                "\(the livingston group\)",                                                
+                "the livingston group",
+                "van scoyoc associates",
+                "the implementation group",
+                "jefferson consulting group",                
+                "alcalde and fay",
+                "govbiz advantage",
     ]
     for b in breakers:
-        if b in s:
-            s = s.split(b)[-1]
+        if b in s and len(s) > len(b) + 4:
+            s = re.split("\\b"+b+"\\b",s)[-1]
     s = preProcess(s)
+    if s[0] == "(" and s[-1] == ")":
+        s = s[1:-1]
     for c in [")",":","/","for"]:
         while c == s[0:len(c)]:
             s = s[len(c):]
