@@ -1,15 +1,21 @@
-import copy
+import codecs
 from collections import defaultdict
+import copy
 import datetime
 from glob   import glob
 import networkx as nx
+import norvig
+import itertools
 import json
 import os
+import pickle
 from pprint import pprint
 import re
 import subprocess
 import time
 import uuid
+
+processed_files = 'processed_files'
 
 #Lobbyists
 #"lobbyists"
@@ -28,7 +34,7 @@ import uuid
 
 #Time
 #"effectiveDate","regType","reportType","reportYear","signedDate"
-    
+
 def replaceWhitespace(s):
     return re.sub('  +', ' ', s)
 
@@ -42,22 +48,28 @@ def replaceWhitespace(s):
 #ad hoc informal coalitions
 
 def preProcess(s):
-    s = s.encode("ascii","replace")
+    org = s
+    s = s.encode("ascii","ignore")    
     s = re.sub('\n', ' ', s)
     s = s.strip().strip('"').strip("'").lower().strip()
-    return replaceWhitespace(s)
+    s = replaceWhitespace(s)
+    if s == 'legi\\x company': #LEGI\X is ridiclous 
+        s = "legi-x company"        
+    return s
 
 #processClientName(preProcess("assn of J.H.Christ & The-All-Mighty l c llc lp"))
 #'asociation of j h christ and the all mighty'
 # preprocess ("aia") out
 def processClientName(org):
+    #convert a.b.c.d. to abcd
     s = org
     if "city" not in s:
         s = re.sub("\\bco\\b"," ",s)    
     s = re.sub('\?','\'',s)       #replace ? with '            
     s = re.sub('[,\.]',' ',s)    #replace ,. with space
     s = re.sub('\\bu s a\\b','usa',s) #replace u.s.a. with usa
-    s = re.sub('\\bu s\\b','us',s) #replace u.s.a. with usa    
+    s = re.sub('\\bu s\\b','us',s) #replace u.s.a. with usa
+    s = re.sub('\\bu s\\b','na',s) #replace n a with na        
     s = re.sub('\\bassn\\b','asociation',s) # replace "assn" with "association"
     s = re.sub('&',' and ',s)#replace "&" with " and "
         
@@ -65,6 +77,7 @@ def processClientName(org):
                 "l c","lc",
                 "l l p","llp",
                 "l p","lp",
+                "incorperated",
                 "ltd","l t d","company","corporation","corp","companies","incorporated","inc"] 
     #remove various stopwords
     for sub in useless:
@@ -84,39 +97,63 @@ def processClientName(org):
                 "the implementation group",
                 "jefferson consulting group",                
                 "alcalde and fay",
-                "govbiz advantage",
-    ]
+                "govbiz advantage"]
+    s = preProcess(s)
     for b in breakers:
         if b in s and len(s) > len(b) + 4:
             s = re.split("\\b"+b+"\\b",s)[-1]
-    s = preProcess(s)
-    if s[0] == "(" and s[-1] == ")":
-        s = s[1:-1]
-    for c in [")",":","/","for"]:
-        while c == s[0:len(c)]:
-            s = s[len(c):]
-    for c in ["(",":","/"]:
-        while c == s[-len(c)]:
-            s = s[:-len(c)]
-        
-    while ")" == s[-1] and "(" not in s:
-        s = s[:-1]
-    while "(" == s[-1] and ")" not in s:
-        s = s[:-1]
 
-        
-    #ImmaLetYouFinish = [
-    #                     "capitol strategies ",  "alcalde and fay \(","white house consulting",
-    #                     "the ickes and enright group","corporation", 
-    #                     "dla piper us for", "obo" ]
-    #remove "alcalde & fay (" "alenxander strategy group (" "apco worldwide ("    
-    # for s in ImmaLetYouFinish:
-    #     if s in name:
-    #         a = name.split(s)[-1]
-    #         if len(a) > 2:
-    #             name = replaceWhitespace(a)
+    old = None
+    while old != s:
+        s=preProcess(s)
+        if s=='':
+            return ''
+        old = s
+        if s[0] == "(" and s[-1] == ")":
+            s = s[1:-1]
 
-    #remove on behalf of
+        for c in ["-",")",":","/","for\\b","client"]:            
+            while c == s[0:len(c)]:
+                s = s[len(c):]
+                if s=='':
+                    return ''
+
+        for c in ["(",":","/"]:
+            while c == s[-len(c)]:
+                s = s[:-len(c)]
+                if s=='':
+                    return ''
+
+        while ")" == s[-1] and "(" not in s:
+            s = s[:-1]
+            
+        while "(" == s[-1] and ")" not in s:
+            s = s[:-1]
+            
+        
+    #remove acronyms
+    #housing action resource trust (hart) ==> housing action resource trust
+    #ousing action resource trust ("hart")
+
+    g = re.match(r"([\w' ]*)\((.*)\)$",s)
+    mappings = {
+        "and":["a",""],
+        "southwest":["s","sw"]
+    }
+    if g is not None:
+        gs = g.groups()
+        ws = []
+        for w in filter(lambda x: x != "",gs[0].split(" ")):
+            if w in mappings:
+                ws.append(mappings[w])
+            else:
+                ws.append([w[0]])
+        words = map("".join,list(itertools.product(*ws)))
+        if gs[1] in words:
+            s = preProcess(gs[0])
+            
+    s = re.sub('-',' ',s)
+    
     return preProcess(s)
 
 
@@ -125,7 +162,8 @@ def loadFile(f):
     jOb = {}
     corruption = "{http://www.PureEdge.com/XFDL/Custom}"    
     try:
-        jOb = json.loads(open(f).read())[u'LOBBYINGDISCLOSURE1']
+        fo = codecs.open(f,"r",encoding="utf-8")
+        jOb = json.loads(fo.read())[u'LOBBYINGDISCLOSURE1']
     except KeyError:
         try:
             corruptedjOb = json.loads(open(f).read())[corruption+u'LOBBYINGDISCLOSURE1']
@@ -191,7 +229,7 @@ def loadFile(f):
         "p_city":        preProcess(jOb["principal_city"]),
         "p_country":     preProcess(jOb["principal_country"]),
         "p_state":       preProcess(jOb["principal_state"]),
-        "P_zip":         preProcess(jOb["principal_zip"]),
+        "p_zip":         preProcess(jOb["principal_zip"]),
         "filename": f
     }
 
@@ -214,7 +252,21 @@ beingr = {"label":"represents", "relation":"represents"}
 def loadData():
     print 'Reading into clients ...'    
     universe = nx.Graph()
-    for col in map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")):
+    data = None
+    if os.path.exists(processed_files):
+        print ("File %s exists reading now" % processed_files)
+        with open(processed_files,"r") as f:
+            data = pickle.load(f)
+    else:
+        print("Loading and processing files now")
+        data = map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json"))
+        print "Saving processed files"
+        with open(processed_files,"w") as f:
+            pickle.dump(data,f,2)
+        
+    print(len(data))
+    text = ""
+    for col in data:
         if col == None:
             continue
         (client,firm,employs) = col        
@@ -232,7 +284,8 @@ def loadData():
         universe.add_edge(fnode,fbeing,copy.copy(beingr))
         
         universe.add_edge(fnode,cnode,employs)
-    return universe
+        text += " "+client["name"]
+    return universe,text
 
 def mergeTheirBeings(universe,al,bl):
     a = findBeing(universe,al)
@@ -263,13 +316,17 @@ def findBeing(universe,l):
         raise Exception("Found {} beings for {}: {}".format(len(beings),l,",".join(beings)))
 
 def formerSplitter(name):
-    splitters = ["\"fka\"","fka:","fka","f/k/a/",
+    if "\"fka\"" in name: # The " mess up the word boundaries 
+        return re.split("\"fka\"",name)
+    
+    splitters = ["fka:","fka","f/k/a","f/k/a/",
                  "formerly known as",
                  "formerly know as",
                  "formerly filed as",
                  "formerly reported as",                                  
                  "formerly",
-                 "formally known as",                 
+                 "formally known as",
+                 "also known as",                                  
                  "formally", 
                  "former", #united natural products alliance (former utah natural products alliance)?
                  "d/b/a",
@@ -280,26 +337,30 @@ def formerSplitter(name):
             return re.split("\\b"+s+"\\b",name)
     return [name]
 
-def mergeExactMatches(universe):
+def mineNames(s):
+    return filter(lambda x: x !="", map(processClientName,formerSplitter(s)))
+
+def mergeEasyMatches(universe):
     nodes = universe.nodes(data=True)
     l = len(nodes)
     
     firmsOrg = defaultdict(list)
-    firmsPrinted = defaultdict(list)    
+#    firmsPrinted = defaultdict(list)    
     clients = defaultdict(list)    
     
     for k,v in nodes:
         if v["type"] == "client":
             if v["name"] != "":
-                for split in map(processClientName,formerSplitter(v["name"])):
+                for split in mineNames(v["name"]):
                     clients[split].append(k)
         if v["type"] == "firm":
             if v["orgname"] != "":
-                firmsOrg[v["orgname"]].append(k)
-            if v["printedname"] != "":                
-                firmsPrinted[v["printedname"]].append(k)
+                for split in mineNames(model,v["orgname"]):
+                    firmsOrg[split].append(k)
+            # if v["printedname"] != "":                
+            #     firmsPrinted[v["printedname"]].append(k)
 
-    for grouping in [firmsOrg,firmsPrinted,clients]:
+    for grouping in [firmsOrg,clients]:
         for k,v in grouping.iteritems():
             merged = reduce(lambda x,y: mergeTheirBeings(universe,x,y),v)
             found = findBeing(universe,merged)
@@ -311,9 +372,9 @@ def mergeExactMatches(universe):
     for (k,v) in universe.nodes(data=True):            
         if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
             universe.remove_node(k)
-
-
-def save(universe):
+            
+            
+def steralize(universe):
     for k1,k2,v in universe.edges(data=True):
         if "alis" in v:
             v["alis"] = ", ".join(list(v["alis"]))
@@ -321,20 +382,82 @@ def save(universe):
     for k,v in universe.nodes(data=True):            
         if "names" in v:
             v["names"] = ", ".join(sorted(list(v["names"])))            
+
+
+def save(universe):
     stamp = re.sub("[ :\.]","-",str(datetime.datetime.now()))[:-7]
-    f = "output-{}.graphml".format(stamp)
+    f  = codecs.open("output-{}.graphml".format(stamp),"w",encoding="utf-8")
+    fn = codecs.open("fresh-output.graphml","w",encoding="utf-8")
     nx.write_graphml(universe,f)
-    nx.write_graphml(universe,"fresh-output.graphml")    
+    nx.write_graphml(universe,fn)    
     print("Saved in {}".format(f))
 
-    
+def project(universe):
+    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))
+    clients ={}
+    firms = {}
+    for b in beings:
+        ns = nx.neighbors(universe,b[0])
+        if universe.node[ns[0]]["type"] == "client":
+            n = universe.node[b[0]]["names"]
+            clients[n] = set(map(lambda x: universe.node[x]["name"], ns))
+        if universe.node[ns[0]]["type"] == "firm":
+            if len(ns) != 1:            
+                n = universe.node[b[0]]["names"]
+                firms[n] = set(map(lambda x: universe.node[x]["orgname"], ns))
+
+
+    print("Found {} unique clients".format(len(clients)))
+    print("Found {} unique firms".format(len(firms)))    
+            
+    print("Writing clientnames.txt")
+    with open("clientnames.txt","w") as f:        
+        for k in sorted(clients.keys()):
+            if len(clients[k]) == 1 and list(clients[k])[0] == k:
+                f.write(list(clients[k])[0])
+            elif len(clients[k]) == 1 and list(clients[k])[0] != k:
+                f.write(list(clients[k])[0]+" ==> "+k)            
+            else:
+                f.write(k)
+                f.write('\n')
+                f.write("%%%%%%%%%%%%%%%%%%%%")
+                f.write('\n')
+                for n in clients[k]:
+                    f.write(n)
+                    f.write('\n')
+            f.write('\n')
+            f.write('\n')            
+
+    print("Writing firmnames.txt")
+    with open("firmnames.txt","w") as f:        
+        for k in sorted(firms.keys()):
+            if len(firms[k]) == 1 and list(firms[k])[0] == k:
+                f.write(list(firms[k])[0])
+            elif len(firms[k]) == 1 and list(firms[k])[0] != k:
+                f.write(list(firms[k])[0]+" ==> "+k)            
+            else:
+                f.write(k)
+                f.write('\n')
+                f.write("%%%%%%%%%%%%%%%%%%%%")
+                f.write('\n')
+                for n in firms[k]:
+                    f.write(n)
+                    f.write('\n')
+            f.write('\n')
+            f.write('\n')            
+
+
 def main():
-    print("Loading data")
+    print("Loading universe")
     universe = loadData()
-    print("Matching")
-    mergeExactMatches(universe)
-    print("Saving")
-    save(universe)
+    print("Matching universe the easy way")
+    mergeEasyMatches(universe)
+    print("Matching universe the *fancy* way")    
+    mergeFancyMatches(universe)
+    print("Steralizing universe")        
+    steralize(universe)
+    print("Projecting universe")    
+    project(universe)
 
 
  
