@@ -135,17 +135,18 @@ def download_sopr_xml(options):
     download_all(_urls, _get_response_loc_pair, options)
 
 
-def download_sopr_report_types(options):
+def download_sopr_field_codes(field_name, options):
     FORM_URL = 'http://soprweb.senate.gov/index.cfm?event=processSelectFields'
 
     jar = cookielib.CookieJar()
     requests.get(FORM_URL, cookies=jar)
     form_page = requests.post(FORM_URL, cookies=jar,
-                              data={"searchCriteria": "reportType"})
+                              data={"searchCriteria": field_name})
     d = pq(form_page.text, parser='html')
-    reportTypes = {x.text: x.attrib["value"] for x in
-                   d('select#reportType > option') if x.text != "select one"}
-    return reportTypes
+    field_code_map = {x.text: x.attrib["value"] for x in
+                      d('select#{} > option'.format(field_name))
+                      if x.text != "select one"}
+    return field_code_map
 
 
 def download_sopr_html(options):
