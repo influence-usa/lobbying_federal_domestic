@@ -8,9 +8,9 @@ import pickle
 import uuid
 
 from text import preProcess
+from being import being, represents
 
 processed_files = 'processed_files'
-from being import being, represents
 
 def loadFile(f):
     jOb = {}
@@ -90,11 +90,10 @@ def loadFile(f):
     return (client, firm, employs)
     
 def loadData():
-    print 'Reading into clients ...'
     universe = nx.Graph()
     data = None
     if os.path.exists(processed_files):
-        print ("File %s exists reading now" % processed_files)
+        print ("File %s exists, reading it instead" % processed_files)
         with open(processed_files,"r") as f:
             data = pickle.load(f)
     else:
@@ -104,8 +103,6 @@ def loadData():
         with open(processed_files,"w") as f:
             pickle.dump(data,f,2)
         
-    print(len(data))
-    text = ""
     for col in data:
         if col == None:
             continue
@@ -124,5 +121,4 @@ def loadData():
         universe.add_edge(fnode,fbeing,copy.copy(represents))
         
         universe.add_edge(fnode,cnode,employs)
-        text += " "+client["name"]
     return universe
