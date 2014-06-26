@@ -75,16 +75,17 @@ def download_all(vals, get_response_loc_pair, options):
     thread_num = options.get('thread_num', 4)
 
     if threaded:
+        log.info("starting threaded download")
         pool = ThreadPool(thread_num)
         for val in vals:
+            log.debug("async start for {}".format(str(val)))
             pool.apply_async(download, args=(val, get_response_loc_pair),
                              callback=log_result)
         pool.close()
         pool.join()
     else:
         for val in vals:
-            response_loc_pair = get_response_loc_pair(val)
-            log_result(download(response_loc_pair))
+            log_result(download(val, get_response_loc_pair))
 
 
 def is_not_cached(response, output_loc):
