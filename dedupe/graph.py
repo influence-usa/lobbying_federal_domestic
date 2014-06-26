@@ -9,7 +9,7 @@ import re
 from load import loadData
 from text import preProcess
 from save import steralize, save, project
-from being import mergeTheirBeings, findBeing
+from being import mergeTheirBeings, findBeing, groupMerge
 
 #Questions
 #alliance of/ alliance to?
@@ -150,35 +150,18 @@ def mineNames(s):
 def mergeEasyMatches(universe):
     nodes = universe.nodes(data=True)
     l = len(nodes)
-    
-    firmsOrg = defaultdict(list)
-#    firmsPrinted = defaultdict(list)    
-    clients = defaultdict(list)    
-    
-    for k,v in nodes:
-        if v["type"] == "client":
-            if v["name"] != "":
-                for split in mineNames(v["name"]):
-                    clients[split].append(k)
-        if v["type"] == "firm":
-            if v["orgname"] != "":
-                for split in mineNames(v["orgname"]):
-                    firmsOrg[split].append(k)
-            # if v["printedname"] != "":                
-            #     firmsPrinted[v["printedname"]].append(k)
 
-    for grouping in [firmsOrg,clients]:
-        for k,v in grouping.iteritems():
-            merged = reduce(lambda x,y: mergeTheirBeings(universe,x,y),v)
-            found = findBeing(universe,merged)
-            if "names" in universe.node[found]:
-                universe.node[found]["names"].add(k)
-            else:
-                universe.node[found]["names"] = set([k])        
+    groupMerge(universe,
+               lambda v: v["type"] == "client" and v["name"] != "",
+               lambda v: mineNames(v["name"]))
 
-    for (k,v) in universe.nodes(data=True):            
-        if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
-            universe.remove_node(k)
+    groupMerge(universe,
+               lambda v: v["type"] == "firm" and v["orgname"] != "",
+               lambda v: mineNames(v["orgname"]))
+
+    groupMerge(universe,
+               lambda v: v["type"] == "firm" and v["printedname"] != "",
+               lambda v: mineNames(v["printedname"]))
             
 def mergeFancyMatches(universe):
     nodes = universe.nodes(data=True)

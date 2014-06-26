@@ -1,3 +1,4 @@
+from collections import defaultdict
 import copy
 from networkx import nx
 
@@ -32,6 +33,26 @@ def mergeTheirBeings(universe,al,bl):
             av["names"] = bv["names"]            
     return al
 
+def cullHermits(universe):
+    for (k,v) in universe.nodes(data=True):            
+        if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
+            universe.remove_node(k)
 
-#def groupMerge(universe, pred, split, process):
+def groupMerge(universe, pred, extract):
+    nodes = filter(lambda t: pred(t[1]),universe.nodes(data=True))
+    d = defaultdict(list)
+    for k,v in nodes:
+        for s in extract(v):
+            d[s].append(k)
+    for k,v in d.iteritems():
+        merged = reduce(lambda x,y: mergeTheirBeings(universe,x,y),v)
+        found = findBeing(universe,merged)
+        if "names" in universe.node[found]:
+            universe.node[found]["names"].add(k)
+        else:
+            universe.node[found]["names"] = set([k])        
+        
+    cullHermits(universe)
+            
+    
 
