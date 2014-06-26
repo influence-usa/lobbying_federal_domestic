@@ -57,6 +57,13 @@ def preProcess(s):
         s = "legi-x company"        
     return s
 
+useless = ["l l c","llc", "l c","lc", "l l p","llp", "l p","lp", "pllc",
+           "pllp",
+           "incorperated", "ltd","l t d","company",
+           "corporations",
+           "corps",
+           "corporation","corp","companies","incorporated","inc"] 
+
 #processClientName(preProcess("assn of J.H.Christ & The-All-Mighty l c llc lp"))
 #'asociation of j h christ and the all mighty'
 # preprocess ("aia") out
@@ -73,12 +80,6 @@ def processClientName(org):
     s = re.sub('\\bassn\\b','asociation',s) # replace "assn" with "association"
     s = re.sub('&',' and ',s)#replace "&" with " and "
         
-    useless =  ["l l c","llc",
-                "l c","lc",
-                "l l p","llp",
-                "l p","lp",
-                "incorperated",
-                "ltd","l t d","company","corporation","corp","companies","incorporated","inc"] 
     #remove various stopwords
     for sub in useless:
         s=re.sub("\\b"+sub+"\\b"," ",s) #TODO: look into "co" company vs. colorado
@@ -132,12 +133,15 @@ def processClientName(org):
             
         
     #remove acronyms
+    #greater richmond transit company (grtc) ==> greater richmond transit (grtc)
     #housing action resource trust (hart) ==> housing action resource trust
     #ousing action resource trust ("hart")
 
     g = re.match(r"([\w' ]*)\((.*)\)$",s)
     mappings = {
         "and":["a",""],
+        "for":["f",""],
+        "in":["i",""],                
         "southwest":["s","sw"]
     }
     if g is not None:
@@ -285,7 +289,7 @@ def loadData():
         
         universe.add_edge(fnode,cnode,employs)
         text += " "+client["name"]
-    return universe,text
+    return universe
 
 def mergeTheirBeings(universe,al,bl):
     a = findBeing(universe,al)
@@ -355,7 +359,58 @@ def mergeEasyMatches(universe):
                     clients[split].append(k)
         if v["type"] == "firm":
             if v["orgname"] != "":
-                for split in mineNames(model,v["orgname"]):
+                for split in mineNames(v["orgname"]):
+                    firmsOrg[split].append(k)
+            # if v["printedname"] != "":                
+            #     firmsPrinted[v["printedname"]].append(k)
+
+    for grouping in [firmsOrg,clients]:
+        for k,v in grouping.iteritems():
+            merged = reduce(lambda x,y: mergeTheirBeings(universe,x,y),v)
+            found = findBeing(universe,merged)
+            if "names" in universe.node[found]:
+                universe.node[found]["names"].add(k)
+            else:
+                universe.node[found]["names"] = set([k])        
+
+    for (k,v) in universe.nodes(data=True):            
+        if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
+            universe.remove_node(k)
+            
+def mergeFancyMatches(universe):
+    nodes = universe.nodes(data=True)
+    l = len(nodes)
+    
+    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))
+    text = ""
+    for b in beings:
+        if "names" in b[1]:
+            s = " ".join(b[1]["names"])
+            text += " " + s
+    print("Training norvig!")
+    m = sorted(norvig.train(text).iteritems(),key=lambda x:-x[1])
+    m = filter(lambda x: len(x[0]) > 4, m)
+    m = sorted(map(lambda x: x[0],m)[0:10])
+    print("Ignoring norvig!")
+    model = {k : float("inf") for k in ["corporation","company","corporations",
+                                        "associates","association","associated",
+                                        "companies","incorporated","associations"
+                                    ]}
+    # for s in useless:
+    #     if " " not in s:
+    #         model[s] = float("inf")
+    firmsOrg = defaultdict(list)
+#    firmsPrinted = defaultdict(list)    
+    clients = defaultdict(list)    
+
+    for k,v in nodes:
+        if v["type"] == "client":
+            if v["name"] != "":
+                for split in mineNames(norvig.correctSentence(model,v["name"])):
+                    clients[split].append(k)
+        if v["type"] == "firm":
+            if v["orgname"] != "":
+                for split in mineNames(norvig.correctSentence(model,v["orgname"])):
                     firmsOrg[split].append(k)
             # if v["printedname"] != "":                
             #     firmsPrinted[v["printedname"]].append(k)
