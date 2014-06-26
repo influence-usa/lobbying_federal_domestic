@@ -1,4 +1,4 @@
-from being import groupMerge, countTypes, matchTypeAndHaveField
+from being import groupMerge, countTypes, matchTypeAndHasFields
 from load import loadData
 from norvig import correctSentence
 from pprint import pprint
@@ -16,19 +16,23 @@ def main():
         return lambda v: mineNames(correctSentence(model,v[f]))
 
     groupMerge(universe,
-               matchTypeAndHaveField("client","name"),               
+               matchTypeAndHasFields("client",["name"]),               
                mnf("name"),
                description="Merged clients based on *corrected* name")
         
     groupMerge(universe,
-               matchTypeAndHaveField("firm","orgname"),
+               matchTypeAndHasFields("firm",["orgname"]),
                mnf("orgname"),
                description="Merging firms based on *corrected* orgname")
 
     groupMerge(universe,
-               matchTypeAndHaveField("firm","printedname"),
+               matchTypeAndHasFields("firm",["printedname"]),
                mnf("printedname"),               
                description="Merging firms based on *corrected* printedname")    
+    
+    project(universe,"clientnames.txt",
+            lambda v: v["type"] == "client",
+            lambda v: v["name"])
     
 if __name__ == "__main__":
     main()

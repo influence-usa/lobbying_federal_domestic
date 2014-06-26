@@ -9,7 +9,7 @@ def preProcess(s):
     org = s
     s = s.encode("ascii","ignore")    
     s = re.sub('\n', ' ', s)
-    s = s.strip().strip('"').strip("'").lower().strip()
+    s = s.strip().strip('"').strip("'").strip()
     s = replaceWhitespace(s)
     if s == 'legi\\x company': #LEGI\X is ridiclous 
         s = "legi-x company"        
@@ -107,7 +107,8 @@ def processClientName(org):
         "and":["a",""],
         "for":["f",""],
         "in":["i",""],                
-        "southwest":["s","sw"]
+        "southwest":["s","sw"],
+        "of":["o",""]
     }
     if g is not None:
         gs = g.groups()
@@ -127,6 +128,7 @@ def processClientName(org):
     
 
 def formerSplitter(name):
+    name = preProcess(name).lower()
     if "\"fka\"" in name: # The " mess up the word boundaries 
         return re.split("\"fka\"",name)
     
