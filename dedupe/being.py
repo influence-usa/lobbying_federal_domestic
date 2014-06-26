@@ -27,10 +27,6 @@ def mergeTheirBeings(universe,al,bl):
             universe.remove_edge(v,b)
         av = universe.node[a]
         bv = universe.node[b]        
-        if "names" in av and "names" in bv:    
-            av["names"] = av["names"].union(bv["names"])
-        elif "names" not in av and "names" in bv:    
-            av["names"] = bv["names"]            
     return al
 
 def cullHermits(universe):
@@ -59,10 +55,6 @@ def groupMerge(universe, pred, extract,description=None):
     for k,v in d.iteritems():
         merged = reduce(lambda x,y: mergeTheirBeings(universe,x,y),v)
         found = findBeing(universe,merged)
-        if "names" in universe.node[found]:
-            universe.node[found]["names"].add(k)
-        else:
-            universe.node[found]["names"] = set([k])        
         
     cullHermits(universe)
     if description != None:
@@ -73,6 +65,6 @@ def groupMerge(universe, pred, extract,description=None):
             print(txt)
             print("")
     
-def matchTypeAndHaveField(t,f):
-    return lambda v: v["type"] == t and v[f] != ""
+def matchTypeAndHasFields(t,fs):
+    return lambda v: v["type"] == t and all([v[f] != "" for f in fs])
     

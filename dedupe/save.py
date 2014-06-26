@@ -21,58 +21,22 @@ def save(universe):
     print("Saved in {}".format(f))
 
                         
-def project(universe):
-    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))x
-    clients ={}
-    firms = {}
+def project(universe,fo,pred,extract):
+    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))
+    lst = []
     for b in beings:
         ns = nx.neighbors(universe,b[0])
-        if universe.node[ns[0]]["type"] == "client":
-            n = universe.node[b[0]]["names"]
-            clients[n] = set(map(lambda x: universe.node[x]["name"], ns))
-        if universe.node[ns[0]]["type"] == "firm":
-            if len(ns) != 1:            
-                n = universe.node[b[0]]["names"]
-                firms[n] = set(map(lambda x: universe.node[x]["orgname"], ns))
+        if pred(universe.node[ns[0]]):
+            fs = list(set(map(lambda x: extract(universe.node[x]), ns)))
+            fs = sorted(fs)
+            lst.append(fs)
 
-
-    print("Found {} unique clients".format(len(clients)))
-    print("Found {} unique firms".format(len(firms)))    
-            
-    print("Writing clientnames.txt")
-    with open("clientnames.txt","w") as f:        
-        for k in sorted(clients.keys()):
-            if len(clients[k]) == 1 and list(clients[k])[0] == k:
-                f.write(list(clients[k])[0])
-            elif len(clients[k]) == 1 and list(clients[k])[0] != k:
-                f.write(list(clients[k])[0]+" ==> "+k)            
-            else:
-                f.write(k)
+    print("Writing {} with {} groups".format(fo,len(lst)))
+    with codecs.open(fo,"w",encoding="utf-8") as f:        
+        for b in sorted(lst,key=lambda x:x[0].lower()):
+            for el in b:
+                f.write(el)
                 f.write('\n')
-                f.write("%%%%%%%%%%%%%%%%%%%%")
-                f.write('\n')
-                for n in clients[k]:
-                    f.write(n)
-                    f.write('\n')
             f.write('\n')
-            f.write('\n')            
-
-    print("Writing firmnames.txt")
-    with open("firmnames.txt","w") as f:        
-        for k in sorted(firms.keys()):
-            if len(firms[k]) == 1 and list(firms[k])[0] == k:
-                f.write(list(firms[k])[0])
-            elif len(firms[k]) == 1 and list(firms[k])[0] != k:
-                f.write(list(firms[k])[0]+" ==> "+k)            
-            else:
-                f.write(k)
-                f.write('\n')
-                f.write("%%%%%%%%%%%%%%%%%%%%")
-                f.write('\n')
-                for n in firms[k]:
-                    f.write(n)
-                    f.write('\n')
             f.write('\n')
-            f.write('\n')            
-
     
