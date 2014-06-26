@@ -22,7 +22,7 @@ def save(universe):
 
                         
 def project(universe):
-    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))
+    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))x
     clients ={}
     firms = {}
     for b in beings:

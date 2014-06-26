@@ -38,7 +38,19 @@ def cullHermits(universe):
         if k in universe and v["type"] == "Being" and len(nx.neighbors(universe,k)) == 0:
             universe.remove_node(k)
 
-def groupMerge(universe, pred, extract):
+def countTypes(universe):
+    beings = filter(lambda x: x[1]["type"] == "Being", universe.nodes(data=True))
+    d = defaultdict(lambda: 1)
+    for b in beings:
+        ns = nx.neighbors(universe,b[0])
+        d[universe.node[ns[0]]["type"]] += 1
+    return d
+            
+def groupMerge(universe, pred, extract,description=None):
+    if description != None:
+            start = countTypes(universe)
+            print(description)
+            
     nodes = filter(lambda t: pred(t[1]),universe.nodes(data=True))
     d = defaultdict(list)
     for k,v in nodes:
@@ -53,6 +65,14 @@ def groupMerge(universe, pred, extract):
             universe.node[found]["names"] = set([k])        
         
     cullHermits(universe)
-            
+    if description != None:
+            d = countTypes(universe)
+            txt = "" 
+            for k,v in d.iteritems():
+                txt += k + " " + str(v-start[k]) + " "
+            print(txt)
+            print("")
     
-
+def matchTypeAndHaveField(t,f):
+    return lambda v: v["type"] == t and v[f] != ""
+    

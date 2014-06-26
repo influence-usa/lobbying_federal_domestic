@@ -41,8 +41,8 @@ def correctSentence(model,sentence):
             corrected += w
         else:
             corrected += correct(model,w)
-    if sentence != corrected:
-        print(sentence)
-        print(corrected)
-        print("")
+    # if sentence != corrected:
+    #     print(sentence)
+    #     print(corrected)
+    #     print("")
     return corrected
