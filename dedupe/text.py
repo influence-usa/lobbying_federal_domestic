@@ -38,7 +38,7 @@ def processClientName(org):
     if "city" not in s:
         s = re.sub("\\bco\\b"," ",s)    
     s = re.sub('\?','\'',s)       #replace ? with '            
-    s = re.sub('[,\.]',' ',s)    #replace ,. with space
+    s = re.sub('[\',\.]',' ',s)    #replace ,. with space
     s = re.sub('\\bu s a\\b','usa',s) #replace u.s.a. with usa
     s = re.sub('\\bu s\\b','us',s) #replace u.s.a. with usa
     s = re.sub('\\bu s\\b','na',s) #replace n a with na        
@@ -63,12 +63,21 @@ def processClientName(org):
                 "the implementation group",
                 "jefferson consulting group",                
                 "alcalde and fay",
-                "govbiz advantage"]
+                "govbiz advantage",
+                "capitol impact",
+                "capitol insight",
+                "dci group",
+                "dci group az",
+    ]
     s = preProcess(s)
     for b in breakers:
         if b in s and len(s) > len(b) + 4:
             s = re.split("\\b"+b+"\\b",s)[-1]
+    for b in ["(for "]:
+        if b in s and len(s) > len(b) + 4:
+            s = re.split(re.escape(b),s)[-1]
 
+            
     old = None
     while old != s:
         s=preProcess(s)
@@ -95,8 +104,34 @@ def processClientName(org):
             
         while "(" == s[-1] and ")" not in s:
             s = s[:-1]
-            
-        
+                                
+    s = re.sub('-',' ',s)
+    
+    return preProcess(s)
+    
+
+def splitName(name):
+    name = preProcess(name).lower()
+    if "\"fka\"" in name: # The "'s mess up the word boundaries 
+        return re.split("\"fka\"",name)
+    
+    splitters = ["fka:","fka","f/k/a","f/k/a/",
+                 "formerly known as",
+                 "formerly know as",
+                 "formerly filed as",
+                 "formerly reported as",                                  
+                 "formerly",
+                 "formally known as",
+                 "also known as",                                  
+                 "formally", 
+                 "former", #united natural products alliance (former utah natural products alliance)?
+                 "d/b/a",
+                 "dba",
+    ]#todo: compile regex ahead of times
+    for s in splitters:
+        if s in name and name != "dba international":
+            return re.split("\\b"+s+"\\b",name)
+
     #remove acronyms
     #greater richmond transit company (grtc) ==> greater richmond transit (grtc)
     #housing action resource trust (hart) ==> housing action resource trust
@@ -119,36 +154,11 @@ def processClientName(org):
             else:
                 ws.append([w[0]])
         words = map("".join,list(itertools.product(*ws)))
-        if gs[1] in words:
-            s = preProcess(gs[0])
-            
-    s = re.sub('-',' ',s)
-    
-    return preProcess(s)
-    
-
-def formerSplitter(name):
-    name = preProcess(name).lower()
-    if "\"fka\"" in name: # The " mess up the word boundaries 
-        return re.split("\"fka\"",name)
-    
-    splitters = ["fka:","fka","f/k/a","f/k/a/",
-                 "formerly known as",
-                 "formerly know as",
-                 "formerly filed as",
-                 "formerly reported as",                                  
-                 "formerly",
-                 "formally known as",
-                 "also known as",                                  
-                 "formally", 
-                 "former", #united natural products alliance (former utah natural products alliance)?
-                 "d/b/a",
-                 "dba",
-    ]#todo: compile regex ahead of times
-    for s in splitters:
-        if s in name and name != "dba international":
-            return re.split("\\b"+s+"\\b",name)
+        for w in words:
+            if gs[1] == w:
+                return [preProcess(w),preProcess(gs[0])]
+        
     return [name]
 
-def mineNames(s):
-    return filter(lambda x: x !="", map(processClientName,formerSplitter(s)))
+def extractNames(s):
+    return filter(lambda x: x !="", map(processClientName,splitName(s)))

@@ -93,7 +93,7 @@ def loadData():
     universe = nx.Graph()
     data = None
     if os.path.exists(processed_files):
-        print ("File %s exists, reading it instead" % processed_files)
+        print ("Processed files have been saved, reading those instead")
         with open(processed_files,"r") as f:
             data = pickle.load(f)
     else:
