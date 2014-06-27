@@ -12,72 +12,82 @@ from being import being, represents
 
 processed_files = 'processed_files'
 
-def loadFile(f):
+def carefulDict(jOb,d,props):
+    for k,kvs in props:
+        v = jOb
+        found = True
+        for vs in kvs:
+            if vs in v:
+                v = v[vs]
+            else:
+                found = False
+                break
+        if found:
+            d[k] = preProcess(v)
+
+def loadForm(f,t):
+    t = str(t)
     jOb = {}
     corruption = "{http://www.PureEdge.com/XFDL/Custom}"    
     try:
         fo = codecs.open(f,"r",encoding="utf-8")
-        jOb = json.loads(fo.read())[u'LOBBYINGDISCLOSURE1']
+        jOb = json.loads(fo.read())[u'LOBBYINGDISCLOSURE{}'.format(t)]
     except KeyError:
         try:
-            corruptedjOb = json.loads(open(f).read())[corruption+u'LOBBYINGDISCLOSURE1']
+            corruptedjOb = json.loads(open(f).read())[corruption+u'LOBBYINGDISCLOSURE{}'.format(t)]
             jOb = {}
             for (k,v) in corruptedjOb.iteritems():
                 jOb[k.split(corruption)[-1]]=v
         except KeyError:
             return None
 
-    #Client node
-    #"clientAddress","clientCity","clientCountry","clientGeneralDescription","clientGovtEntity",
-    #"clientName","clientState","clientZip","clientZipExt","prinClientCity","prinClientCountry",
-    #"prinClientState","prinClientZip","prinClientZipExt"
     client = {        
         #Type
         "type":"client",
-        
-        #Acutal data
-        "name":        preProcess(jOb["clientName"]),
-        "address":     preProcess(jOb["clientAddress"]),
-        "city":        preProcess(jOb["clientCity"]),
-        "country":     preProcess(jOb["clientCountry"]),
-        "state":       preProcess(jOb["clientState"]),
-        "zip":         preProcess(jOb["clientZip"]),
-        
-        "filename": f,
-        "description":     preProcess(jOb["clientGeneralDescription"]),
-        "specific_issues": preProcess(jOb["specific_issues"]),
-    }
-
-    #Firm node
-    #"address1","address2","city","firstName","lastName","state","zip","zipext","country",
-    #"principal_city","principal_country","principal_state","principal_zip","principal_zipext",
-    #"organizationName","printedName","registrantGeneralDescription",
-    
-    firm = {
-        #Type
-        "type":"firm",
-
-        #Actual data
-        "firstname":   preProcess(jOb["firstName"]),
-        "lastname":    preProcess(jOb["lastName"]),
-        "orgname":     preProcess(jOb["organizationName"]),
-        "printedname": preProcess(jOb["printedName"]),
-        "description": preProcess(jOb["registrantGeneralDescription"]),                        
-        
-        "address1":    preProcess(jOb["address1"]),
-        "address2":    preProcess(jOb["address2"]),        
-        "city":        preProcess(jOb["city"]),
-        "country":     preProcess(jOb["country"]),
-        "state":       preProcess(jOb["state"]),
-        "zip":         preProcess(jOb["zip"]),
-
-        "p_city":        preProcess(jOb["principal_city"]),
-        "p_country":     preProcess(jOb["principal_country"]),
-        "p_state":       preProcess(jOb["principal_state"]),
-        "p_zip":         preProcess(jOb["principal_zip"]),
         "filename": f
     }
 
+    #PRINCIPAL might be a way of getting around the brokers     
+    carefulDict(
+        jOb,client,
+        [("name",["clientName"]),         
+         ("address",["updates","clientAddress"]),
+         ("city",   ["updates","clientCity"]),
+         ("country",["updates","clientCountry"]),
+         ("state",  ["updates","clientState"]),
+         ("zip",    ["updates","clientZip"]),        
+         ("address",["clientAddress"]),
+         ("city",   ["clientCity"]),
+         ("country",["clientCountry"]),
+         ("state",  ["clientState"]),
+         ("zip",    ["clientZip"]),
+         ("description", ["clientGeneralDescription"]),
+         ("specific_issuse", ["specific_issuse"])])
+            
+
+    firm = {
+        #Type
+        "type":"firm",
+        "filename": f
+    }
+    
+    carefulDict(
+        jOb,firm,
+        [("firstname",   ["firstName"]),
+         ("lastname",    ["lastName"]),
+         ("orgname",     ["organizationName"]),
+         ("printedname", ["printedName"]),        
+         ("address1",    ["address1"]),
+         ("address2",    ["address2"]),        
+         ("city",        ["city"]),
+         ("country",     ["country"]),
+         ("state",       ["state"]),
+         ("zip",         ["zip"]),
+         ("p_city",      ["principal_city"]),
+         ("p_country",   ["principal_country"]),
+         ("p_state",     ["principal_state"]),
+         ("p_zip",       ["principal_zip"])])
+    
     #Relationship
     #"houseID", "senateID", "specific_issues","alis"
     employs = {
@@ -85,10 +95,9 @@ def loadFile(f):
         "relation": "employs",
         "houseID":     preProcess(jOb["houseID"]),
         "senate":      preProcess(jOb["senateID"]),
-        "alis":        frozenset(filter(lambda x: x != u"",jOb["alis"])),        
     }
     return (client, firm, employs)
-    
+
 def loadData():
     universe = nx.Graph()
     data = None
@@ -98,7 +107,9 @@ def loadData():
             data = pickle.load(f)
     else:
         print("Loading and processing files now")
-        data = map(loadFile,glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json"))
+        data  = map(lambda x: loadForm(x,1),glob(os.environ["HOUSEXML"]+"/LD1/*/*/*.json")[0:10])
+        data += map(lambda x: loadForm(x,2),glob(os.environ["HOUSEXML"]+"/LD2/*/*/*.json")[0:10])        
+        
         print "Saving processed files"
         with open(processed_files,"w") as f:
             pickle.dump(data,f,2)
