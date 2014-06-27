@@ -3,6 +3,11 @@ import sys
 import re
 import logging
 import time
+import json
+import urlparse
+from glob import glob, iglob
+from datetime import datetime
+
 from itertools import product
 from multiprocessing.dummy import Pool as ThreadPool
 
@@ -10,8 +15,9 @@ import requests
 
 from pyquery import PyQuery as pq
 import cookielib
+from lxml import etree
 
-from settings import CACHE_DIR
+from settings import CACHE_DIR, TRANS_DIR
 from .utils import mkdir_p
 from .log import set_up_logging
 
@@ -153,7 +159,169 @@ def download_sopr_html(options):
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
 
-    url_template = 'http://soprweb.senate.gov/index.cfm?event=getFilingDetails&filingID={filing_id}&filingTypeID={filing_type_id}'
+    _base_url = 'http://soprweb.senate.gov/index.cfm'
+    _search_url_rgx = re.compile(r"(window\.open\(')(.*?)('\))", re.IGNORECASE)
+    _report_types = download_sopr_field_codes('reportType', options)
+
+    _filing_type_to_subyear = {
+        "FIRST QUARTER (NO ACTIVITY)": "Q1",
+        "FIRST QUARTER AMENDMENT (NO ACTIVITY)": "Q1",
+        "FIRST QUARTER AMENDMENT": "Q1",
+        "FIRST QUARTER REPORT": "Q1",
+        "FIRST QUARTER TERMINATION (NO ACTIVITY)": "Q1",
+        "FIRST QUARTER TERMINATION AMENDMENT (NO ACTIVITY)": "Q1",
+        "FIRST QUARTER TERMINATION AMENDMENT": "Q1",
+        "FIRST QUARTER TERMINATION": "Q1",
+        "FOURTH QUARTER (NO ACTIVITY)": "Q4",
+        "FOURTH QUARTER AMENDMENT (NO ACTIVITY)": "Q4",
+        "FOURTH QUARTER AMENDMENT": "Q4",
+        "FOURTH QUARTER REPORT": "Q4",
+        "FOURTH QUARTER TERMINATION (NO ACTIVITY)": "Q4",
+        "FOURTH QUARTER TERMINATION AMENDMENT (NO ACTIVITY)": "Q4",
+        "FOURTH QUARTER TERMINATION AMENDMENT": "Q4",
+        "FOURTH QUARTER TERMINATION": "Q4",
+        "MID-YEAR (NO ACTIVITY)": "Q2",
+        "MID-YEAR AMENDMENT (NO ACTIVITY)": "Q2",
+        "MID-YEAR AMENDMENT": "Q2",
+        "MID-YEAR REPORT": "Q2",
+        "MID-YEAR REPORT": "Q2",
+        "MID-YEAR TERMINATION (NO ACTIVITY)": "Q2",
+        "MID-YEAR TERMINATION AMENDMENT (NO ACTIVITY)": "Q2",
+        "MID-YEAR TERMINATION AMENDMENT": "Q2",
+        "MID-YEAR TERMINATION LETTER": "Q2",
+        "MID-YEAR TERMINATION": "Q2",
+        "MISC TERM": "MISC",
+        "MISC. DOC": "MISC",
+        "REGISTRATION AMENDMENT": "REG",
+        "REGISTRATION": "REG",
+        "SECOND QUARTER (NO ACTIVITY)": "Q2",
+        "SECOND QUARTER AMENDMENT (NO ACTIVITY)": "Q2",
+        "SECOND QUARTER AMENDMENT": "Q2",
+        "SECOND QUARTER REPORT": "Q2",
+        "SECOND QUARTER TERMINATION (NO ACTIVITY)": "Q2",
+        "SECOND QUARTER TERMINATION AMENDMENT (NO ACTIVITY)": "Q2",
+        "SECOND QUARTER TERMINATION AMENDMENT": "Q2",
+        "SECOND QUARTER TERMINATION": "Q2",
+        "THIRD QUARTER (NO ACTIVITY)": "Q3",
+        "THIRD QUARTER AMENDMENT (NO ACTIVITY)": "Q3",
+        "THIRD QUARTER AMENDMENT": "Q3",
+        "THIRD QUARTER REPORT": "Q3",
+        "THIRD QUARTER TERMINATION (NO ACTIVITY)": "Q3",
+        "THIRD QUARTER TERMINATION AMENDMENT (NO ACTIVITY)": "Q3",
+        "THIRD QUARTER TERMINATION AMENDMENT": "Q3",
+        "THIRD QUARTER TERMINATION": "Q3",
+        "YEAR-END (NO ACTIVITY)": "Q4",
+        "YEAR-END AMENDMENT (NO ACTIVITY)": "Q4",
+        "YEAR-END AMENDMENT": "Q4",
+        "YEAR-END REPORT": "Q4",
+        "YEAR-END TERMINATION (NO ACTIVITY)": "Q4",
+        "YEAR-END TERMINATION AMENDMENT (NO ACTIVITY)": "Q4",
+        "YEAR-END TERMINATION AMENDMENT": "Q4",
+        "YEAR-END TERMINATION LETTER": "Q4",
+        "YEAR-END TERMINATION": "Q4",
+    }
+
+    def _parse_search_result(result):
+        filing_type = result.xpath('td[3]')[0].text
+        filing_year = result.xpath('td[6]')[0].text
+        try:
+            m = re.match(_search_url_rgx, result.attrib['onclick'])
+        except KeyError:
+            log.error('element {} has no onclick attribute'.format(
+                      etree.tostring(result)))
+        _doc_path = m.groups()[1]
+        _params = dict(urlparse.parse_qsl(_doc_path))
+        _params['Type'] = filing_type
+        _params['Year'] = filing_year
+        return _params
+
+    def _get_newest_filings(cut_field, cut_vals, since=datetime.today()):
+        all_params = []
+        start = datetime.strftime(since, '%m/%d/%Y')
+        end = datetime.strftime(datetime.today(), '%m/%d/%Y')
+        search_params = {'event': 'processSearchCriteria'}
+        search_form = {'datePostedStart': start,
+                       'datePostedEnd': end}
+        for cut_val in cut_vals:
+            search_form.update({cut_field: cut_val})
+            resp = requests.post(_base_url, params=search_params,
+                                 data=search_form)
+            d = pq(resp.text, parser='html')
+            results = d('tbody tr')
+            if len(results) >= 3000:
+                error_msg = "More than 3000 results for params:\n{}".format(
+                            json.dumps(search_params, indent=2))
+                raise Exception(error_msg)
+            for result in results:
+                params = _parse_search_result(result)
+                if params:
+                    all_params.append(params)
+                else:
+                    log.error('unable to parse {}'.format(
+                              etree.tostring(result)))
+        return all_params
+
+    def _build_params_from_xml_json(xml_json_loc):
+        params = {}
+        with open(xml_json_loc) as xml_json_file:
+            json_dict = json.load(xml_json_file)
+            params['event'] = 'getFilingDetails'
+            params['filingID'] = json_dict['ID'].lower()
+
+            # Get relevant fields from json
+            for field in ['Type', 'Year']:
+                try:
+                    params[field] = json_dict[field]
+                except KeyError:
+                    log.error(
+                        '{f_loc} missing required field {fieldname}!'.format(
+                            f_loc=xml_json_loc, fieldname=field))
+                    return False
+
+            # Look up type in our mapping
+            try:
+                filing_type_id = _report_types[params['Type']]
+            except KeyError:
+                log.error('{f_loc} unknown Type: {filingtype}'.format(
+                    f_loc=xml_json_loc, filingtype=params['Type']))
+                return False
+
+            params['filingTypeID'] = filing_type_id
+
+        return params
+    
+    def _get_response_loc_pair(params):
+        filing_year = params.pop('Year', None)
+        filing_type = params.pop('Type', None)
+        output_fname = '.'.join([params['filingID'], 'html'])
+        response = requests.get(_base_url, params=params)
+        subyear = _filing_type_to_subyear[filing_type]
+        output_dir = os.path.join(CACHE_DIR,
+                                  'sopr_html',
+                                  filing_year,
+                                  subyear)
+        if not os.path.exists(output_dir):
+            log.debug("making {}".format(output_dir))
+            mkdir_p(output_dir)
+        output_loc = os.path.join(output_dir, output_fname)
+        return (response, output_loc)
+
+    if options.get('backfill', None):
+        log.debug('globbing up archived json')
+        xml_json_files = glob(os.path.join(
+                              TRANS_DIR, 'sopr_xml', '*', '*', '*.json'))
+        log.debug('building params')
+        all_params = []
+        for loc in xml_json_files:
+            params = _build_params_from_xml_json(loc)
+            if params:
+                all_params.append(params)
+    else:
+        state_map = download_sopr_field_codes('clientState', None)
+        all_params = _get_newest_filings('clientState', state_map.values())
+
+    log.info('beginning {num_vals} downloads'.format(num_vals=len(all_params)))
+    download_all(all_params, _get_response_loc_pair, options)
 
 
 def download_house_xml(options):
@@ -186,13 +354,19 @@ def download_house_xml(options):
 
     filing_selector = d('select#selFilesXML')
 
-    space = r'(\ )'
-    filing_type = r'(?P<filing_type>(?P<filing_type_year>\d{4})\ (?P<filing_type_form>MidYear|Registrations|YearEnd|(1st|2nd|3rd|4th)Quarter))'
-    xml = '(XML)'
-    date = r'(\(\ (?P<updated_date>(?P<updated_date_month>\d{1,2})\/(?P<updated_date_day>\d{1,2})\/(?P<updated_date_year>\d{4})))'
-    time = r'(?P<updated_time>(?P<updated_time_hour>\d{1,2}):(?P<updated_time_min>\d{2}):(?P<updated_time_sec>\d{2})\ (?P<updated_time_am_pm>PM|AM)\))'
+    _space = r'(\ )'
+    _filing_type = r'(?P<filing_type>(?P<filing_type_year>\d{4})\ (?P<filing_type_form>MidYear|Registrations|YearEnd|(1st|2nd|3rd|4th)Quarter))'
+    _xml = '(XML)'
+    _date = r'(\(\ (?P<updated_date>(?P<updated_date_month>\d{1,2})\/(?P<updated_date_day>\d{1,2})\/(?P<updated_date_year>\d{4})))'
+    _time = r'(?P<updated_time>(?P<updated_time_hour>\d{1,2}):(?P<updated_time_min>\d{2}):(?P<updated_time_sec>\d{2})\ (?P<updated_time_am_pm>PM|AM)\))'
 
-    option_rgx = re.compile(filing_type+space+xml+space+date+space+time)
+    option_rgx = re.compile(_filing_type +
+                            _space +
+                            _xml +
+                            _space +
+                            _date +
+                            _space +
+                            _time)
 
     dl_options = filing_selector.find('option')
 
