@@ -1,4 +1,5 @@
 import os
+import shutil
 import logging
 import zipfile
 from glob import glob
@@ -42,6 +43,13 @@ def extract_zip(cache_path):
         return ('failure', old_path, e)
 
 
+def copy_cached_files(cache_paths, options):
+    for cache_path in cache_paths:
+        old_path, new_path = translate_dir(cache_path, from_dir=CACHE_DIR,
+                                           to_dir=ORIG_DIR)
+        shutil.move(old_path, new_path)
+
+
 def extract_all_zips(cache_paths, options):
     threaded = options.get('threaded', False)
     thread_num = options.get('thread_num', 4)
@@ -73,6 +81,22 @@ def extract_sopr_xml(options):
               "\n\t".join(cache_paths))
 
     extract_all_zips(cache_paths, options)
+
+
+def extract_sopr_html(options):
+    if not os.path.exists(ORIG_DIR):
+        mkdir_p(ORIG_DIR)
+
+    if options.get('loglevel', None):
+        log.setLevel(options['loglevel'])
+
+    # cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/*/*/*.html'))
+    # log.debug("cache paths ({num}):".format(num=len(cache_paths)) +
+    #          "\n\t".join(cache_paths))
+    # copy_cached_files(cache_paths, options)
+    cache_path = os.path.join(CACHE_DIR, 'sopr_html')
+    orig_path = os.path.join(ORIG_DIR, 'sopr_html')
+    os.symlink(cache_path, orig_path)
 
 
 def extract_house_xml(options):
