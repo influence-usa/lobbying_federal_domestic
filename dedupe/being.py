@@ -44,9 +44,9 @@ def countTypes(universe):
             
 def groupMerge(universe, pred, extract,description=None):
     if description != None:
+            print(description)        
             start = countTypes(universe)
-            print(description)
-            
+
     nodes = filter(lambda t: pred(t[1]),universe.nodes(data=True))
     d = defaultdict(list)
     for k,v in nodes:
