@@ -63,8 +63,7 @@ def download(val, get_response_loc_pair):
                 _url = _response.url
                 return ('success', _url, _loc, content_length)
             except Exception:
-                log.warn('{url} something went wrong, trying again ' +
-                         '({code} - {reason})'.format(
+                log.warn('{url} something went wrong, trying again ({code} - {reason})'.format(
                              url=_response.url,
                              code=_response.status_code,
                              reason=_response.reason))
