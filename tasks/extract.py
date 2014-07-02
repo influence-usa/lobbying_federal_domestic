@@ -2,15 +2,21 @@ import os
 import shutil
 import logging
 import zipfile
+import json
 from glob import glob
 
 from multiprocessing.dummy import Pool as ThreadPool
 
+from lxml import etree
+
 from settings import CACHE_DIR, ORIG_DIR
 from .utils import mkdir_p, translate_dir
 from .log import set_up_logging
+from .schema import ld1_schema
 
 log = set_up_logging('extract', loglevel=logging.DEBUG)
+
+html_parser = etree.HTMLParser()
 
 
 def log_result(result):
@@ -43,6 +49,53 @@ def extract_zip(cache_path):
         return ('failure', old_path, e)
 
 
+def apply_element_node(parsed, node):
+    _parse_fct = node['parser']
+    _path = node['path']
+    try:
+        # log.debug(_path)
+        element = parsed.xpath(_path)[0]
+        return _parse_fct(element)
+    except IndexError:
+        # log.debug(parsed.xpath(_path))
+        return None
+
+
+def apply_container_node(parsed, node):
+    _parse_fct = node['parser']
+    _children = node['children']
+    _path = node['path']
+    element_array = parsed.xpath(_path)
+    if element_array:
+        return [r for r in _parse_fct(element_array, _children)]
+    else:
+        return []
+
+
+def extract_html(cache_path, schema_elements, schema_containers):
+    old_path, new_path = translate_dir(cache_path, from_dir=CACHE_DIR,
+                                       to_dir=ORIG_DIR)
+    filename = os.path.basename(old_path).split(os.extsep)[0]
+    new_path = os.extsep.join([os.path.join(new_path, filename), 'json'])
+    # log.info('old: '+old_path)
+    # log.info('new: '+new_path)
+    record = {'document_id': filename}
+    #try:
+    with open(old_path, "r") as html:
+        _parsed = etree.parse(html, html_parser)
+        # print etree.tostring(_parsed)
+        for node in schema_elements:
+            _field = node['field']
+            record[_field] = apply_element_node(_parsed, node)
+        for node in schema_containers:
+            _field = node['field']
+            record[_field] = apply_container_node(_parsed, node)
+        json.dump(record, open(new_path, 'w'))
+        return ('success', old_path, new_path, 1)
+    #except Exception as e:
+    #    return ('failure', old_path, e)
+
+
 def copy_cached_files(cache_paths, options):
     for cache_path in cache_paths:
         old_path, new_path = translate_dir(cache_path, from_dir=CACHE_DIR,
@@ -69,6 +122,25 @@ def extract_all_zips(cache_paths, options):
             log_result(extract_zip(path))
 
 
+def extract_all_html(cache_paths, schema_elements, schema_containers, options):
+    threaded = options.get('threaded', False)
+    thread_num = options.get('thread_num', 4)
+
+    if threaded:
+        pool = ThreadPool(thread_num)
+        for path in cache_paths:
+            if check_ext(path, ext='.html'):
+                pool.apply_async(extract_html, args=(path, schema_elements,
+                                 schema_containers), callback=log_result)
+            else:
+                raise Exception("{} not an html file!".format(path))
+        pool.close()
+        pool.join()
+    else:
+        for path in cache_paths:
+            log_result(extract_html(path, schema_elements, schema_containers))
+
+
 def extract_sopr_xml(options):
     if not os.path.exists(ORIG_DIR):
         mkdir_p(ORIG_DIR)
@@ -90,13 +162,15 @@ def extract_sopr_html(options):
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
 
-    # cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/*/*/*.html'))
-    # log.debug("cache paths ({num}):".format(num=len(cache_paths)) +
-    #          "\n\t".join(cache_paths))
-    # copy_cached_files(cache_paths, options)
-    cache_path = os.path.join(CACHE_DIR, 'sopr_html')
-    orig_path = os.path.join(ORIG_DIR, 'sopr_html')
-    os.symlink(cache_path, orig_path)
+    ld1_cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/*/REG/*.html'))
+    # ld2_cache_paths = glob(os.path.join(CACHE_DIR,
+    #                        'sopr_html/*/Q[1-4]/*.html'))
+    log.debug("cache paths ({num}):".format(num=len(ld1_cache_paths)) +
+              "\n\t".join(ld1_cache_paths))
+
+    ld1_containers = filter(lambda x: 'children' in x, ld1_schema)
+    ld1_elements = filter(lambda x: 'children' not in x, ld1_schema)
+    extract_all_html(ld1_cache_paths, ld1_elements, ld1_containers, options)
 
 
 def extract_house_xml(options):
