@@ -7,4 +7,6 @@ log
 *~
 dedupe/clustered
 dedupe/jsons
+dedupe/*.graphml
 dedupe/processed_files
+dedupe/*.txt
