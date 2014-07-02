@@ -230,7 +230,7 @@ def download_sopr_html(options):
             log.error('element {} has no onclick attribute'.format(
                       etree.tostring(result)))
         _doc_path = m.groups()[1]
-        _params = dict(urlparse.parse_qsl(_doc_path))
+        _params = dict(urlparse.parse_qsl(urlparse.urlparse(_doc_path).query))
         _params['Type'] = filing_type
         _params['Year'] = filing_year
         return _params
