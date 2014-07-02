@@ -67,7 +67,7 @@ def apply_container_node(parsed, node):
     _path = node['path']
     element_array = parsed.xpath(_path)
     if element_array:
-        return [r for r in _parse_fct(element_array, _children)]
+        return [r for r in _parse_fct(element_array, _children) if any(r.values())]
     else:
         return []
 
@@ -80,20 +80,20 @@ def extract_html(cache_path, schema_elements, schema_containers):
     # log.info('old: '+old_path)
     # log.info('new: '+new_path)
     record = {'document_id': filename}
-    #try:
-    with open(old_path, "r") as html:
-        _parsed = etree.parse(html, html_parser)
-        # print etree.tostring(_parsed)
-        for node in schema_elements:
-            _field = node['field']
-            record[_field] = apply_element_node(_parsed, node)
-        for node in schema_containers:
-            _field = node['field']
-            record[_field] = apply_container_node(_parsed, node)
-        json.dump(record, open(new_path, 'w'))
-        return ('success', old_path, new_path, 1)
-    #except Exception as e:
-    #    return ('failure', old_path, e)
+    try:
+        with open(old_path, "r") as html:
+            _parsed = etree.parse(html, html_parser)
+            # print etree.tostring(_parsed)
+            for node in schema_elements:
+                _field = node['field']
+                record[_field] = apply_element_node(_parsed, node)
+            for node in schema_containers:
+                _field = node['field']
+                record[_field] = apply_container_node(_parsed, node)
+            json.dump(record, open(new_path, 'w'))
+            return ('success', old_path, new_path, 1)
+    except Exception as e:
+        return ('failure', old_path, e)
 
 
 def copy_cached_files(cache_paths, options):
