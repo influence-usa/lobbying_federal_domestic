@@ -57,10 +57,10 @@ def log_result(result):
 def download(val, get_response_loc_pair):
     for i in xrange(5):
         _response, _loc = get_response_loc_pair(val)
+        _url = _response.url
         if is_not_cached(_response, _loc):
             try:
                 content_length = response_download(_response, _loc)
-                _url = _response.url
                 return ('success', _url, _loc, content_length)
             except Exception:
                 log.warn('{url} something went wrong, trying again ({code} - {reason})'.format(
