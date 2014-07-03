@@ -161,6 +161,7 @@ def download_sopr_html(options):
     _base_url = 'http://soprweb.senate.gov/index.cfm'
     _search_url_rgx = re.compile(r"(window\.open\(')(.*?)('\))", re.IGNORECASE)
     _report_types = download_sopr_field_codes('reportType', options)
+    _report_type_reverse = {v: k for k, v in _report_types.iteritems()}
 
     _filing_type_to_subyear = {
         "FIRST QUARTER (NO ACTIVITY)": "Q1",
@@ -288,10 +289,11 @@ def download_sopr_html(options):
             params['filingTypeID'] = filing_type_id
 
         return params
-    
+
     def _get_response_loc_pair(params):
         filing_year = params.pop('Year', None)
-        filing_type = params.pop('Type', None)
+        filing_type = params.pop('Type',
+                                 _report_type_reverse[params['filingTypeID']])
         output_fname = '.'.join([params['filingID'], 'html'])
         response = requests.get(_base_url, params=params)
         subyear = _filing_type_to_subyear[filing_type]
