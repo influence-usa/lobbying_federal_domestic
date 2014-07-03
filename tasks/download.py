@@ -291,11 +291,11 @@ def download_sopr_html(options):
         return params
 
     def _get_response_loc_pair(params):
-        filing_year = params.pop('Year', None)
-        filing_type = params.pop('Type',
-                                 _report_type_reverse[params['filingTypeID']])
-        output_fname = '.'.join([params['filingID'], 'html'])
-        response = requests.get(_base_url, params=params)
+        _params = params.copy()
+        filing_year = _params.pop('Year', None)
+        filing_type = _params.pop('Type', None)
+        output_fname = '.'.join([_params['filingID'], 'html'])
+        response = requests.get(_base_url, params=_params)
         subyear = _filing_type_to_subyear[filing_type]
         output_dir = os.path.join(CACHE_DIR,
                                   'sopr_html',
