@@ -314,7 +314,10 @@ def download_sopr_html(options):
         log.debug('building params')
         all_params = []
         for loc in xml_json_files:
-            if os.path.exists(loc.replace(TRANS_DIR, CACHE_DIR).replace('.json', '.html')):
+            cache_path, cache_fname = os.path.split(loc)
+            cache_path = cache_path.replace(TRANS_DIR, CACHE_DIR).replace('sopr_xml', 'sopr_html')
+            cache_fname = cache_fname.lower().replace('.json', '.html')
+            if os.path.exists(os.path.join(cache_path, cache_fname)):
                 continue
             params = _build_params_from_xml_json(loc)
             if params:
