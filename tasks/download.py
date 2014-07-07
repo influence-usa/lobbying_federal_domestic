@@ -309,16 +309,22 @@ def download_sopr_html(options):
 
     if options.get('backfill', None):
         log.debug('globbing up archived json')
-        xml_json_files = glob(os.path.join(
-                              TRANS_DIR, 'sopr_xml', '*', '*', '*.json'))
+        cached_doc_ids = set([os.path.splitext(os.path.basename(x))[0].lower()
+                              for x in
+                              glob(os.path.join(CACHE_DIR,
+                                                'sopr_html',
+                                                '*',
+                                                '*',
+                                                '*.html'))])
+        log.debug('found {} cached files'.format(len(cached_doc_ids)))
+        xml_json_files = (loc for loc in
+                          iglob(os.path.join(
+                                TRANS_DIR, 'sopr_xml', '*', '*', '*.json'))
+                          if os.path.splitext(os.path.basename(loc))[0].lower()
+                          not in cached_doc_ids)
         log.debug('building params')
         all_params = []
         for loc in xml_json_files:
-            cache_path, cache_fname = os.path.split(loc)
-            cache_path = cache_path.replace(TRANS_DIR, CACHE_DIR).replace('sopr_xml', 'sopr_html')
-            cache_fname = cache_fname.lower().replace('.json', '.html')
-            if os.path.exists(os.path.join(cache_path, cache_fname)):
-                continue
             params = _build_params_from_xml_json(loc)
             if params:
                 all_params.append(params)
