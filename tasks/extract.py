@@ -3,6 +3,7 @@ import shutil
 import logging
 import zipfile
 import json
+from collections import defaultdict
 from glob import glob
 
 from multiprocessing.dummy import Pool as ThreadPool
@@ -79,17 +80,20 @@ def extract_html(cache_path, schema_elements, schema_containers):
     new_path = os.extsep.join([os.path.join(new_path, filename), 'json'])
     # log.info('old: '+old_path)
     # log.info('new: '+new_path)
-    record = {'document_id': filename}
+    record = defaultdict(dict)
+    record['document_id'] = filename
     try:
         with open(old_path, "r") as html:
             _parsed = etree.parse(html, html_parser)
             # print etree.tostring(_parsed)
             for node in schema_elements:
+                _section = node['section']
                 _field = node['field']
-                record[_field] = apply_element_node(_parsed, node)
+                record[_section][_field] = apply_element_node(_parsed, node)
             for node in schema_containers:
+                _section = node['section']
                 _field = node['field']
-                record[_field] = apply_container_node(_parsed, node)
+                record[_section][_field] = apply_container_node(_parsed, node)
             json.dump(record, open(new_path, 'w'))
             return ('success', old_path, new_path, 1)
     except Exception as e:
