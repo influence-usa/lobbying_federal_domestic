@@ -12,7 +12,7 @@ from lxml import etree
 from settings import CACHE_DIR, ORIG_DIR
 from .utils import mkdir_p, translate_dir
 from .log import set_up_logging
-from .schema import ld1_schema
+from .schema import ld1_schema, ld2_schema
 
 log = set_up_logging('extract', loglevel=logging.DEBUG)
 
@@ -163,14 +163,18 @@ def extract_sopr_html(options):
         log.setLevel(options['loglevel'])
 
     ld1_cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/*/REG/*.html'))
-    # ld2_cache_paths = glob(os.path.join(CACHE_DIR,
-    #                        'sopr_html/*/Q[1-4]/*.html'))
     log.debug("cache paths ({num}):".format(num=len(ld1_cache_paths)) +
               "\n\t".join(ld1_cache_paths))
 
     ld1_containers = filter(lambda x: 'children' in x, ld1_schema)
     ld1_elements = filter(lambda x: 'children' not in x, ld1_schema)
     extract_all_html(ld1_cache_paths, ld1_elements, ld1_containers, options)
+    
+    ld2_cache_paths = glob(os.path.join(CACHE_DIR,
+                            'sopr_html/*/Q[1-4]/*.html'))
+    ld2_containers = filter(lambda x: 'children' in x, ld2_schema)
+    ld2_elements = filter(lambda x: 'children' not in x, ld2_schema)
+    extract_all_html(ld2_cache_paths, ld2_elements, ld2_containers, options)
 
 
 def extract_house_xml(options):
