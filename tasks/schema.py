@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+import locale
 
 from .log import set_up_logging
 
@@ -8,6 +9,8 @@ log = set_up_logging('schema', loglevel=logging.DEBUG)
 REPLACE_MAP = {u'&#160;': u'',
                u'\xa0':  u'',
                u'&nbsp;': u''}
+
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 
 def checkbox_boolean(e):
@@ -24,6 +27,41 @@ def clean_text(e):
     for p, r in REPLACE_MAP.iteritems():
         s = s.replace(p, r)
     return s
+
+
+def tail_text(e):
+    s = e.tail
+    for p, r in REPLACE_MAP.iteritems():
+        s = s.replace(p, r)
+    return s.strip()
+
+
+def parse_decimal(e):
+    s = e.text
+    return locale.atof(s)
+
+
+def parse_int(e):
+    s = e.text
+    return int(s)
+
+
+def parse_percent(e):
+    s = e.text.replace('%', '')
+    if s:
+        return float(s) / 100.0
+    else:
+        return None
+
+
+def split_keep_rightmost(e):
+    s = e.text
+    split_text = s.split(' ')
+    if len(split_text) > 1:
+        return split_text[-1]
+    else:
+        return None
+
 
 def parse_array(array, children):
     for element in array:
