@@ -166,16 +166,20 @@ def extract_sopr_html(options):
     if options.get('loglevel', None):
         log.setLevel(options['loglevel'])
 
-    ld1_cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/*/REG/*.html'))
+    # ld1_cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/*/REG/*.html'))
+    ld1_cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/200[89]/REG/*.html')) + \
+        glob(os.path.join(CACHE_DIR, 'sopr_html/201[0-9]/REG/*.html'))
     log.debug("cache paths ({num}):".format(num=len(ld1_cache_paths)) +
               "\n\t".join(ld1_cache_paths))
 
     ld1_containers = filter(lambda x: 'children' in x, ld1_schema)
     ld1_elements = filter(lambda x: 'children' not in x, ld1_schema)
     extract_all_html(ld1_cache_paths, ld1_elements, ld1_containers, options)
-    
+
     ld2_cache_paths = glob(os.path.join(CACHE_DIR,
-                            'sopr_html/*/Q[1-4]/*.html'))
+                           'sopr_html/*/Q[1-4]/*.html'))
+    ld2_cache_paths = glob(os.path.join(CACHE_DIR, 'sopr_html/200[89]/Q[1-4]/*.html')) + \
+        glob(os.path.join(CACHE_DIR, 'sopr_html/201[0-9]/Q[1-4]/*.html'))
     ld2_containers = filter(lambda x: 'children' in x, ld2_schema)
     ld2_elements = filter(lambda x: 'children' not in x, ld2_schema)
     extract_all_html(ld2_cache_paths, ld2_elements, ld2_containers, options)
