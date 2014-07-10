@@ -77,18 +77,20 @@ def split_keep_rightmost(e):
 
 
 def parse_array(array, children):
+    out = []
     for element in array:
         record = {}
         for child in children:
             _parser = child['parser']
             _field = child['field']
             _path = child['path']
-            _child_node = element.xpath(_path)[0]
+            _child_sel = element.xpath(_path)
             if child.get('children', False):
-                record[_field] = _parser(_child_node, child['children'])
+                record[_field] = _parser(_child_sel, child['children'])
             else:
-                record[_field] = _parser(_child_node)
-        yield record
+                record[_field] = _parser(_child_sel[0])
+        out.append(record)
+    return out
 
 
 def parse_even_odd(array, children):
