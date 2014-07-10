@@ -129,16 +129,16 @@ ld1_schema = [
         'parser': parse_datetime
     },
     {
-        'section': 'registrant',
-        'lda_question': 2,
-        'field': 'house_id',
+        'section': 'identifiers',
+        'lda_question': '2',
+        'field': 'registrant_house_id',
         'path': '/html/body/table[2]/tbody/tr[2]/td[2]/div',
         'parser': clean_text
     },
     {
-        'section': 'registrant',
-        'lda_question': 2,
-        'field': 'senate_id',
+        'section': 'identifiers',
+        'lda_question': '2',
+        'field': 'registrant_senate_id',
         'path': '/html/body/table[2]/tbody/tr[2]/td[5]/div',
         'parser': clean_text
     },
