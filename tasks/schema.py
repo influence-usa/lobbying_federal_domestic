@@ -71,7 +71,10 @@ def parse_array(array, children):
             _field = child['field']
             _path = child['path']
             _child_node = element.xpath(_path)[0]
-            record[_field] = _parser(_child_node)
+            if child.get('children', False):
+                record[_field] = _parser(_child_node, child['children'])
+            else:
+                record[_field] = _parser(_child_node)
         yield record
 
 
