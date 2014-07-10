@@ -17,16 +17,23 @@ def checkbox_boolean(e):
     return 'checked' in e.attrib
 
 
-def parse_datetime(e):
-    s = e.text
-    return datetime.strptime(s, '%m/%d/%Y').isoformat()
-
-
 def clean_text(e):
-    s = e.text
+    s = e.text or ''
+    s = s.strip()
     for p, r in REPLACE_MAP.iteritems():
         s = s.replace(p, r)
     return s
+
+
+def parse_datetime(e):
+    s = clean_text(e)
+    if s:
+        try:
+            return datetime.strptime(s, '%m/%d/%Y').isoformat()
+        except ValueError:
+            return datetime.strptime(s, '%m/%d/%Y %I:%M:%S %p').isoformat()
+    else:
+        return None
 
 
 def tail_text(e):
@@ -37,17 +44,23 @@ def tail_text(e):
 
 
 def parse_decimal(e):
-    s = e.text
-    return locale.atof(s)
+    s = clean_text(e)
+    if s:
+        return locale.atof(s)
+    else:
+        return None
 
 
 def parse_int(e):
-    s = e.text
-    return int(s)
+    s = clean_text(e)
+    if s:
+        return int(s)
+    else:
+        return None
 
 
 def parse_percent(e):
-    s = e.text.replace('%', '')
+    s = clean_text(e).replace('%', '')
     if s:
         return float(s) / 100.0
     else:
@@ -55,7 +68,7 @@ def parse_percent(e):
 
 
 def split_keep_rightmost(e):
-    s = e.text
+    s = clean_text(e)
     split_text = s.split(' ')
     if len(split_text) > 1:
         return split_text[-1]
