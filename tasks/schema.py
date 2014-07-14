@@ -8,6 +8,7 @@ log = set_up_logging('schema', loglevel=logging.DEBUG)
 
 REPLACE_MAP = {u'&#160;': u'',
                u'\xa0':  u'',
+               u'\u200b':  u'',
                u'&nbsp;': u''}
 
 locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
@@ -945,7 +946,7 @@ ld2_schema = [
                 'section': 'lobbying_activities',
                 'lda_question': '15',
                 'field': 'general_issue_area',
-                'path': 'following-sibling::p[1]',
+                'path': '.',
                 'parser': split_keep_rightmost
             },
             {
@@ -953,7 +954,7 @@ ld2_schema = [
                 'lda_question': '16',
                 'field': 'specific_issues',
                 'path': 'following-sibling::p[2]',
-                'parser': split_keep_rightmost
+                'parser': clean_text
             },
             {
                 'section': 'lobbying_activities',
