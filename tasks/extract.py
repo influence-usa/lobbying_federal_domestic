@@ -10,7 +10,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 from lxml import etree
 
-from settings import CACHE_DIR, ORIG_DIR
+from settings import CACHE_DIR, ORIG_DIR, TEST_CACHE_DIR, TEST_ORIG_DIR
 from .utils import mkdir_p, translate_dir
 from .log import set_up_logging
 from .schema import ld1_schema, ld2_schema
@@ -73,9 +73,9 @@ def apply_container_node(parsed, node):
         return []
 
 
-def extract_html(cache_path, schema_elements, schema_containers):
-    old_path, new_path = translate_dir(cache_path, from_dir=CACHE_DIR,
-                                       to_dir=ORIG_DIR)
+def extract_html(cache_path, schema_elements, schema_containers, cache_dir, orig_dir):
+    old_path, new_path = translate_dir(cache_path, from_dir=cache_dir,
+                                       to_dir=orig_dir)
     filename = os.path.basename(old_path).split(os.extsep)[0]
     new_path = os.extsep.join([os.path.join(new_path, filename), 'json'])
     # log.info('old: '+old_path)
@@ -129,20 +129,28 @@ def extract_all_zips(cache_paths, options):
 def extract_all_html(cache_paths, schema_elements, schema_containers, options):
     threaded = options.get('threaded', False)
     thread_num = options.get('thread_num', 4)
+    if options.get('test', False):
+        cache_dir = TEST_CACHE_DIR
+        orig_dir = TEST_ORIG_DIR
+    else:
+        cache_dir = CACHE_DIR
+        orig_dir = ORIG_DIR
 
     if threaded:
         pool = ThreadPool(thread_num)
         for path in cache_paths:
             if check_ext(path, ext='.html'):
                 pool.apply_async(extract_html, args=(path, schema_elements,
-                                 schema_containers), callback=log_result)
+                                 schema_containers, cache_dir, orig_dir), 
+                                 callback=log_result)
             else:
                 raise Exception("{} not an html file!".format(path))
         pool.close()
         pool.join()
     else:
         for path in cache_paths:
-            log_result(extract_html(path, schema_elements, schema_containers))
+            log_result(extract_html(path, schema_elements, schema_containers,
+                                    cache_dir, orig_dir))
 
 
 def extract_sopr_xml(options):
