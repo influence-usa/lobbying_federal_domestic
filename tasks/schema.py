@@ -77,6 +77,15 @@ def split_keep_rightmost(e):
         return None
 
 
+def split_drop_leftmost(e):
+    s = clean_text(e)
+    split_text = s.split(' ')
+    if len(split_text) > 1:
+        return ' '.join(split_text[1:])
+    else:
+        return None
+
+
 def parse_array(array, children):
     out = []
     for element in array:
@@ -95,23 +104,21 @@ def parse_array(array, children):
 
 
 def parse_even_odd(array, children):
-    for even, odd in zip([(array[i], array[i+1])
-                          for i in xrange(0, len(array), 2)]):
+    for even, odd in [(array[i], array[i+1])
+                      for i in xrange(0, len(array), 2)]:
         record = {}
-        for element in even:
-            for child in children['even']:
-                _parser = child['parser']
-                _field = child['field']
-                _path = child['path']
-                _child_node = element.xpath(_path)
-                record[_field] = _parser(_child_node)
-        for element in odd:
-            for child in children['odd']:
-                _parser = child['parser']
-                _field = child['field']
-                _path = child['path']
-                _child_node = element.xpath(_path)
-                record[_field] = _parser(_child_node)
+        for child in children['even']:
+            _parser = child['parser']
+            _field = child['field']
+            _path = child['path']
+            _child_node = even.xpath(_path)[0]
+            record[_field] = _parser(_child_node)
+        for child in children['odd']:
+            _parser = child['parser']
+            _field = child['field']
+            _path = child['path']
+            _child_node = odd.xpath(_path)[0]
+            record[_field] = _parser(_child_node)
         yield record
 
 
@@ -464,7 +471,7 @@ ld1_schema = [
         'parser': parse_even_odd,
         'children':
             {
-                'odd': [
+                'even': [
                     {
                         'section': 'affiliated_organizations',
                         'lda_question': '13',
@@ -487,7 +494,7 @@ ld1_schema = [
                         'parser': clean_text
                     },
                 ],
-                'even': [
+                'odd': [
                     {
                         'section': 'affiliated_organizations',
                         'lda_question': '13',
@@ -555,7 +562,7 @@ ld1_schema = [
         'parser': parse_even_odd,
         'children':
             {
-                'odd': [
+                'even': [
                     {
                         'section': 'foreign_entities',
                         'lda_question': '14',
@@ -571,7 +578,7 @@ ld1_schema = [
                         'parser': clean_text
                     },
                 ],
-                'even': [
+                'odd': [
                     {
                         'section': 'foreign_entities',
                         'lda_question': '14',
@@ -583,21 +590,21 @@ ld1_schema = [
                         'section': 'foreign_entities',
                         'lda_question': '14',
                         'field': 'foreign_entity_city',
-                        'path': 'td[2]/table/tbody/tr/td[2]/div',
+                        'path': 'td[2]/table/tbody/tr/td[1]/div',
                         'parser': clean_text
                     },
                     {
                         'section': 'foreign_entities',
                         'lda_question': '14',
                         'field': 'foreign_entity_state',
-                        'path': 'td[2]/table/tbody/tr/td[3]/div',
+                        'path': 'td[2]/table/tbody/tr/td[2]/div',
                         'parser': clean_text
                     },
                     {
                         'section': 'foreign_entities',
                         'lda_question': '14',
                         'field': 'foreign_entity_country',
-                        'path': 'td[2]/table/tbody/tr/td[4]/div',
+                        'path': 'td[2]/table/tbody/tr/td[3]/div',
                         'parser': clean_text
                     },
                     {
@@ -673,126 +680,133 @@ ld2_schema = [
         'section': 'registrant',
         'lda_question': '2',
         'field': 'registrant_address_one',
-        'path': '/html/body/div[1]/table[1]/tbody/tr/td[2]/div',
+        'path': '/html/body/div[1]/table[1]/tbody/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '2',
         'field': 'registrant_address_two',
-        'path': '/html/body/div[1]/table[1]/tbody/tr/td[4]/div',
+        'path': '/html/body/div[1]/table[1]/tbody/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '2',
         'field': 'registrant_city',
-        'path': '/html/body/div[1]/table[2]/tbody/tr/td[2]/div',
+        'path': '/html/body/div[1]/table[2]/tbody/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '2',
         'field': 'registrant_state',
-        'path': '/html/body/div[1]/table[2]/tbody/tr/td[4]/div',
+        'path': '/html/body/div[1]/table[2]/tbody/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '2',
         'field': 'registrant_zip',
-        'path': '/html/body/div[1]/table[2]/tbody/tr/td[6]/div',
+        'path': '/html/body/div[1]/table[2]/tbody/td[6]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '2',
         'field': 'registrant_country',
-        'path': '/html/body/div[1]/table[2]/tbody/tr/td[8]/div',
+        'path': '/html/body/div[1]/table[2]/tbody/td[8]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '3',
         'field': 'registrant_ppb_city',
-        'path': '/html/body/div[1]/table[2]/tbody/tr/td[8]/div',
+        'path': '/html/body/div[1]/table[2]/tbody/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '3',
         'field': 'registrant_ppb_state',
-        'path': '/html/body/div[1]/table[3]/tbody/tr/td[4]/div',
+        'path': '/html/body/div[1]/table[3]/tbody/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '3',
         'field': 'registrant_ppb_zip',
-        'path': '/html/body/div[1]/table[3]/tbody/tr/td[6]/div',
+        'path': '/html/body/div[1]/table[3]/tbody/td[6]/div',
+        'parser': clean_text
+    },
+    {
+        'section': 'registrant',
+        'lda_question': '3',
+        'field': 'registrant_ppb_country',
+        'path': '/html/body/div[1]/table[3]/tbody/td[8]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '4a',
         'field': 'registrant_contact_name_prefix',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[1]/td[1]/table/tbody/tr[2]/td[1]/div',
+        'path': '/html/body/div[1]/table[4]/tr[1]/td[1]/table/tbody/tr[2]/td[1]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '4a',
         'field': 'registrant_contact_name',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[1]/td[1]/table/tbody/tr[2]/td[2]/div',
+        'path': '/html/body/div[1]/table[4]/tr[1]/td[1]/table/tbody/tr[2]/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '4b',
         'field': 'registrant_contact_phone',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[1]/td[1]/table/tbody/tr[2]/td[3]/div',
+        'path': '/html/body/div[1]/table[4]/tr[1]/td[1]/table/tbody/tr[2]/td[3]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '4c',
         'field': 'registrant_contact_email',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[1]/td[1]/table/tbody/tr[2]/td[4]/div',
+        'path': '/html/body/div[1]/table[4]/tr[1]/td[1]/table/tbody/tr[2]/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'identifiers',
         'lda_question': '5',
         'field': 'client_registrant_senate_id',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[1]/td[2]/div',
+        'path': '/html/body/div[1]/table[4]/tr[1]/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'identifiers',
         'lda_question': '6',
         'field': 'client_registrant_house_id',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[2]/td[2]/div',
+        'path': '/html/body/div[1]/table[4]/tr[2]/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'client',
         'lda_question': '7',
         'field': 'client_self',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[2]/td[1]/table/tbody/tr[1]/td[2]/input',
+        'path': '/html/body/div[1]/table[4]/tr[2]/td[1]/table/tbody/tr[1]/td[2]/input',
         'parser': checkbox_boolean
     },
     {
         'section': 'client',
         'lda_question': '7',
         'field': 'client_state_or_local_government',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[2]/td[1]/table/tbody/tr[1]/td[3]/input',
+        'path': '/html/body/div[1]/table[4]/tr[2]/td[1]/table/tbody/tr[1]/td[3]/input',
         'parser': checkbox_boolean
     },
     {
         'section': 'client',
         'lda_question': '7',
         'field': 'client_name',
-        'path': '/html/body/div[1]/table[4]/tbody/tr[2]/td[1]/table/tbody/tr[2]/td/div',
+        'path': '/html/body/div[1]/table[4]/tr[2]/td[1]/table/tbody/tr[2]/td/div',
         'parser': clean_text
     },
     {
@@ -1281,21 +1295,21 @@ ld2_schema = [
                 'lda_question': '27',
                 'field': 'foreign_entity_ppb_city',
                 'path': 'td[3]/table/tbody/tr[1]/td',
-                'parser': split_keep_rightmost
+                'parser': split_drop_leftmost
             },
             {
                 'section': 'registration_update',
                 'lda_question': '27',
                 'field': 'foreign_entity_ppb_state',
                 'path': 'td[3]/table/tbody/tr[2]/td[1]',
-                'parser': split_keep_rightmost
+                'parser': split_drop_leftmost
             },
             {
                 'section': 'registration_update',
                 'lda_question': '27',
                 'field': 'foreign_entity_ppb_country',
                 'path': 'td[3]/table/tbody/tr[2]/td[2]',
-                'parser': split_keep_rightmost
+                'parser': split_drop_leftmost
             },
             {
                 'section': 'registration_update',
@@ -1316,7 +1330,7 @@ ld2_schema = [
     {
         'section': 'registration_update',
         'lda_question': 28,
-        'field': 'removed_affiliated_organizations',
+        'field': 'removed_foreign_entities',
         'path': '//p[contains(.,"28. Name of each previously reported foreign entity")]/following-sibling::table[1]/tbody/tr/td/span',
         'parser': parse_array,
         'children': [

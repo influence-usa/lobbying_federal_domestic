@@ -94,8 +94,8 @@ def extract_html(cache_path, schema_elements, schema_containers, cache_dir, orig
                 _section = node['section']
                 _field = node['field']
                 record[_section][_field] = apply_container_node(_parsed, node)
-            json.dump(record, open(new_path, 'w'))
-            return ('success', old_path, new_path, 1)
+            json.dump(record, open(new_path, 'w'), indent=2)
+        return ('success', old_path, new_path, 1)
     except Exception as e:
         return ('failure', old_path, e)
 
