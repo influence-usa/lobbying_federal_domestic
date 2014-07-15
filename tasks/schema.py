@@ -13,6 +13,13 @@ REPLACE_MAP = {u'&#160;': u'',
 
 locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
+DATE_FORMATS = ['%m/%d/%Y',
+                '%m/%d/%Y %I:%M:%S %p',
+                '%m/%d/%y',
+                '%Y/%m/%d',
+                '%m-%d-%Y',
+                '%m-%d-%y']
+
 
 def checkbox_boolean(e):
     return 'checked' in e.attrib
@@ -28,11 +35,18 @@ def clean_text(e):
 
 def parse_datetime(e):
     s = clean_text(e)
+    parsed = None
     if s:
-        try:
-            return datetime.strptime(s, '%m/%d/%Y').isoformat()
-        except ValueError:
-            return datetime.strptime(s, '%m/%d/%Y %I:%M:%S %p').isoformat()
+        f = 0
+        for f in DATE_FORMATS:
+            try:
+                parsed = datetime.strptime(s, f).isoformat()
+            except ValueError:
+                continue
+            else:
+                return parsed
+        else:
+            return s
     else:
         return None
 

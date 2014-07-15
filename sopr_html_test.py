@@ -70,6 +70,42 @@ test_set_defs = {
                           'filingID': '3A144627-84A0-4190-81A8-B40718EA37EC',
                           'filingTypeID': 1
                       },
+                      {
+                          'test_name': 'index_out_of_range',
+                          'event': 'getFilingDetails',
+                          'filingID': 'b1170146-00ac-4186-ba9b-01da020446ea',
+                          'filingTypeID': 1
+                      },
+                      {
+                          'test_name': 'date_bad',
+                          'event': 'getFilingDetails',
+                          'filingID': 'e6349365-11de-48b3-9c56-c3917595b56f',
+                          'filingTypeID': 1
+                      },
+                      {
+                          'test_name': 'date_mdy',
+                          'event': 'getFilingDetails',
+                          'filingID': '57702f25-d4bb-465a-b654-d1b8aedec3fa',
+                          'filingTypeID': 1
+                      },
+                      {
+                          'test_name': 'date_m-d-y',
+                          'event': 'getFilingDetails',
+                          'filingID': '770967dd-e25a-4bfc-ad06-749132db4525',
+                          'filingTypeID': 1
+                      },
+                      {
+                          'test_name': 'date_m-d-Y',
+                          'event': 'getFilingDetails',
+                          'filingID': '7e0c83ac-577a-48ae-83ee-ec4ebaf3964d',
+                          'filingTypeID': 1
+                      },
+                      {
+                          'test_name': 'date_Ymd',
+                          'event': 'getFilingDetails',
+                          'filingID': '308f6aaa-c292-440e-8eca-f49fa937758e',
+                          'filingTypeID': 1
+                      }
                   ],
                   'ld2':
                   [
@@ -124,7 +160,7 @@ def build_test_sets(source_name):
 
 
 if __name__ == "__main__":
-    # build_test_sets('sopr_html')
+    build_test_sets('sopr_html')
 
     ld1_cache_paths = glob(os.path.join(settings.TEST_CACHE_DIR, 'sopr_html',
                                         'ld1', '*.html'))
