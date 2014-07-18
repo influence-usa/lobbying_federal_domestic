@@ -199,8 +199,11 @@ def transform_sopr_html(options):
         method_labels = ['a', 'b', 'c']
 
         method = [l for l in method_labels if expenses['expense_method_'+l]]
-        assert len(method) == 1
-        return method[0]
+        assert len(method) <= 1
+        try:
+            return method[0]
+        except IndexError:
+            return None
 
     def _pop_true(dictlike):
         for k, v in dictlike.iteritems():
