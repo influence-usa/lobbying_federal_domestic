@@ -660,7 +660,7 @@ ld1_schema = [
         'parser': clean_text
     },
     {
-        'section': 'datetimes',
+        'section': 'signature',
         'lda_question': None,
         'field': 'signature_date',
         'path': '/html/body/table[20]/tbody/tr/td[4]/div',
