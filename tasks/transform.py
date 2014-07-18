@@ -245,5 +245,7 @@ def transform_sopr_html(options):
             _write_to_file(ld2_loc, transformed_ld2)
         except Exception as e:
             log.error(str(e)+' ('+ld2_loc+')')
+            raise
         except etree.XMLSyntaxError as x:
             log.error(str(x)+' ('+ld2_loc+')')
+            raise
