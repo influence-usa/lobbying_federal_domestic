@@ -4,13 +4,29 @@ import json
 import logging
 from glob import glob, iglob
 
+from multiprocessing import Pool as ThreadPool
+
 from lxml import etree
 
 import settings as s
-from .utils import translate_dir, map_vals
+from .utils import translate_dir, map_vals, get_key
 from .log import set_up_logging
 
 log = set_up_logging('transform', loglevel=logging.DEBUG)
+
+
+def log_result(result):
+    if result[0] == 'success':
+        src_dir, dest_dir, num_files = result[1:]
+        log.info("successfully extracted " +
+                 "{src_dir} => {dest_dir} ({num} files)".format(
+                     src_dir=src_dir, dest_dir=dest_dir, num=num_files))
+    elif result[0] == 'failure':
+        loc, e = result[1:]
+        log.error("extracting from {loc} failed: {exception}".format(
+            loc=loc, exception=str(e)))
+    else:
+        raise Exception('Result for {loc} was neither success nor failure?')
 
 
 def transform_sopr_xml(options):
@@ -182,6 +198,8 @@ def transform_sopr_html(options):
         with open(output_path, 'w') as output_file:
             json.dump(json_filing, output_file)
 
+        return output_path
+
     def _determine_quarter(record):
         report = record['report'].copy()
         quarter_map = {'one': 'Q1',
@@ -222,33 +240,57 @@ def transform_sopr_html(options):
             float(fe.pop('foreign_entity_ownership_percentage', 0.0)) / 100.0
         return fe
 
+    def _postprocess_ld2(transformed_ld2, original_ld2):
+        _transformed_ld2 = transformed_ld2.copy()
+        _transformed_ld2['report_quarter'] = _determine_quarter(original_ld2)
+        _transformed_ld2['expense_reporting_method'] = _determine_expense_method(original_ld2)
+        if get_key(original_ld2, 'report.report_no_activity'):
+            _transformed_ld2['lobbying_activities'] = []
+        return _transformed_ld2
+
+    def _postprocess_ld1(transformed_ld1, original_ld1):
+        pass
+
+    def _transform(original_loc, copy_map, postprocess, template):
+        try:
+            with open(original_loc, 'r') as _original:
+                _original_json = json.load(_original)
+                _transformed = map_vals(copy_map, _original_json,
+                                        template)
+                _transformed = postprocess(_transformed, _original_json)
+                output_path = _write_to_file(original_loc, _transformed)
+            return ('success', original_loc, output_path)
+        except Exception as e:
+            return ('failure', original_loc, e)
+
+    def _transform_all(original_locs, copy_map, postprocess, template,
+                       options):
+        threaded = options.get('threaded', False)
+        thread_num = options.get('thread_num', 4)
+
+        if threaded:
+            pool = ThreadPool(thread_num)
+            for original_loc in original_locs:
+                pool.apply_async(_transform, args=(original_loc, copy_map,
+                                 postprocess, template), callback=log_result)
+            pool.close()
+            pool.join()
+        else:
+            for original_loc in original_locs:
+                log_result(_transform(original_loc, copy_map, postprocess,
+                                      template))
+
     original_ld1_files = iglob(os.path.join(s.ORIG_DIR, 'sopr_html', '*',
                                             'REG', '*.json'))
 
     original_ld2_files = iglob(os.path.join(s.ORIG_DIR, 'sopr_html', '*',
                                             'Q[1-4]', '*.json'))
 
-    for ld1_loc in original_ld1_files:
-        try:
-            original_ld1 = json.load(open(ld1_loc, 'r'))
-            transformed_ld1 = map_vals(ld1_copy_map, original_ld1)
-            _write_to_file(ld1_loc, transformed_ld1)
-        except Exception as e:
-            log.error(str(e)+' ('+ld1_loc+')')
-        except etree.XMLSyntaxError as x:
-            log.error(str(x)+' ('+ld1_loc+')')
-
-    for ld2_loc in original_ld2_files:
-        try:
-            original_ld2 = json.load(open(ld2_loc, 'r'))
-            transformed_ld2 = map_vals(ld2_copy_map, original_ld2,
-                                       {'datetimes': {}})
-            transformed_ld2['report_quarter'] = _determine_quarter(original_ld2)
-            transformed_ld2['expense_reporting_method'] = _determine_expense_method(original_ld2)
-            _write_to_file(ld2_loc, transformed_ld2)
-        except Exception as e:
-            log.error(str(e)+' ('+ld2_loc+')')
-            raise
-        except etree.XMLSyntaxError as x:
-            log.error(str(x)+' ('+ld2_loc+')')
-            raise
+    log.info('Beginning LD-1 transforms')
+    _transform_all(original_ld1_files, ld1_copy_map, _postprocess_ld1,
+                   {}, options)
+    log.info('Finished LD-1 transforms')
+    log.info('Beginning LD-2 transforms')
+    _transform_all(original_ld2_files, ld2_copy_map, _postprocess_ld2,
+                   {'datetimes': {}}, options)
+    log.info('Finished LD-2 transforms')

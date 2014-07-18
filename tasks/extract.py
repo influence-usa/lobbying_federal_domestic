@@ -6,7 +6,7 @@ import json
 from collections import defaultdict
 from glob import glob
 
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing import Pool as ThreadPool
 
 from lxml import etree
 
