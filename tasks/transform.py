@@ -190,8 +190,11 @@ def transform_sopr_html(options):
                        'four': 'Q4'}
         quarter = [v for q, v in quarter_map.items()
                    if report['report_quarter_'+q]]
-        assert len(quarter) == 1
-        return quarter[0]
+        assert len(quarter) <= 1
+        try:
+            return quarter[0]
+        except IndexError:
+            return None
 
     def _determine_expense_method(record):
         expenses = record['expenses'].copy()
