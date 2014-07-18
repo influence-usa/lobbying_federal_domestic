@@ -99,7 +99,7 @@ def transform_house_xml(options):
             json_dict[element.tag] = text.strip()
         return json_dict
 
-    def _write_to_file(xml_filepath, filing):
+    def _write_to_file(xml_filepath, json_filing):
         path, destination_dir = translate_dir(xml_filepath,
                                               from_dir=s.ORIG_DIR,
                                               to_dir=s.TRANS_DIR)
