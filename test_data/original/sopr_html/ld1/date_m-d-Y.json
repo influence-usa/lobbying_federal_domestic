@@ -1,0 +1,99 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "BAN"
+      }, 
+      {
+        "issue_code": "ECN"
+      }, 
+      {
+        "issue_code": "FIN"
+      }, 
+      {
+        "issue_code": "RES"
+      }, 
+      {
+        "issue_code": "GOV"
+      }, 
+      {
+        "issue_code": "SMB"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "413830000", 
+    "registrant_senate_id": "400635920-12"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2010-07-15T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "", 
+    "client_self": false, 
+    "client_name": "EDF REsource Capital, Inc.", 
+    "client_city": "Folsom", 
+    "client_zip": "95630", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "Real estate lending for small businesses.", 
+    "client_state": "CA", 
+    "client_address": "1050 Iron Point Road"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "United States Representative", 
+        "lobbyist_first_name": "John", 
+        "lobbyist_last_name": "Doolittle", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2012-07-19T20:01:46", 
+    "signature": "Digitally Signed By: John T. Doolittle"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "1. Implementation of an SBA 504 loan recovery program.\n2. Reform of SBA 504 Loan Refinancing Capabilities.\n3. Reform of the Premier Certified Lender Program (PCLP).\n4. Reform of Policies Relating to a Certified Development Corporation (CDC).\n5. Extension of 504 first mortgage lien pool (FMLP)."
+  }, 
+  "registrant": {
+    "registrant_name": "John T. Doolittle, LLC", 
+    "registrant_zip": "22124", 
+    "registrant_address_one": "10531 Mereworth Lane", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Oakton", 
+    "registrant_email": "JTDoolittle@att.net", 
+    "registrant_state": "VA", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "registrant_contact": "Mr. John T. Doolittle", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "7039383889", 
+    "registrant_general_description": "Public affairs consultant", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "date_m-d-Y", 
+  "registration_type": {
+    "amendment": true, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": false
+  }
+}

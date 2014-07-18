@@ -1,0 +1,136 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "TEC"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "41030", 
+    "registrant_senate_id": "400497448"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": true, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [
+      {
+        "affiliated_organization_ppb_state": "TX", 
+        "affiliated_organization_address": "1133 21st Street NW, #900", 
+        "affiliated_organization_ppb_city": "Dallas", 
+        "affiliated_organization_name": "AT&T Services Inc.", 
+        "affiliated_organization_zip": "20036", 
+        "affiliated_organization_ppb_country": "USA", 
+        "affiliated_organization_country": "USA", 
+        "affiliated_organization_state": "DC", 
+        "affiliated_organization_city": "Washington"
+      }, 
+      {
+        "affiliated_organization_ppb_state": "WA", 
+        "affiliated_organization_address": "601 Pennsylvania Avenue, NW #800 North", 
+        "affiliated_organization_ppb_city": "Belleview", 
+        "affiliated_organization_name": "T-Mobile US, Inc.", 
+        "affiliated_organization_zip": "20004", 
+        "affiliated_organization_ppb_country": "USA", 
+        "affiliated_organization_country": "USA", 
+        "affiliated_organization_state": "DC", 
+        "affiliated_organization_city": "Washington"
+      }, 
+      {
+        "affiliated_organization_ppb_state": "NY", 
+        "affiliated_organization_address": "1300 I Street, NW", 
+        "affiliated_organization_ppb_city": "New York", 
+        "affiliated_organization_name": "Verizon Communications Inc.", 
+        "affiliated_organization_zip": "20005", 
+        "affiliated_organization_ppb_country": "USA", 
+        "affiliated_organization_country": "USA", 
+        "affiliated_organization_state": "DC", 
+        "affiliated_organization_city": "Washington"
+      }
+    ], 
+    "affiliated_organizations_no": false
+  }, 
+  "datetimes": {
+    "effective_date": "2013-07-16T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "", 
+    "client_self": false, 
+    "client_name": "CTIA - The Wireless Association (on behalf of AT&T, Verizon and T-Mobile)", 
+    "client_city": "Washington", 
+    "client_zip": "20036", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "Waste Disposal Energy Creation", 
+    "client_state": "DC", 
+    "client_address": "1400 16th Street, NW #600"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "Acting Secretary/Under Secretary of the Army;", 
+        "lobbyist_first_name": "R.L. (Les)", 
+        "lobbyist_last_name": "Brownlee", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Staff Director, Senate Committee on Armed Services", 
+        "lobbyist_first_name": "R.L. (Les)", 
+        "lobbyist_last_name": "Brownlee", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Principal Staff Member, Senate Committee on Armed Services", 
+        "lobbyist_first_name": "R.L. (Les)", 
+        "lobbyist_last_name": "Brownlee", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Military Legislative Assistant, Office, Senator John Warner", 
+        "lobbyist_first_name": "R.L. (Les)", 
+        "lobbyist_last_name": "Brownlee", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2013-08-30T00:00:00", 
+    "signature": "Digitally Signed By: R. L. (Les) Brownlee,  President"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "Frequency Spectrum Allocation"
+  }, 
+  "registrant": {
+    "registrant_name": "Les Brownlee & Associates, LLC", 
+    "registrant_zip": "22206", 
+    "registrant_address_one": "2720 S. Arlington Mill Drive; Suite 501", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Arlington", 
+    "registrant_email": "mward@wardlawless.com", 
+    "registrant_state": "VA", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "registrant_contact": "Mr. R.L. (LES) BROWNLEE", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "7037510565", 
+    "registrant_general_description": "Lobbying/Consulting", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "multiple_lobbyists", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": true
+  }
+}

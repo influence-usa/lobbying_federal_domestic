@@ -1,0 +1,186 @@
+{
+  "lobbying_activities": {
+    "lobbying_activities": [
+      {
+        "general_issue_area": "TAX", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "S. 232/H.R. 523, The Protect Medical Innovation Act of 2013.", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES,", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Jodie", 
+            "lobbyist_last_name": "Curtis", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "MMM", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Proposed rule regarding durable medical equipment reimbursement definition of routinely purchased.", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Jodie", 
+            "lobbyist_last_name": "Curtis", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Leg. Aide/Dpty Comm. Dir./Senator Arlen Specter", 
+            "lobbyist_is_new": true, 
+            "lobbyist_first_name": "Jim", 
+            "lobbyist_last_name": "Twaddell", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Staff Asst./Leg. Corr., Senator Mike DeWine", 
+            "lobbyist_is_new": true, 
+            "lobbyist_first_name": "Jeremy", 
+            "lobbyist_last_name": "Scott", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Staff Asst./Leg. Corr., Senator Dianne Feinstein", 
+            "lobbyist_is_new": true, 
+            "lobbyist_first_name": "Ilisa", 
+            "lobbyist_last_name": "Halpern Paul", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Leg. Asst./Scheduler, Senator Chris Dodd", 
+            "lobbyist_is_new": true, 
+            "lobbyist_first_name": "Rebecca", 
+            "lobbyist_last_name": "McGrath", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Leg. Asst./Staff Asst. Cong. Stokes", 
+            "lobbyist_is_new": true, 
+            "lobbyist_first_name": "Julie", 
+            "lobbyist_last_name": "Hyams", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": true, 
+            "lobbyist_first_name": "Erin", 
+            "lobbyist_last_name": "Morton", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Anna", 
+            "lobbyist_last_name": "Howard", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "ECN", 
+        "houses_and_agencies_none": true, 
+        "specific_issues": "Global Investment in American Jobs Act (H.R. 2052, S. 1023).", 
+        "houses_and_agencies": "", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Jodie", 
+            "lobbyist_last_name": "Curtis", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }
+    ]
+  }, 
+  "identifiers": {
+    "client_registrant_house_id": "318010137", 
+    "client_registrant_senate_id": "12631-1005496"
+  }, 
+  "expenses": {
+    "expense_amount": null, 
+    "expense_method_a": false, 
+    "expense_method_c": false, 
+    "expense_method_b": false, 
+    "expense_less_than_five_thousand": false, 
+    "expense_five_thousand_or_more": false
+  }, 
+  "registration_update": {
+    "removed_foreign_entities": [], 
+    "client_new_ppb_city": "", 
+    "client_new_ppb_zip": "", 
+    "added_foreign_entities": [], 
+    "added_affiliated_organizations": [], 
+    "client_new_zip": "", 
+    "client_new_city": "", 
+    "client_new_ppb_country": "", 
+    "client_new_general_description": "", 
+    "removed_lobbyists": [
+      {
+        "removed_lobbyist_first_name": "Andrew", 
+        "removed_lobbyist_last_name": ""
+      }
+    ], 
+    "removed_lobbying_issues": [], 
+    "client_new_address": "", 
+    "client_new_country": "", 
+    "client_new_state": "", 
+    "removed_affiliated_organizations": [], 
+    "client_new_ppb_state": ""
+  }, 
+  "client": {
+    "client_name": "Smith & Nephew, Inc.", 
+    "client_self": false, 
+    "client_state_or_local_government": false
+  }, 
+  "income": {
+    "income_less_than_five_thousand": false, 
+    "income_amount": 50000.0, 
+    "income_five_thousand_or_more": true
+  }, 
+  "report": {
+    "report_quarter_one": false, 
+    "report_quarter_four": false, 
+    "report_no_activity": false, 
+    "report_year": "2013", 
+    "report_quarter_two": false, 
+    "report_termination_date": null, 
+    "report_quarter_three": true, 
+    "report_is_amendment": false, 
+    "report_is_termination": false
+  }, 
+  "signature": {
+    "signature_date": "2013-10-17T00:00:00", 
+    "signature": "Digitally Signed By: Ilisa Halpern Paul, Managing Government Relations Manager"
+  }, 
+  "registrant": {
+    "registrant_name": "DRINKER BIDDLE & REATH LLP", 
+    "registrant_zip": "20005", 
+    "registrant_contact_email": "ilisa.paul@dbr.com", 
+    "registrant_address_one": "1500 K Street, NW", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "Washington", 
+    "registrant_ppb_zip": "19103-6996", 
+    "registrant_city": "Washington", 
+    "registrant_contact_name": "ILISA HALPERN PAUL", 
+    "registrant_state": "DC", 
+    "registrant_ppb_state": "PA", 
+    "registrant_contact_phone": "2022305145", 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "organization_lobbying_firm": true, 
+    "registrant_ppb_country": "USA", 
+    "registrant_contact_name_prefix": "Mrs."
+  }, 
+  "document_id": "multiple_issues"
+}

@@ -1,0 +1,144 @@
+{
+  "lobbying_activities": {
+    "lobbying_activities": [
+      {
+        "general_issue_area": "TAX", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Legislative and regulatory services related to the production tax credit of section 45 & Treasury grants for renewable energy;", 
+        "houses_and_agencies": "U.S. SENATE, U.S. HOUSE OF REPRESENTATIVES, Treasury - Dept of", 
+        "foreign_entity_interest": "E.ON AG has no direct interest in the specific issues.", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Lindsay", 
+            "lobbyist_last_name": "Hooper", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Jonathan", 
+            "lobbyist_last_name": "Talisman", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Mikrut", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Melissa", 
+            "lobbyist_last_name": "Mueller", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": false
+      }
+    ]
+  }, 
+  "identifiers": {
+    "client_registrant_house_id": "356170121", 
+    "client_registrant_senate_id": "65976-2450"
+  }, 
+  "expenses": {
+    "expense_amount": null, 
+    "expense_method_a": false, 
+    "expense_method_c": false, 
+    "expense_method_b": false, 
+    "expense_less_than_five_thousand": false, 
+    "expense_five_thousand_or_more": false
+  }, 
+  "registration_update": {
+    "removed_foreign_entities": [], 
+    "client_new_ppb_city": "", 
+    "client_new_ppb_zip": "", 
+    "added_foreign_entities": [
+      {
+        "foreign_entity_city": "Dusseldorf", 
+        "foreign_entity_state": "", 
+        "foreign_entity_name": "E.ON AG", 
+        "foreign_entity_address": "E.ON - Platz 1 40479", 
+        "foreign_entity_amount": 0.0, 
+        "foreign_entity_ppb_state": null, 
+        "foreign_entity_ppb_city": "Dusseldorf", 
+        "foreign_entity_country": "DEN", 
+        "foreign_entity_ppb_country": "DEN", 
+        "foreign_entity_ownership_percentage": null
+      }, 
+      {
+        "foreign_entity_city": "Dusseldorf", 
+        "foreign_entity_state": "", 
+        "foreign_entity_name": "E.ON AG", 
+        "foreign_entity_address": "E.ON - Platz 1 40479", 
+        "foreign_entity_amount": 0.0, 
+        "foreign_entity_ppb_state": null, 
+        "foreign_entity_ppb_city": "Dusseldorf", 
+        "foreign_entity_country": "DEN", 
+        "foreign_entity_ppb_country": "DEN", 
+        "foreign_entity_ownership_percentage": null
+      }
+    ], 
+    "added_affiliated_organizations": [], 
+    "client_new_zip": "", 
+    "client_new_city": "", 
+    "client_new_ppb_country": "", 
+    "client_new_general_description": "", 
+    "removed_lobbyists": [], 
+    "removed_lobbying_issues": [], 
+    "client_new_address": "", 
+    "client_new_country": "", 
+    "client_new_state": "", 
+    "removed_affiliated_organizations": [], 
+    "client_new_ppb_state": ""
+  }, 
+  "client": {
+    "client_name": "E.ON Climate & Renewables North America Inc.", 
+    "client_self": false, 
+    "client_state_or_local_government": false
+  }, 
+  "income": {
+    "income_less_than_five_thousand": true, 
+    "income_amount": null, 
+    "income_five_thousand_or_more": false
+  }, 
+  "report": {
+    "report_quarter_one": false, 
+    "report_quarter_four": false, 
+    "report_no_activity": false, 
+    "report_year": "2013", 
+    "report_quarter_two": true, 
+    "report_termination_date": null, 
+    "report_quarter_three": false, 
+    "report_is_amendment": false, 
+    "report_is_termination": false
+  }, 
+  "signature": {
+    "signature_date": "2013-07-22T11:54:59", 
+    "signature": "Digitally Signed By: Joseph Mikrut"
+  }, 
+  "registrant": {
+    "registrant_name": "Capitol Tax Partners, LLP", 
+    "registrant_zip": "20001", 
+    "registrant_contact_email": "faddoul@capitoltax.com", 
+    "registrant_address_one": "101 Constitution Avenue, NW Suite 675 East", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "Washington", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Washington", 
+    "registrant_contact_name": "Joseph Mikrut", 
+    "registrant_state": "DC", 
+    "registrant_ppb_state": "", 
+    "registrant_contact_phone": "2022898700", 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "organization_lobbying_firm": true, 
+    "registrant_ppb_country": "", 
+    "registrant_contact_name_prefix": "Mr."
+  }, 
+  "document_id": "multiple_added_foreign"
+}

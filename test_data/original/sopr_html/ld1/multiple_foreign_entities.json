@@ -1,0 +1,238 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "HOM"
+      }, 
+      {
+        "issue_code": "AVI"
+      }, 
+      {
+        "issue_code": "BUD"
+      }, 
+      {
+        "issue_code": "DEF"
+      }, 
+      {
+        "issue_code": "ECN"
+      }, 
+      {
+        "issue_code": "FOR"
+      }, 
+      {
+        "issue_code": "GOV"
+      }, 
+      {
+        "issue_code": "LBR"
+      }, 
+      {
+        "issue_code": "LAW"
+      }, 
+      {
+        "issue_code": "TOU"
+      }, 
+      {
+        "issue_code": "TRA"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "31748", 
+    "registrant_senate_id": "1182"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2012-09-20T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "Carolina", 
+    "client_self": false, 
+    "client_name": "Airport Shoppes Corp. dba International Meal Company Caribe", 
+    "client_city": "Carolina", 
+    "client_zip": "00984", 
+    "client_ppb_zip": "00984", 
+    "client_ppb_country": "USA", 
+    "client_ppb_state": "PR", 
+    "client_general_description": "Food service", 
+    "client_state": "PR", 
+    "client_address": "Jose A. (Tony) Santana Ave., 575 St., Central Sector"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": true, 
+    "foreign_entities": [
+      {
+        "foreign_entity_city": "Hamilton", 
+        "foreign_entity_state": "", 
+        "foreign_entity_name": "IMC Puerto Rico Ltd.", 
+        "foreign_entity_address": "Clarendon House 2 Church Street", 
+        "foreign_entity_amount": "0.00", 
+        "foreign_entity_ppb_state": "", 
+        "foreign_entity_country": "BER", 
+        "foreign_entity_ppb_country": "BER", 
+        "foreign_entity_ownership_percentage": "100"
+      }, 
+      {
+        "foreign_entity_city": "Sao Paulo", 
+        "foreign_entity_state": "", 
+        "foreign_entity_name": "International Meal Company Holdings S.A.", 
+        "foreign_entity_address": "Av. Brig. Faria Lima, 2277, cj. 1803", 
+        "foreign_entity_amount": "0.00", 
+        "foreign_entity_ppb_state": "", 
+        "foreign_entity_country": "BRA", 
+        "foreign_entity_ppb_country": "BRA", 
+        "foreign_entity_ownership_percentage": "0"
+      }, 
+      {
+        "foreign_entity_city": "Sao Paulo", 
+        "foreign_entity_state": "", 
+        "foreign_entity_name": "FIP-Brasil Empreendimentos", 
+        "foreign_entity_address": "Avenida Brigadeiro Faria Lima, 3900", 
+        "foreign_entity_amount": "0.00", 
+        "foreign_entity_ppb_state": "", 
+        "foreign_entity_country": "BRA", 
+        "foreign_entity_ppb_country": "BRA", 
+        "foreign_entity_ownership_percentage": "0"
+      }
+    ], 
+    "foreign_entities_no": false
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "U.S. Senator (Kansas)", 
+        "lobbyist_first_name": "Robert J.", 
+        "lobbyist_last_name": "Dole", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "U.S. Congressman (Louisiana)", 
+        "lobbyist_first_name": "Billy", 
+        "lobbyist_last_name": "Tauzin", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "U.S. Congressman (North Dakota)", 
+        "lobbyist_first_name": "Earl", 
+        "lobbyist_last_name": "Pomeroy", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Counsel, Sen. Barbara Mikulski; Counsel Senate Approps", 
+        "lobbyist_first_name": "Robert C.", 
+        "lobbyist_last_name": "Jones", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Deputy Assistant Secretary, Legislative Affairs, DHS", 
+        "lobbyist_first_name": "Jeff", 
+        "lobbyist_last_name": "Sural", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Assistant Administrator for Legislative Affairs, TSA", 
+        "lobbyist_first_name": "Jeff", 
+        "lobbyist_last_name": "Sural", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Legislative Counsel, Rep. Vernon Ehlers", 
+        "lobbyist_first_name": "Jeff", 
+        "lobbyist_last_name": "Sural", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Chief of Staff for Congressman Earl Pomeroy", 
+        "lobbyist_first_name": "Bob", 
+        "lobbyist_last_name": "Siggins", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Staff Director, Senate Agriculture Cmte", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Staff Director, Sen. Finance Subcmte on Int'l Trade", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Dep. Chief of Staff, CFTC Chairman Gary Gensler", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Dir. External Affairs, CFTC Acting Chair. M. Dunn", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Senior Adv'r, CFTC Commissioner Bart Chilton", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Assoc. Dir., Dem. Steering & Outreach Cmte", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Office of Majority Leader Harry Reid", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Senior Policy Advisor, Sen. Blanche Lincoln", 
+        "lobbyist_first_name": "Robert", 
+        "lobbyist_last_name": "Holifield", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2012-11-02T00:00:00", 
+    "signature": "Digitally Signed By: Robert Driscoll, Partner"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "Privatization proposal for Luis Munoz Marin International Airport in San Juan, Puerto Rico, (SJU) under Federal Aviation Administration Airport Privatization Pilot Program under 49 U.S.C.  47134 (Docket No. FAA-2009-1144) and related federal issues."
+  }, 
+  "registrant": {
+    "registrant_name": "ALSTON & BIRD, LLP", 
+    "registrant_zip": "20004", 
+    "registrant_address_one": "THE ATLANTIC BUILDING", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "WASHINGTON", 
+    "registrant_email": "ldafilings@alston.com", 
+    "registrant_state": "DC", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "950 F STREET, NW", 
+    "registrant_contact": "Mr. Robert Driscoll", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "2022393470", 
+    "registrant_general_description": "law firm", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "multiple_foreign_entities", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": true
+  }
+}

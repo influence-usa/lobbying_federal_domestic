@@ -1,0 +1,149 @@
+{
+  "lobbying_activities": {
+    "lobbying_activities": [
+      {
+        "general_issue_area": "CPT", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "patent litigation reform; S. 1013, the Patent Abuse Reduction Act; H.R. 845, the Saving High Tech Innovators from Egregious Legal Disputes (SHIELD) Act; H.R. 2639, the Patent Litigation Reform Act of 2013, S. 866, the Patent Quality Improvement Act; H.R. 2766, the Stopping Offensive Use of Patents (STOP) Act of 2013; H.R. 2024, End Anonymous Patents Act; H.R. 3309, the Innovation Act; S. 1720, Patent Transparency and Improvements Act; AIA implementation", 
+        "houses_and_agencies": "U.S. SENATE, U.S. HOUSE OF REPRESENTATIVES, Commerce - Dept of (DOC), Patent & Trademark Office (PTO), Government Accountability Office (GAO), Office of Management & Budget (OMB)", 
+        "foreign_entity_interest": "Samsung is a South Korean-headquartered company that has substantial operations and revenue in the United States, thus the company has an interest in US patent law.", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Matthew", 
+            "lobbyist_last_name": "Tanielian", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joshua", 
+            "lobbyist_last_name": "Ackil", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Kara", 
+            "lobbyist_last_name": "Campbell", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Brian", 
+            "lobbyist_last_name": "Peters", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Ryan", 
+            "lobbyist_last_name": "Triplette", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": false
+      }
+    ]
+  }, 
+  "identifiers": {
+    "client_registrant_house_id": "398400001", 
+    "client_registrant_senate_id": "40013096-101"
+  }, 
+  "expenses": {
+    "expense_amount": null, 
+    "expense_method_a": false, 
+    "expense_method_c": false, 
+    "expense_method_b": false, 
+    "expense_less_than_five_thousand": false, 
+    "expense_five_thousand_or_more": false
+  }, 
+  "registration_update": {
+    "removed_foreign_entities": [], 
+    "client_new_ppb_city": "", 
+    "client_new_ppb_zip": "", 
+    "added_foreign_entities": [], 
+    "added_affiliated_organizations": [
+      {
+        "affiliated_organization_ppb_state": "NJ", 
+        "affiliated_organization_address": "1200 New Hampshire Ave NW, Suite 500", 
+        "affiliated_organization_ppb_city": "Park", 
+        "affiliated_organization_name": "Samsung Electronics America", 
+        "affiliated_organization_zip": "20036", 
+        "affiliated_organization_ppb_country": "USA", 
+        "affiliated_organization_country": "USA", 
+        "affiliated_organization_state": "DC", 
+        "affiliated_organization_city": "Washington"
+      }, 
+      {
+        "affiliated_organization_ppb_state": null, 
+        "affiliated_organization_address": "1 Market Street", 
+        "affiliated_organization_ppb_city": null, 
+        "affiliated_organization_name": "Salesforce.com Inc", 
+        "affiliated_organization_zip": "941051315", 
+        "affiliated_organization_ppb_country": null, 
+        "affiliated_organization_country": "USA", 
+        "affiliated_organization_state": "CA", 
+        "affiliated_organization_city": "San Francisco"
+      }
+    ], 
+    "client_new_zip": "", 
+    "client_new_city": "", 
+    "client_new_ppb_country": "", 
+    "client_new_general_description": "", 
+    "removed_lobbyists": [], 
+    "removed_lobbying_issues": [], 
+    "client_new_address": "", 
+    "client_new_country": "", 
+    "client_new_state": "", 
+    "removed_affiliated_organizations": [], 
+    "client_new_ppb_state": ""
+  }, 
+  "client": {
+    "client_name": "Coalition for Patent Fairness", 
+    "client_self": false, 
+    "client_state_or_local_government": false
+  }, 
+  "income": {
+    "income_less_than_five_thousand": false, 
+    "income_amount": 120000.0, 
+    "income_five_thousand_or_more": true
+  }, 
+  "report": {
+    "report_quarter_one": false, 
+    "report_quarter_four": true, 
+    "report_no_activity": false, 
+    "report_year": "2013", 
+    "report_quarter_two": false, 
+    "report_termination_date": null, 
+    "report_quarter_three": false, 
+    "report_is_amendment": true, 
+    "report_is_termination": false
+  }, 
+  "signature": {
+    "signature_date": "2014-01-20T15:53:32", 
+    "signature": "Digitally Signed By: MATTHEW TANIELIAN"
+  }, 
+  "registrant": {
+    "registrant_name": "Franklin Square Group, LLC", 
+    "registrant_zip": "20004", 
+    "registrant_contact_email": "mtanielian@franklinsquaregroup.com", 
+    "registrant_address_one": "1155 F Street, NW", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "Washington", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Washington", 
+    "registrant_contact_name": "MATTHEW TANIELIAN", 
+    "registrant_state": "DC", 
+    "registrant_ppb_state": "", 
+    "registrant_contact_phone": "2022897223", 
+    "registrant_country": "USA", 
+    "registrant_address_two": "Suite 900", 
+    "organization_lobbying_firm": true, 
+    "registrant_ppb_country": "", 
+    "registrant_contact_name_prefix": "Mr."
+  }, 
+  "document_id": "multiple_added_affiliated"
+}

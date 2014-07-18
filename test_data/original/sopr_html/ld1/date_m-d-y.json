@@ -1,0 +1,96 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "UTI"
+      }, 
+      {
+        "issue_code": "TAX"
+      }, 
+      {
+        "issue_code": "ENG"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "422290001", 
+    "registrant_senate_id": "401033915-12"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2014-04-01T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "", 
+    "client_self": true, 
+    "client_name": "Northwest Public Power Association", 
+    "client_city": "", 
+    "client_zip": "", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "", 
+    "client_state": "", 
+    "client_address": ""
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "COO at the Bonneville Power Administration", 
+        "lobbyist_first_name": "Anita", 
+        "lobbyist_last_name": "Decker", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "", 
+        "lobbyist_first_name": "Nicole", 
+        "lobbyist_last_name": "Case", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2014-04-24T13:25:16", 
+    "signature": "Digitally Signed By: Anita Decker"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "PMA Issues, Hydro power, Cyber Security, reliability, Transmission and energy policy, Muni bonds"
+  }, 
+  "registrant": {
+    "registrant_name": "Northwest Public Power Association", 
+    "registrant_zip": "98662-6064", 
+    "registrant_address_one": "9817 NE 54th Street", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Vancouver", 
+    "registrant_email": "Anita@nwppa.org", 
+    "registrant_state": "WA", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "registrant_contact": "Mrs. Anita Decker", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "3602540109", 
+    "registrant_general_description": "West Coast Electric Utility Trade Association", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "date_m-d-y", 
+  "registration_type": {
+    "amendment": true, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": false
+  }
+}

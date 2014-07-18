@@ -1,0 +1,99 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "RES"
+      }, 
+      {
+        "issue_code": "FIN"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "39832", 
+    "registrant_senate_id": "323114"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2014-02-17T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "East Falls Church", 
+    "client_self": false, 
+    "client_name": "Seller Finance Coalition (SFC)", 
+    "client_city": "East Falls Church", 
+    "client_zip": "22406", 
+    "client_ppb_zip": "22406", 
+    "client_ppb_country": "USA", 
+    "client_ppb_state": "VA", 
+    "client_general_description": "Seller finance companies & individuals educating lawmakers on financial regulation impact", 
+    "client_state": "VA", 
+    "client_address": "607 Timber Lane"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "Legislative Director, Congresswoman Sue Kelly", 
+        "lobbyist_first_name": "Frank", 
+        "lobbyist_last_name": "McCarthy", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "Deputy Chief of Staff, Rep. Tim Johnson", 
+        "lobbyist_first_name": "Stephen", 
+        "lobbyist_last_name": "Borg", 
+        "lobbyist_suffix": ""
+      }, 
+      {
+        "lobbyist_covered_official_position": "", 
+        "lobbyist_first_name": "Matt", 
+        "lobbyist_last_name": "Keelen", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2014-03-25T11:32:39", 
+    "signature": "Digitally Signed By: Matt Keelen"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "The Seller Finance Coalition (SFC) was created to protect the seller finance industry from overregulation from Washington and to undo the unintended consequences stemming from both the Secure and Fair Enforcement for Licensing (SAFE) Act and the Wall Street Reform and Consumer Protection (Dodd-Frank) Act."
+  }, 
+  "registrant": {
+    "registrant_name": "The Keelen Group, LLC", 
+    "registrant_zip": "22202", 
+    "registrant_address_one": "PO Box 2016", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "WASHINGTON", 
+    "registrant_ppb_zip": "20003", 
+    "registrant_city": "Arlington", 
+    "registrant_email": "mkeelen@keelengroup.com", 
+    "registrant_state": "VA", 
+    "registrant_ppb_state": "DC", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "registrant_contact": "Mr. Matt Keelen", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "2025062061", 
+    "registrant_general_description": "Lobbying and consulting", 
+    "registrant_ppb_country": "USA"
+  }, 
+  "document_id": "date_mdy", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": true
+  }
+}

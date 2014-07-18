@@ -1,0 +1,87 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "HCR"
+      }, 
+      {
+        "issue_code": "SMB"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "", 
+    "registrant_senate_id": "400381739"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2009-07-22T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "", 
+    "client_self": false, 
+    "client_name": "MDL MDX", 
+    "client_city": "PANORAMA", 
+    "client_zip": "91402", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "DEDICAL DIAGNOSIS LABORATORIES & MEDICAL DIAGNOSIS PORTABLE X-RAY & EKG SERVICES", 
+    "client_state": "CA", 
+    "client_address": "14250 ARMINTA STREET"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "", 
+        "lobbyist_first_name": "LAURIE", 
+        "lobbyist_last_name": "RAINS", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2001-08-13T00:00:00", 
+    "signature": "Digitally Signed By: LAURIE RAINS, OWNER"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "SMALL BUSINESS GUIDANCE"
+  }, 
+  "registrant": {
+    "registrant_name": "LAURIE RAINS STRATEGIES, LLC", 
+    "registrant_zip": "22201", 
+    "registrant_address_one": "2111 WILSON BOULEVARD", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "ARLINGTON", 
+    "registrant_email": "LRAINS@GMAIL.COM", 
+    "registrant_state": "VA", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "SUITE700", 
+    "registrant_contact": "Ms. LAURIE RAINS", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "2027441875", 
+    "registrant_general_description": "POLITICAL CONSULTING", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "date_Ymd", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": true, 
+    "new_client_for_existing_registrant": false
+  }
+}

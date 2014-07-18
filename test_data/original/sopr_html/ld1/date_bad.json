@@ -1,0 +1,84 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "DEF"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "", 
+    "registrant_senate_id": "48634"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "03/031/2008"
+  }, 
+  "client": {
+    "client_country": "US", 
+    "client_ppb_city": "", 
+    "client_self": false, 
+    "client_name": "Global Aviation Technologies", 
+    "client_city": "Wichita", 
+    "client_zip": "67213", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "Strategic research and communications for business and politics", 
+    "client_state": "KS", 
+    "client_address": "2629 W May"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "", 
+        "lobbyist_first_name": "Alan", 
+        "lobbyist_last_name": "Ross", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2008-04-16T00:00:00", 
+    "signature": "Digitally Signed By: Alan L. Ross, President"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "Defense appropriations"
+  }, 
+  "registrant": {
+    "registrant_name": "A.L. Ross Associates", 
+    "registrant_zip": "20191", 
+    "registrant_address_one": "1800 Alexander Bell Drive", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Reston", 
+    "registrant_email": "alross@alra.us", 
+    "registrant_state": "VA", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "Suite 520", 
+    "registrant_contact": "Mr. Alan L. Ross", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "7038607600", 
+    "registrant_general_description": "Business development", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "date_bad", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": true, 
+    "new_client_for_existing_registrant": false
+  }
+}

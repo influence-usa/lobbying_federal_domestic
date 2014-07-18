@@ -1,0 +1,108 @@
+{
+  "lobbying_activities": {
+    "lobbying_activities": [
+      {
+        "general_issue_area": "EDU", 
+        "houses_and_agencies_none": true, 
+        "specific_issues": "Department of Education, monitor waiver policy.", 
+        "houses_and_agencies": "", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Doug", 
+            "lobbyist_last_name": "Mesecar", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }
+    ]
+  }, 
+  "identifiers": {
+    "client_registrant_house_id": "414280000", 
+    "client_registrant_senate_id": "400658981-12"
+  }, 
+  "expenses": {
+    "expense_amount": 30000.0, 
+    "expense_method_a": true, 
+    "expense_method_c": false, 
+    "expense_method_b": false, 
+    "expense_less_than_five_thousand": false, 
+    "expense_five_thousand_or_more": true
+  }, 
+  "registration_update": {
+    "removed_foreign_entities": [], 
+    "client_new_ppb_city": "", 
+    "client_new_ppb_zip": "", 
+    "added_foreign_entities": [], 
+    "added_affiliated_organizations": [], 
+    "client_new_zip": "", 
+    "client_new_city": "", 
+    "client_new_ppb_country": "", 
+    "client_new_general_description": "", 
+    "removed_lobbyists": [], 
+    "removed_lobbying_issues": [], 
+    "client_new_address": "", 
+    "client_new_country": "", 
+    "client_new_state": "", 
+    "removed_affiliated_organizations": [
+      {
+        "affiliated_organization_name": "Sylvan Learning"
+      }, 
+      {
+        "affiliated_organization_name": "Educate Online, Inc."
+      }, 
+      {
+        "affiliated_organization_name": "Educate, Inc."
+      }
+    ], 
+    "client_new_ppb_state": ""
+  }, 
+  "client": {
+    "client_name": "Sylvan Learning, Inc. (Formerly lobbied under the Registration of Educate, Inc.)", 
+    "client_self": true, 
+    "client_state_or_local_government": false
+  }, 
+  "income": {
+    "income_less_than_five_thousand": false, 
+    "income_amount": null, 
+    "income_five_thousand_or_more": false
+  }, 
+  "report": {
+    "report_quarter_one": true, 
+    "report_quarter_four": false, 
+    "report_no_activity": false, 
+    "report_year": "2013", 
+    "report_quarter_two": false, 
+    "report_termination_date": "2013-03-31T00:00:00", 
+    "report_quarter_three": false, 
+    "report_is_amendment": false, 
+    "report_is_termination": true
+  }, 
+  "signature": {
+    "signature_date": "2013-04-12T13:38:26", 
+    "signature": "Digitally Signed By: Doug Mesecar"
+  }, 
+  "registrant": {
+    "registrant_name": "Sylvan Learning, Inc. (Formerly lobbied under the Registration of Educate, Inc.)", 
+    "registrant_zip": "21202", 
+    "registrant_contact_email": "doug.mesecar@sylvanlearning.com", 
+    "registrant_address_one": "1001 Fleet Street", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "Baltimore", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Baltimore", 
+    "registrant_contact_name": "Doug Mesecar", 
+    "registrant_state": "MD", 
+    "registrant_ppb_state": "", 
+    "registrant_contact_phone": "4108436675", 
+    "registrant_country": "USA", 
+    "registrant_address_two": "9th Floor", 
+    "organization_lobbying_firm": true, 
+    "registrant_ppb_country": "", 
+    "registrant_contact_name_prefix": "Mr."
+  }, 
+  "document_id": "multiple_removed_affiliated"
+}

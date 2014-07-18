@@ -1,0 +1,84 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "DEF"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "42145", 
+    "registrant_senate_id": "400987818"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2013-05-28T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "", 
+    "client_self": false, 
+    "client_name": "Imperatis Corp.", 
+    "client_city": "Arlington", 
+    "client_zip": "22202", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "government, military, and civilian support services", 
+    "client_state": "VA", 
+    "client_address": "2231 Crystal Drive, Suite 401"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "Leadership CoS., Sen. Republican Conf. Chair & Vice Chair", 
+        "lobbyist_first_name": "Lee", 
+        "lobbyist_last_name": "Johnson", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2013-05-28T14:29:38", 
+    "signature": "Digitally Signed By: Blake Johnson"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "Intelligence support for overseas combat operations"
+  }, 
+  "registrant": {
+    "registrant_name": "101 Strategy Partners, LLC", 
+    "registrant_zip": "20001", 
+    "registrant_address_one": "101 Constitution Ave NW", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Washington", 
+    "registrant_email": "bjohnson@101sp.com", 
+    "registrant_state": "DC", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": true, 
+    "registrant_country": "USA", 
+    "registrant_address_two": "Suite L110", 
+    "registrant_contact": "Mr. Blake Johnson", 
+    "registrant_international_phone": false, 
+    "registrant_phone": "2024146169", 
+    "registrant_general_description": "Public Affairs and Communications", 
+    "registrant_ppb_country": ""
+  }, 
+  "document_id": "random", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": true
+  }
+}

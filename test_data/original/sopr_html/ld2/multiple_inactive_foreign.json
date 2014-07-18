@@ -1,0 +1,272 @@
+{
+  "lobbying_activities": {
+    "lobbying_activities": [
+      {
+        "general_issue_area": "AGR", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Ag Issues in US Free Trade Agreements that support our farmer customers; Renewable Fuels Standard; Farm Bill issues; GPS issues", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE, Agriculture - Dept of (USDA), U.S. Trade Representative (USTR)", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "LBR", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Issues relating to card check elections and binding arbitration; HR 377 - Paycheck Fairness Act; E-verify", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE, Labor - Dept of (DOL)", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "TRD", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Government policies and positions regarding the importation of agriculture and construction equipment to Russia; Trade Promotion Authority; Trade negotiations being pursued like the Trans Pacific Partnership (TPP) between the United States and Asia-Pacific region; the Transatlantic Trade and Investment Partnership (TTIP) between the United States and European Union.", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE, U.S. Trade Representative (USTR)", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "TAX", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Obama Administration Budget, provisions relating to increasing taxes on US companies competing for business in international", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE, White House Office", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "FOR", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Issues relating to agricultural and construction equipment used in Iraq and Afganistan.", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE, State - Dept of (DOS)", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "TRA", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Issues relating to funding of federal highways. Off-road farm equipment operated on public roads newly defined as \"commercial", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE, Transportation - Dept of (DOT)", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }, 
+      {
+        "general_issue_area": "BUD", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "Obama Administration Budget, provisions relating to increasing taxes on US companies competing for business in international", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Joseph", 
+            "lobbyist_last_name": "Samora", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "Legislative Correspondent, Senator Chambliss", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Michael", 
+            "lobbyist_last_name": "Venet", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }
+    ]
+  }, 
+  "identifiers": {
+    "client_registrant_house_id": "353300000", 
+    "client_registrant_senate_id": "59832-12"
+  }, 
+  "expenses": {
+    "expense_amount": 230000.0, 
+    "expense_method_a": false, 
+    "expense_method_c": true, 
+    "expense_method_b": false, 
+    "expense_less_than_five_thousand": false, 
+    "expense_five_thousand_or_more": true
+  }, 
+  "registration_update": {
+    "removed_foreign_entities": [
+      {
+        "foreign_entity_name": "CNH Global N.V."
+      }, 
+      {
+        "foreign_entity_name": "Fiat Industrial S.p.A."
+      }, 
+      {
+        "foreign_entity_name": "Fiat Netherlands Holding N.V."
+      }
+    ], 
+    "client_new_ppb_city": "", 
+    "client_new_ppb_zip": "", 
+    "added_foreign_entities": [
+      {
+        "foreign_entity_city": "SS14 3AD", 
+        "foreign_entity_state": "", 
+        "foreign_entity_name": "CNH Industrial N.V.", 
+        "foreign_entity_address": "Basildon, Essex", 
+        "foreign_entity_amount": 0.0, 
+        "foreign_entity_ppb_state": null, 
+        "foreign_entity_ppb_city": "Basildon, Essex", 
+        "foreign_entity_country": "GBR", 
+        "foreign_entity_ppb_country": "GBR", 
+        "foreign_entity_ownership_percentage": null
+      }
+    ], 
+    "added_affiliated_organizations": [], 
+    "client_new_zip": "", 
+    "client_new_city": "", 
+    "client_new_ppb_country": "", 
+    "client_new_general_description": "", 
+    "removed_lobbyists": [], 
+    "removed_lobbying_issues": [], 
+    "client_new_address": "", 
+    "client_new_country": "", 
+    "client_new_state": "", 
+    "removed_affiliated_organizations": [], 
+    "client_new_ppb_state": ""
+  }, 
+  "client": {
+    "client_name": "Case New Holland Inc. and its affiliates", 
+    "client_self": true, 
+    "client_state_or_local_government": false
+  }, 
+  "income": {
+    "income_less_than_five_thousand": false, 
+    "income_amount": null, 
+    "income_five_thousand_or_more": false
+  }, 
+  "report": {
+    "report_quarter_one": false, 
+    "report_quarter_four": true, 
+    "report_no_activity": false, 
+    "report_year": "2013", 
+    "report_quarter_two": false, 
+    "report_termination_date": null, 
+    "report_quarter_three": false, 
+    "report_is_amendment": false, 
+    "report_is_termination": false
+  }, 
+  "signature": {
+    "signature_date": "2014-01-21T00:00:00", 
+    "signature": "Digitally Signed By: Joseph Samora, Senior Vice President"
+  }, 
+  "registrant": {
+    "registrant_name": "Case New Holland Inc. and its affiliates", 
+    "registrant_zip": "20001", 
+    "registrant_contact_email": "joseph.samora@cnh.com", 
+    "registrant_address_one": "1001 G Street, NW", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "Washington", 
+    "registrant_ppb_zip": "60527-7111", 
+    "registrant_city": "Washington", 
+    "registrant_contact_name": "JOSEPH SAMORA", 
+    "registrant_state": "DC", 
+    "registrant_ppb_state": "IL", 
+    "registrant_contact_phone": "2027377575", 
+    "registrant_country": "USA", 
+    "registrant_address_two": "#100 - East", 
+    "organization_lobbying_firm": true, 
+    "registrant_ppb_country": "USA", 
+    "registrant_contact_name_prefix": "Mr."
+  }, 
+  "document_id": "multiple_inactive_foreign"
+}
