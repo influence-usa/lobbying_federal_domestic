@@ -9,7 +9,7 @@ from multiprocessing import Pool as ThreadPool
 from lxml import etree
 
 import settings as s
-from .utils import translate_dir, map_vals
+from .utils import translate_dir, map_vals, get_key
 from .log import set_up_logging
 
 log = set_up_logging('transform', loglevel=logging.DEBUG)
@@ -235,8 +235,12 @@ def transform_sopr_html(options):
         return fe
 
     def _postprocess_ld2(transformed_ld2, original_ld2):
-        transformed_ld2['report_quarter'] = _determine_quarter(original_ld2)
-        transformed_ld2['expense_reporting_method'] = _determine_expense_method(original_ld2)
+        _transformed_ld2 = transformed_ld2.copy()
+        _transformed_ld2['report_quarter'] = _determine_quarter(original_ld2)
+        _transformed_ld2['expense_reporting_method'] = _determine_expense_method(original_ld2)
+        if get_key(original_ld2, 'report.report_no_activity'):
+            _transformed_ld2['lobbying_activities'] = []
+        return _transformed_ld2
 
     def _postprocess_ld1(transformed_ld1, original_ld1):
         pass
