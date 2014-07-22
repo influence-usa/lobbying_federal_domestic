@@ -1,0 +1,111 @@
+{
+  "lobbying_issues": {
+    "lobbying_issues": [
+      {
+        "issue_code": "BUD"
+      }, 
+      {
+        "issue_code": "TAX"
+      }, 
+      {
+        "issue_code": "ENG"
+      }, 
+      {
+        "issue_code": "HCR"
+      }, 
+      {
+        "issue_code": "TRA"
+      }, 
+      {
+        "issue_code": "IMM"
+      }, 
+      {
+        "issue_code": "LBR"
+      }, 
+      {
+        "issue_code": "CAW"
+      }, 
+      {
+        "issue_code": "RET"
+      }
+    ]
+  }, 
+  "identifiers": {
+    "registrant_house_id": "39339", 
+    "registrant_senate_id": "318298"
+  }, 
+  "affiliated_organizations": {
+    "affiliated_organizations_yes": false, 
+    "affiliated_organizations_url": null, 
+    "affiliated_organizations": [], 
+    "affiliated_organizations_no": true
+  }, 
+  "datetimes": {
+    "effective_date": "2008-12-01T00:00:00"
+  }, 
+  "client": {
+    "client_country": "USA", 
+    "client_ppb_city": "", 
+    "client_self": false, 
+    "client_name": "United Brotherhood of Carpenters and Joiners of America", 
+    "client_city": "Washington", 
+    "client_zip": "20001", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
+    "client_general_description": "Labor Union", 
+    "client_state": "DC", 
+    "client_address": "101 Constitution Avenue, NW"
+  }, 
+  "foreign_entities": {
+    "foreign_entities_yes": false, 
+    "foreign_entities": [], 
+    "foreign_entities_no": true
+  }, 
+  "lobbyists": {
+    "lobbyists": [
+      {
+        "lobbyist_covered_official_position": "", 
+        "lobbyist_first_name": "Christopher", 
+        "lobbyist_last_name": "Heinz", 
+        "lobbyist_suffix": ""
+      }
+    ]
+  }, 
+  "signature": {
+    "signature_date": "2009-01-07T00:00:00", 
+    "signature": "Digitally Signed By: Christopher Heinz   -  Owner"
+  }, 
+  "lobbying_issues_detail": {
+    "lobbying_issues_detail": "Appropriations, Pension Issues, Health Care Reform, Immigration Reform, Construction, Housing, Nuclear Energy, Energy production, Davis-Bacon Act, Transportation Construction, Tax Reform."
+  }, 
+  "registrant": {
+    "registrant_zip": "22554", 
+    "registrant_general_description": "Lobbying and Government Affairs Consulting", 
+    "registrant_org_name": null, 
+    "self_employed_individual": true, 
+    "registrant_state": "VA", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "Stafford", 
+    "registrant_email": "chris@cheinz.com", 
+    "registrant_individual_lastname": "Heinz", 
+    "registrant_ppb_state": "", 
+    "organization_or_lobbying_firm": false, 
+    "registrant_individual_prefix": "Mr.", 
+    "registrant_address_two": "", 
+    "registrant_country": "USA", 
+    "registrant_international_phone": false, 
+    "registrant_contact": "Mr. Christopher Heinz", 
+    "registrant_ppb_city": "", 
+    "registrant_ppb_country": "", 
+    "registrant_phone": "5406575780", 
+    "registrant_individual_firstname": "Christopher", 
+    "registrant_address_one": "9 Muster Drive"
+  }, 
+  "document_id": "self_employed", 
+  "registration_type": {
+    "amendment": false, 
+    "new_registrant": false, 
+    "new_client_for_existing_registrant": true
+  }
+}
