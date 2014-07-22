@@ -196,8 +196,29 @@ ld1_schema = [
     {
         'section': 'registrant',
         'lda_question': '3',
-        'field': 'registrant_name',
-        'path': '/html/body/table[3]/tbody/tr/td[3]/div',
+        'field': 'registrant_org_name',
+        'path': '/html/body/table[3]/tbody/tr/td[contains(.,"Organization")]/following-sibling::td[1]/div',
+        'parser': clean_text
+    },
+    {
+        'section': 'registrant',
+        'lda_question': '3',
+        'field': 'registrant_individual_prefix',
+        'path': '/html/body/table[3]/tbody/tr/td[contains(.,"Prefix")]/following-sibling::td[1]/div',
+        'parser': clean_text
+    },
+    {
+        'section': 'registrant',
+        'lda_question': '3',
+        'field': 'registrant_individual_firstname',
+        'path': '/html/body/table[3]/tbody/tr/td[5]/div',
+        'parser': clean_text
+    },
+    {
+        'section': 'registrant',
+        'lda_question': '3',
+        'field': 'registrant_individual_lastname',
+        'path': '/html/body/table[3]/tbody/tr/td[7]/div',
         'parser': clean_text
     },
     {

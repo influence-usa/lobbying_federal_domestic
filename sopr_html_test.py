@@ -105,6 +105,12 @@ test_set_defs = {
                           'event': 'getFilingDetails',
                           'filingID': '308f6aaa-c292-440e-8eca-f49fa937758e',
                           'filingTypeID': 1
+                      },
+                      {
+                          'test_name': 'self_employed',
+                          'event': 'getFilingDetails',
+                          'filingID': 'b931620a-16aa-4834-b798-e08b0a3bddf8',
+                          'filingTypeID': 1
                       }
                   ],
                   'ld2':
