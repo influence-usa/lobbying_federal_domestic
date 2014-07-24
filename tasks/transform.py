@@ -17,10 +17,10 @@ log = set_up_logging('transform', loglevel=logging.DEBUG)
 
 def log_result(result):
     if result[0] == 'success':
-        src_dir, dest_dir, num_files = result[1:]
+        src_dir, dest_dir = result[1:]
         log.info("successfully extracted " +
-                 "{src_dir} => {dest_dir} ({num} files)".format(
-                     src_dir=src_dir, dest_dir=dest_dir, num=num_files))
+                 "{src_dir} => {dest_dir}".format(
+                     src_dir=src_dir, dest_dir=dest_dir))
     elif result[0] == 'failure':
         loc, e = result[1:]
         log.error("extracting from {loc} failed: {exception}".format(
