@@ -161,9 +161,7 @@ def transform_sopr_html(options):
                      ('registration_update',                                   'registration_update'),
                      ('client',                                                'client'),
                      ('income.income_amount',                                  'income_amount'),
-                     ('income.income_less_than_five_thousand',                 'income_less_than_five_thousand'),
-                     ('expenses.expense_amount',                               'expense_amount'),
-                     ('expenses.expense_less_than_five_thousand',              'expense_less_than_five_thousand'),]
+                     ('expenses.expense_amount',                               'expense_amount'),]
 
     # (orig loc, transformed loc)
     ld1_copy_map = [ ('document_id',                                           'document_id'),
@@ -226,6 +224,22 @@ def transform_sopr_html(options):
         except IndexError:
             return None
 
+    def _determine_expense_lt(original_ld2):
+        if get_key(original_ld2, 'expenses.expense_less_than_five_thousand'):
+            return True
+        elif get_key(original_ld2, 'expenses.expense_five_thousand_or_more'):
+            return False
+        else:
+            return None
+
+    def _determine_income_lt(original_ld2):
+        if get_key(original_ld2, 'income.income_less_than_five_thousand'):
+            return True
+        elif get_key(original_ld2, 'income.income_five_thousand_or_more'):
+            return False
+        else:
+            return None
+
     def _pop_true(dictlike):
         for k, v in dictlike.iteritems():
             if v:
@@ -246,10 +260,12 @@ def transform_sopr_html(options):
         _transformed_ld2['expense_reporting_method'] = _determine_expense_method(original_ld2)
         if get_key(original_ld2, 'report.report_no_activity'):
             _transformed_ld2['lobbying_activities'] = []
+        _transformed_ld2['expense_less_than_five_thousand'] = _determine_expense_lt(original_ld2)
+        _transformed_ld2['income_less_than_five_thousand'] = _determine_income_lt(original_ld2)
         return _transformed_ld2
 
     def _postprocess_ld1(transformed_ld1, original_ld1):
-        pass
+        return transformed_ld1
 
     def _transform(original_loc, copy_map, postprocess, template):
         try:

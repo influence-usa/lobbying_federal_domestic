@@ -1,0 +1,105 @@
+{
+  "lobbying_activities": {
+    "lobbying_activities": [
+      {
+        "general_issue_area": "TAX", 
+        "houses_and_agencies_none": false, 
+        "specific_issues": "(1) S. 373, To facilitate and expedite direct refunds to coal producers and exporters of the excise tax unconstitutionally imposed on coal exported from the United States, all provisions relating to refund of the coal excise tax and interest.", 
+        "houses_and_agencies": "U.S. HOUSE OF REPRESENTATIVES, U.S. SENATE", 
+        "foreign_entity_interest": "", 
+        "lobbyists": [
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Steven", 
+            "lobbyist_last_name": "Becker", 
+            "lobbyist_suffix": ""
+          }, 
+          {
+            "lobbyist_covered_position": "", 
+            "lobbyist_is_new": false, 
+            "lobbyist_first_name": "Paul", 
+            "lobbyist_last_name": "Horowitz", 
+            "lobbyist_suffix": ""
+          }
+        ], 
+        "foreign_entity_interest_none": true
+      }
+    ]
+  }, 
+  "identifiers": {
+    "client_registrant_house_id": "337330044", 
+    "client_registrant_senate_id": "5142-797"
+  }, 
+  "expenses": {
+    "expense_amount": null, 
+    "expense_method_a": false, 
+    "expense_method_c": false, 
+    "expense_method_b": false, 
+    "expense_less_than_five_thousand": false, 
+    "expense_five_thousand_or_more": false
+  }, 
+  "registration_update": {
+    "removed_foreign_entities": [], 
+    "client_new_ppb_city": "", 
+    "client_new_ppb_zip": "", 
+    "added_foreign_entities": [], 
+    "added_affiliated_organizations": [], 
+    "client_new_zip": "", 
+    "client_new_city": "", 
+    "client_new_ppb_country": "", 
+    "client_new_general_description": "", 
+    "removed_lobbyists": [], 
+    "removed_lobbying_issues": [], 
+    "client_new_address": "", 
+    "client_new_country": "", 
+    "client_new_state": "", 
+    "removed_affiliated_organizations": [], 
+    "client_new_ppb_state": ""
+  }, 
+  "client": {
+    "client_name": "Teco Coal Corporation", 
+    "client_self": false, 
+    "client_state_or_local_government": false
+  }, 
+  "income": {
+    "income_less_than_five_thousand": true, 
+    "income_amount": null, 
+    "income_five_thousand_or_more": false
+  }, 
+  "report": {
+    "report_quarter_one": true, 
+    "report_quarter_four": false, 
+    "report_no_activity": false, 
+    "report_year": "2008", 
+    "report_quarter_two": false, 
+    "report_termination_date": "2008-04-17T00:00:00", 
+    "report_quarter_three": false, 
+    "report_is_amendment": false, 
+    "report_is_termination": true
+  }, 
+  "signature": {
+    "signature_date": "2008-04-21T00:00:00", 
+    "signature": "Digitally Signed By: Carl W. Hampe, Parnter"
+  }, 
+  "registrant": {
+    "registrant_name": "Baker & McKenzie LLP", 
+    "registrant_zip": "10036", 
+    "registrant_contact_email": "steven.h.becker@bakernet.com", 
+    "registrant_address_one": "1114 Avenue of the Americas", 
+    "self_employed_individual": false, 
+    "registrant_ppb_city": "New York", 
+    "registrant_ppb_zip": "", 
+    "registrant_city": "New York", 
+    "registrant_contact_name": "STEVEN H. BECKER", 
+    "registrant_state": "NY", 
+    "registrant_ppb_state": "", 
+    "registrant_contact_phone": "2126264834", 
+    "registrant_country": "USA", 
+    "registrant_address_two": "", 
+    "organization_lobbying_firm": true, 
+    "registrant_ppb_country": "", 
+    "registrant_contact_name_prefix": "Mr."
+  }, 
+  "document_id": "neither_expense"
+}

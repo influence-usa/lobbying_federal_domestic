@@ -140,6 +140,12 @@ test_set_defs = {
                           'filingTypeID': 60
                       },
                       {
+                          'test_name': 'neither_expense',
+                          'event': 'getFilingDetails',
+                          'filingID': '0005b52d-cd4e-4e4a-984f-7ade8e95eaa8',
+                          'filingTypeID': 53
+                      },
+                      {
                           'test_name': 'multiple_inactive_foreign',
                           'event': 'getFilingDetails',
                           'filingID': '55dd2926-23b4-489d-8132-b040cc6ddac5',
