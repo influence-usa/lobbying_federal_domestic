@@ -4,7 +4,7 @@ import os.path
 
 import settings
 
-from .utils import mkdir_p
+from .file_ops import mkdir_p
 
 
 class EncodingFormatter(logging.Formatter):
