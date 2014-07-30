@@ -10,3 +10,5 @@ dedupe/jsons
 dedupe/*.graphml
 dedupe/processed_files
 dedupe/*.txt
+.ipynb_checkpoints
+local_settings.py
