@@ -9,8 +9,8 @@ from multiprocessing import Pool as ThreadPool
 from lxml import etree
 
 import settings as s
-from .utils import translate_dir, map_vals, get_key
-from .log import set_up_logging
+from utils import translate_dir, map_vals, get_key
+from utils import set_up_logging
 
 log = set_up_logging('transform', loglevel=logging.DEBUG)
 

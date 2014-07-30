@@ -18,8 +18,8 @@ import cookielib
 from lxml import etree
 
 from settings import CACHE_DIR, TRANS_DIR
-from .utils import mkdir_p
-from .log import set_up_logging
+from utils import mkdir_p
+from utils import set_up_logging
 
 log = set_up_logging('download', loglevel=logging.DEBUG)
 
