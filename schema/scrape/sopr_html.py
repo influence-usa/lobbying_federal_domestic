@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 import locale
 
-from .log import set_up_logging
+from utils import set_up_logging
 
 log = set_up_logging('schema', loglevel=logging.DEBUG)
 
