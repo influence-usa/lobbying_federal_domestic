@@ -13,7 +13,7 @@ from lxml import etree
 from settings import CACHE_DIR, ORIG_DIR, TEST_CACHE_DIR, TEST_ORIG_DIR
 from utils import mkdir_p, translate_dir
 from utils import set_up_logging
-from .schema import ld1_schema, ld2_schema
+from schema.scrape.sopr_html import ld1_schema, ld2_schema
 
 log = set_up_logging('extract', loglevel=logging.DEBUG)
 
