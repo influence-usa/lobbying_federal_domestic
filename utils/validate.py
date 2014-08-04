@@ -34,7 +34,6 @@ def validate_uuid(validator, fieldname, value, format_option):
                                                value)
 
 
-# from django.core.validators
 def validate_url(validator, fieldname, value, format_option):
 
     print("*********************")
@@ -44,6 +43,7 @@ def validate_url(validator, fieldname, value, format_option):
     print("format_option", format_option)
     print("*********************")
 
+    # from django.core.validators
     http_regex = re.compile(
         r'^(?:http)s?://'  # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
@@ -73,3 +73,26 @@ def validate_url(validator, fieldname, value, format_option):
             raise validictory.FieldValidationError(
                 "String {urlstr} isn't a valid FTP URL".format(urlstr=value),
                 fieldname, value)
+
+
+def validate_email(validator, fieldname, value, format_option):
+
+    print("*********************")
+    print("validator:", validator)
+    print("fieldname:", fieldname)
+    print("value", value)
+    print("format_option", format_option)
+    print("*********************")
+
+    # from django.core.validators
+    email_regex = re.compile(
+        r"(^[-!#$%&'*+/=?^_`{}|~0-9A-Z]+(\.[-!#$%&'*+/=?^_`{}|~0-9A-Z]+)*"  # dot-atom
+        # quoted-string, see also http://tools.ietf.org/html/rfc2822#section-3.2.5
+        r'|^"([\001-\010\013\014\016-\037!#-\[\]-\177]|\\[\001-\011\013\014\016-\177])*"'
+        r')@((?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)$)'  # domain
+        r'|\[(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\]$', re.IGNORECASE)  # literal form, ipv4 address (SMTP 4.1.3)
+
+    if not email_regex.search(value):
+        raise validictory.FieldValidationError(
+            "String {emailstr} isn't a valid email address".format(
+                emailstr=value), fieldname, value)

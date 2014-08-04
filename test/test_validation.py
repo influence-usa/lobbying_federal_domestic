@@ -3,7 +3,7 @@ import json
 import pytest
 import validictory
 
-from utils.validate import validate_uuid, validate_url
+from utils.validate import validate_uuid, validate_url, validate_email
 
 
 @pytest.fixture
@@ -98,3 +98,40 @@ def test_validate_url(url_fixture):
             print bad_eg
             validictory.validate(bad_data, url_schema,
                                  format_validators=formatdict)
+
+
+@pytest.fixture
+def email_fixture():
+    data = json.loads(''' {
+                            "email": "blannon@sunlightfoundation.com"
+                        }''')
+
+    schema = {
+        "title": "Email test schema",
+        "properties": {
+            "email": {
+                "format": "email"
+            }
+        }
+    }
+
+    return {'data': data, 'schema': schema}
+
+
+def test_validate_email(email_fixture):
+
+    email_data = email_fixture['data']
+    email_schema = email_fixture['schema']
+
+    formatdict = {"email": validate_email}
+
+    # Make sure good data validates
+    validictory.validate(email_data, email_schema,
+                         format_validators=formatdict)
+
+    # Make sure bad data doesn't
+    with pytest.raises(validictory.FieldValidationError):
+        bad_data = email_data.copy()
+        bad_data['email'] = 'bobby bear at gmail.com'
+        validictory.validate(bad_data, email_schema,
+                             format_validators=formatdict)
