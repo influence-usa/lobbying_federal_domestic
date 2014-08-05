@@ -1060,7 +1060,7 @@ ld2_schema = [
                     {
                         'section': 'lobbying_activities',
                         'lda_question': '18',
-                        'field': 'lobbyist_covered_position',
+                        'field': 'lobbyist_covered_official_position',
                         'path': 'td[4]/div',
                         'parser': clean_text
                     },
