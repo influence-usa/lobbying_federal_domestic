@@ -703,7 +703,7 @@ ld2_schema = [
     {
         'section': 'registrant',
         'lda_question': '1',
-        'field': 'organization_lobbying_firm',
+        'field': 'organization_or_lobbying_firm',
         'path': '/html/body/div[1]/input[1]',
         'parser': checkbox_boolean
     },
