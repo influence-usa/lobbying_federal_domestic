@@ -311,21 +311,21 @@ ld1_schema = [
     {
         'section': 'registrant',
         'lda_question': '5',
-        'field': 'registrant_contact',
+        'field': 'registrant_contact_name',
         'path': '/html/body/table[8]/tbody/tr/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '5',
-        'field': 'registrant_phone',
+        'field': 'registrant_contact_phone',
         'path': '/html/body/table[8]/tbody/tr/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'registrant',
         'lda_question': '5',
-        'field': 'registrant_email',
+        'field': 'registrant_contact_email',
         'path': '/html/body/table[8]/tbody/tr/td[6]/div',
         'parser': clean_text
     },
