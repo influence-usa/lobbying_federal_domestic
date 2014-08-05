@@ -2,6 +2,8 @@ import logging
 from datetime import datetime
 import locale
 
+from pytz import timezone
+
 from utils import set_up_logging
 
 log = set_up_logging('schema', loglevel=logging.DEBUG)
@@ -12,6 +14,8 @@ REPLACE_MAP = {u'&#160;': u'',
                u'&nbsp;': u''}
 
 locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+
+us_eastern = timezone('US/Eastern')
 
 DATE_FORMATS = ['%m/%d/%Y',
                 '%m/%d/%Y %I:%M:%S %p',
@@ -40,7 +44,13 @@ def parse_datetime(e):
         f = 0
         for f in DATE_FORMATS:
             try:
-                parsed = datetime.strptime(s, f).isoformat()
+                parsed = datetime.strptime(s, f)
+                try:
+                    localized = us_eastern.localize(parsed)
+                except ValueError:
+                    localized = parsed.astimezone(us_eastern)
+                finally:
+                    return localized.strftime('%Y-%m-%dT%H:%M:%SZ')
             except ValueError:
                 continue
             else:
