@@ -159,7 +159,7 @@ ld1_schema = [
         'lda_question': None,
         'field': 'new_client_for_existing_registrant',
         'path': '/html/body/div[1]/input[2]',
-        'parser': checkbox_boolean
+        'parser':  checkbox_boolean
     },
     {
         'section': 'registration_type',
@@ -964,7 +964,7 @@ ld2_schema = [
         'lda_question': '14',
         'field': 'expense_method_a',
         'path': '/html/body/table[4]/tbody/tr[7]/td[2]/input',
-        'parser': checkbox_boolean 
+        'parser': checkbox_boolean
     },
     {
         'section': 'expenses',
@@ -1289,7 +1289,7 @@ ld2_schema = [
                 'lda_question': '25',
                 'field': 'affiliated_organization_name',
                 'path': '.',
-                'parser': tail_text 
+                'parser': tail_text
             },
         ]
     },
