@@ -2,10 +2,10 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "RES"
+        "general_issue_area": "RES"
       }, 
       {
-        "issue_code": "FIN"
+        "general_issue_area": "FIN"
       }
     ]
   }, 
@@ -20,7 +20,7 @@
     "affiliated_organizations_no": true
   }, 
   "datetimes": {
-    "effective_date": "2014-02-17T00:00:00"
+    "effective_date": "2014-02-17T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -64,38 +64,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2014-03-25T11:32:39", 
+    "signature_date": "2014-03-25T11:32:39Z", 
     "signature": "Digitally Signed By: Matt Keelen"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "The Seller Finance Coalition (SFC) was created to protect the seller finance industry from overregulation from Washington and to undo the unintended consequences stemming from both the Secure and Fair Enforcement for Licensing (SAFE) Act and the Wall Street Reform and Consumer Protection (Dodd-Frank) Act."
   }, 
   "registrant": {
-    "registrant_zip": "22202", 
-    "registrant_general_description": "Lobbying and consulting", 
-    "registrant_org_name": "The Keelen Group, LLC", 
+    "registrant_ppb_country": "USA", 
     "self_employed_individual": false, 
     "registrant_state": "VA", 
-    "registrant_ppb_zip": "20003", 
-    "registrant_city": "Arlington", 
-    "registrant_email": "mkeelen@keelengroup.com", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "DC", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "", 
-    "registrant_country": "USA", 
+    "registrant_zip": "22202", 
+    "registrant_contact_email": "mkeelen@keelengroup.com", 
+    "registrant_ppb_zip": "20003", 
+    "registrant_email": "mkeelen@keelengroup.com", 
+    "registrant_contact_name": "Mr. Matt Keelen", 
+    "registrant_contact_phone": "2025062061", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mr. Matt Keelen", 
+    "registrant_address_one": "PO Box 2016", 
+    "registrant_city": "Arlington", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "Lobbying and consulting", 
     "registrant_ppb_city": "WASHINGTON", 
-    "registrant_ppb_country": "USA", 
-    "registrant_phone": "2025062061", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "PO Box 2016"
+    "registrant_org_name": "The Keelen Group, LLC", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "date_mdy", 
   "registration_type": {
-    "amendment": false, 
+    "is_amendment": false, 
     "new_registrant": false, 
     "new_client_for_existing_registrant": true
   }

@@ -2,7 +2,7 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "DEF"
+        "general_issue_area": "DEF"
       }
     ]
   }, 
@@ -17,7 +17,7 @@
     "affiliated_organizations_no": true
   }, 
   "datetimes": {
-    "effective_date": "2013-05-28T00:00:00"
+    "effective_date": "2013-05-28T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -49,38 +49,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2013-05-28T14:29:38", 
+    "signature_date": "2013-05-28T14:29:38Z", 
     "signature": "Digitally Signed By: Blake Johnson"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "Intelligence support for overseas combat operations"
   }, 
   "registrant": {
-    "registrant_zip": "20001", 
-    "registrant_general_description": "Public Affairs and Communications", 
-    "registrant_org_name": "101 Strategy Partners, LLC", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "DC", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "Washington", 
-    "registrant_email": "bjohnson@101sp.com", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "Suite L110", 
-    "registrant_country": "USA", 
+    "registrant_zip": "20001", 
+    "registrant_contact_email": "bjohnson@101sp.com", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "bjohnson@101sp.com", 
+    "registrant_contact_name": "Mr. Blake Johnson", 
+    "registrant_contact_phone": "2024146169", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mr. Blake Johnson", 
+    "registrant_address_one": "101 Constitution Ave NW", 
+    "registrant_city": "Washington", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "Public Affairs and Communications", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "2024146169", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "101 Constitution Ave NW"
+    "registrant_org_name": "101 Strategy Partners, LLC", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "Suite L110", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "random", 
   "registration_type": {
-    "amendment": false, 
+    "is_amendment": false, 
     "new_registrant": false, 
     "new_client_for_existing_registrant": true
   }

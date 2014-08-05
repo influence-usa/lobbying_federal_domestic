@@ -9,15 +9,15 @@
         "foreign_entity_interest": "", 
         "lobbyists": [
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Steven", 
             "lobbyist_last_name": "Becker", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Paul", 
             "lobbyist_last_name": "Horowitz", 
             "lobbyist_suffix": ""
@@ -40,46 +40,46 @@
     "expense_five_thousand_or_more": false
   }, 
   "registration_update": {
+    "client_country": "", 
     "removed_foreign_entities": [], 
-    "client_new_ppb_city": "", 
-    "client_new_ppb_zip": "", 
-    "added_foreign_entities": [], 
+    "client_ppb_city": "", 
     "added_affiliated_organizations": [], 
-    "client_new_zip": "", 
-    "client_new_city": "", 
-    "client_new_ppb_country": "", 
-    "client_new_general_description": "", 
+    "added_foreign_entities": [], 
     "removed_lobbyists": [], 
+    "client_city": "", 
+    "client_zip": "", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
     "removed_lobbying_issues": [], 
-    "client_new_address": "", 
-    "client_new_country": "", 
-    "client_new_state": "", 
+    "client_general_description": "", 
+    "client_state": "", 
     "removed_affiliated_organizations": [], 
-    "client_new_ppb_state": ""
+    "client_address": ""
   }, 
   "client": {
     "client_name": "Teco Coal Corporation", 
     "client_self": false, 
     "client_state_or_local_government": false
   }, 
+  "report_type": {
+    "is_amendment": false, 
+    "quarter_one": true, 
+    "no_activity": false, 
+    "quarter_three": false, 
+    "quarter_four": false, 
+    "termination_date": "2008-04-17T00:00:00Z", 
+    "year": "2008", 
+    "quarter_two": false, 
+    "is_termination": true
+  }, 
   "income": {
     "income_less_than_five_thousand": true, 
     "income_amount": null, 
     "income_five_thousand_or_more": false
   }, 
-  "report": {
-    "report_quarter_one": true, 
-    "report_quarter_four": false, 
-    "report_no_activity": false, 
-    "report_year": "2008", 
-    "report_quarter_two": false, 
-    "report_termination_date": "2008-04-17T00:00:00", 
-    "report_quarter_three": false, 
-    "report_is_amendment": false, 
-    "report_is_termination": true
-  }, 
   "signature": {
-    "signature_date": "2008-04-21T00:00:00", 
+    "signature_date": "2008-04-21T00:00:00Z", 
     "signature": "Digitally Signed By: Carl W. Hampe, Parnter"
   }, 
   "registrant": {
@@ -95,9 +95,9 @@
     "registrant_state": "NY", 
     "registrant_ppb_state": "", 
     "registrant_contact_phone": "2126264834", 
+    "organization_or_lobbying_firm": true, 
     "registrant_country": "USA", 
     "registrant_address_two": "", 
-    "organization_lobbying_firm": true, 
     "registrant_ppb_country": "", 
     "registrant_contact_name_prefix": "Mr."
   }, 

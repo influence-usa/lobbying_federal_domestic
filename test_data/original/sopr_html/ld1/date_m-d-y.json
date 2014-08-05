@@ -2,13 +2,13 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "UTI"
+        "general_issue_area": "UTI"
       }, 
       {
-        "issue_code": "TAX"
+        "general_issue_area": "TAX"
       }, 
       {
-        "issue_code": "ENG"
+        "general_issue_area": "ENG"
       }
     ]
   }, 
@@ -23,7 +23,7 @@
     "affiliated_organizations_no": true
   }, 
   "datetimes": {
-    "effective_date": "2014-04-01T00:00:00"
+    "effective_date": "2014-04-01T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -61,38 +61,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2014-04-24T13:25:16", 
+    "signature_date": "2014-04-24T13:25:16Z", 
     "signature": "Digitally Signed By: Anita Decker"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "PMA Issues, Hydro power, Cyber Security, reliability, Transmission and energy policy, Muni bonds"
   }, 
   "registrant": {
-    "registrant_zip": "98662-6064", 
-    "registrant_general_description": "West Coast Electric Utility Trade Association", 
-    "registrant_org_name": "Northwest Public Power Association", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "WA", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "Vancouver", 
-    "registrant_email": "Anita@nwppa.org", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "", 
-    "registrant_country": "USA", 
+    "registrant_zip": "98662-6064", 
+    "registrant_contact_email": "Anita@nwppa.org", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "Anita@nwppa.org", 
+    "registrant_contact_name": "Mrs. Anita Decker", 
+    "registrant_contact_phone": "3602540109", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mrs. Anita Decker", 
+    "registrant_address_one": "9817 NE 54th Street", 
+    "registrant_city": "Vancouver", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "West Coast Electric Utility Trade Association", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "3602540109", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "9817 NE 54th Street"
+    "registrant_org_name": "Northwest Public Power Association", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "date_m-d-y", 
   "registration_type": {
-    "amendment": true, 
+    "is_amendment": true, 
     "new_registrant": false, 
     "new_client_for_existing_registrant": false
   }

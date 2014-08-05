@@ -2,10 +2,10 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "HCR"
+        "general_issue_area": "HCR"
       }, 
       {
-        "issue_code": "SMB"
+        "general_issue_area": "SMB"
       }
     ]
   }, 
@@ -20,7 +20,7 @@
     "affiliated_organizations_no": true
   }, 
   "datetimes": {
-    "effective_date": "2009-07-22T00:00:00"
+    "effective_date": "2009-07-22T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -52,38 +52,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2001-08-13T00:00:00", 
+    "signature_date": "2001-08-13T00:00:00Z", 
     "signature": "Digitally Signed By: LAURIE RAINS, OWNER"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "SMALL BUSINESS GUIDANCE"
   }, 
   "registrant": {
-    "registrant_zip": "22201", 
-    "registrant_general_description": "POLITICAL CONSULTING", 
-    "registrant_org_name": "LAURIE RAINS STRATEGIES, LLC", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "VA", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "ARLINGTON", 
-    "registrant_email": "LRAINS@GMAIL.COM", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "SUITE700", 
-    "registrant_country": "USA", 
+    "registrant_zip": "22201", 
+    "registrant_contact_email": "LRAINS@GMAIL.COM", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "LRAINS@GMAIL.COM", 
+    "registrant_contact_name": "Ms. LAURIE RAINS", 
+    "registrant_contact_phone": "2027441875", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Ms. LAURIE RAINS", 
+    "registrant_address_one": "2111 WILSON BOULEVARD", 
+    "registrant_city": "ARLINGTON", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "POLITICAL CONSULTING", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "2027441875", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "2111 WILSON BOULEVARD"
+    "registrant_org_name": "LAURIE RAINS STRATEGIES, LLC", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "SUITE700", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "date_Ymd", 
   "registration_type": {
-    "amendment": false, 
+    "is_amendment": false, 
     "new_registrant": true, 
     "new_client_for_existing_registrant": false
   }

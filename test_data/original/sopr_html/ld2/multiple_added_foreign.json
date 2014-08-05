@@ -9,29 +9,29 @@
         "foreign_entity_interest": "E.ON AG has no direct interest in the specific issues.", 
         "lobbyists": [
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Lindsay", 
             "lobbyist_last_name": "Hooper", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Jonathan", 
             "lobbyist_last_name": "Talisman", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Joseph", 
             "lobbyist_last_name": "Mikrut", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Melissa", 
             "lobbyist_last_name": "Mueller", 
             "lobbyist_suffix": ""
@@ -54,9 +54,10 @@
     "expense_five_thousand_or_more": false
   }, 
   "registration_update": {
+    "client_country": "", 
     "removed_foreign_entities": [], 
-    "client_new_ppb_city": "", 
-    "client_new_ppb_zip": "", 
+    "client_ppb_city": "", 
+    "added_affiliated_organizations": [], 
     "added_foreign_entities": [
       {
         "foreign_entity_city": "Dusseldorf", 
@@ -83,42 +84,41 @@
         "foreign_entity_ownership_percentage": null
       }
     ], 
-    "added_affiliated_organizations": [], 
-    "client_new_zip": "", 
-    "client_new_city": "", 
-    "client_new_ppb_country": "", 
-    "client_new_general_description": "", 
     "removed_lobbyists": [], 
+    "client_city": "", 
+    "client_zip": "", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
     "removed_lobbying_issues": [], 
-    "client_new_address": "", 
-    "client_new_country": "", 
-    "client_new_state": "", 
+    "client_general_description": "", 
+    "client_state": "", 
     "removed_affiliated_organizations": [], 
-    "client_new_ppb_state": ""
+    "client_address": ""
   }, 
   "client": {
     "client_name": "E.ON Climate & Renewables North America Inc.", 
     "client_self": false, 
     "client_state_or_local_government": false
   }, 
+  "report_type": {
+    "is_amendment": false, 
+    "quarter_one": false, 
+    "no_activity": false, 
+    "quarter_three": false, 
+    "quarter_four": false, 
+    "termination_date": null, 
+    "year": "2013", 
+    "quarter_two": true, 
+    "is_termination": false
+  }, 
   "income": {
     "income_less_than_five_thousand": true, 
     "income_amount": null, 
     "income_five_thousand_or_more": false
   }, 
-  "report": {
-    "report_quarter_one": false, 
-    "report_quarter_four": false, 
-    "report_no_activity": false, 
-    "report_year": "2013", 
-    "report_quarter_two": true, 
-    "report_termination_date": null, 
-    "report_quarter_three": false, 
-    "report_is_amendment": false, 
-    "report_is_termination": false
-  }, 
   "signature": {
-    "signature_date": "2013-07-22T11:54:59", 
+    "signature_date": "2013-07-22T11:54:59Z", 
     "signature": "Digitally Signed By: Joseph Mikrut"
   }, 
   "registrant": {
@@ -134,9 +134,9 @@
     "registrant_state": "DC", 
     "registrant_ppb_state": "", 
     "registrant_contact_phone": "2022898700", 
+    "organization_or_lobbying_firm": true, 
     "registrant_country": "USA", 
     "registrant_address_two": "", 
-    "organization_lobbying_firm": true, 
     "registrant_ppb_country": "", 
     "registrant_contact_name_prefix": "Mr."
   }, 

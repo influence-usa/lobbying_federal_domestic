@@ -2,37 +2,37 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "HOM"
+        "general_issue_area": "HOM"
       }, 
       {
-        "issue_code": "AVI"
+        "general_issue_area": "AVI"
       }, 
       {
-        "issue_code": "BUD"
+        "general_issue_area": "BUD"
       }, 
       {
-        "issue_code": "DEF"
+        "general_issue_area": "DEF"
       }, 
       {
-        "issue_code": "ECN"
+        "general_issue_area": "ECN"
       }, 
       {
-        "issue_code": "FOR"
+        "general_issue_area": "FOR"
       }, 
       {
-        "issue_code": "GOV"
+        "general_issue_area": "GOV"
       }, 
       {
-        "issue_code": "LBR"
+        "general_issue_area": "LBR"
       }, 
       {
-        "issue_code": "LAW"
+        "general_issue_area": "LAW"
       }, 
       {
-        "issue_code": "TOU"
+        "general_issue_area": "TOU"
       }, 
       {
-        "issue_code": "TRA"
+        "general_issue_area": "TRA"
       }
     ]
   }, 
@@ -47,7 +47,7 @@
     "affiliated_organizations_no": true
   }, 
   "datetimes": {
-    "effective_date": "2012-09-20T00:00:00"
+    "effective_date": "2012-09-20T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -203,38 +203,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2012-11-02T00:00:00", 
+    "signature_date": "2012-11-02T00:00:00Z", 
     "signature": "Digitally Signed By: Robert Driscoll, Partner"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "Privatization proposal for Luis Munoz Marin International Airport in San Juan, Puerto Rico, (SJU) under Federal Aviation Administration Airport Privatization Pilot Program under 49 U.S.C.  47134 (Docket No. FAA-2009-1144) and related federal issues."
   }, 
   "registrant": {
-    "registrant_zip": "20004", 
-    "registrant_general_description": "law firm", 
-    "registrant_org_name": "ALSTON & BIRD, LLP", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "DC", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "WASHINGTON", 
-    "registrant_email": "ldafilings@alston.com", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "950 F STREET, NW", 
-    "registrant_country": "USA", 
+    "registrant_zip": "20004", 
+    "registrant_contact_email": "ldafilings@alston.com", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "ldafilings@alston.com", 
+    "registrant_contact_name": "Mr. Robert Driscoll", 
+    "registrant_contact_phone": "2022393470", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mr. Robert Driscoll", 
+    "registrant_address_one": "THE ATLANTIC BUILDING", 
+    "registrant_city": "WASHINGTON", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "law firm", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "2022393470", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "THE ATLANTIC BUILDING"
+    "registrant_org_name": "ALSTON & BIRD, LLP", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "950 F STREET, NW", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "multiple_issues", 
   "registration_type": {
-    "amendment": false, 
+    "is_amendment": false, 
     "new_registrant": false, 
     "new_client_for_existing_registrant": true
   }

@@ -2,22 +2,22 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "BAN"
+        "general_issue_area": "BAN"
       }, 
       {
-        "issue_code": "ECN"
+        "general_issue_area": "ECN"
       }, 
       {
-        "issue_code": "FIN"
+        "general_issue_area": "FIN"
       }, 
       {
-        "issue_code": "RES"
+        "general_issue_area": "RES"
       }, 
       {
-        "issue_code": "GOV"
+        "general_issue_area": "GOV"
       }, 
       {
-        "issue_code": "SMB"
+        "general_issue_area": "SMB"
       }
     ]
   }, 
@@ -32,7 +32,7 @@
     "affiliated_organizations_no": true
   }, 
   "datetimes": {
-    "effective_date": "2010-07-15T00:00:00"
+    "effective_date": "2010-07-15T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -64,38 +64,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2012-07-19T20:01:46", 
+    "signature_date": "2012-07-19T20:01:46Z", 
     "signature": "Digitally Signed By: John T. Doolittle"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "1. Implementation of an SBA 504 loan recovery program.\n2. Reform of SBA 504 Loan Refinancing Capabilities.\n3. Reform of the Premier Certified Lender Program (PCLP).\n4. Reform of Policies Relating to a Certified Development Corporation (CDC).\n5. Extension of 504 first mortgage lien pool (FMLP)."
   }, 
   "registrant": {
-    "registrant_zip": "22124", 
-    "registrant_general_description": "Public affairs consultant", 
-    "registrant_org_name": "John T. Doolittle, LLC", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "VA", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "Oakton", 
-    "registrant_email": "JTDoolittle@att.net", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "", 
-    "registrant_country": "USA", 
+    "registrant_zip": "22124", 
+    "registrant_contact_email": "JTDoolittle@att.net", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "JTDoolittle@att.net", 
+    "registrant_contact_name": "Mr. John T. Doolittle", 
+    "registrant_contact_phone": "7039383889", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mr. John T. Doolittle", 
+    "registrant_address_one": "10531 Mereworth Lane", 
+    "registrant_city": "Oakton", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "Public affairs consultant", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "7039383889", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "10531 Mereworth Lane"
+    "registrant_org_name": "John T. Doolittle, LLC", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "date_m-d-Y", 
   "registration_type": {
-    "amendment": true, 
+    "is_amendment": true, 
     "new_registrant": false, 
     "new_client_for_existing_registrant": false
   }

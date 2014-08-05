@@ -9,36 +9,36 @@
         "foreign_entity_interest": "Samsung is a South Korean-headquartered company that has substantial operations and revenue in the United States, thus the company has an interest in US patent law.", 
         "lobbyists": [
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Matthew", 
             "lobbyist_last_name": "Tanielian", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Joshua", 
             "lobbyist_last_name": "Ackil", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Kara", 
             "lobbyist_last_name": "Campbell", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Brian", 
             "lobbyist_last_name": "Peters", 
             "lobbyist_suffix": ""
           }, 
           {
-            "lobbyist_covered_position": "", 
             "lobbyist_is_new": false, 
+            "lobbyist_covered_official_position": "", 
             "lobbyist_first_name": "Ryan", 
             "lobbyist_last_name": "Triplette", 
             "lobbyist_suffix": ""
@@ -61,10 +61,9 @@
     "expense_five_thousand_or_more": false
   }, 
   "registration_update": {
+    "client_country": "", 
     "removed_foreign_entities": [], 
-    "client_new_ppb_city": "", 
-    "client_new_ppb_zip": "", 
-    "added_foreign_entities": [], 
+    "client_ppb_city": "", 
     "added_affiliated_organizations": [
       {
         "affiliated_organization_ppb_state": "NJ", 
@@ -89,41 +88,42 @@
         "affiliated_organization_city": "San Francisco"
       }
     ], 
-    "client_new_zip": "", 
-    "client_new_city": "", 
-    "client_new_ppb_country": "", 
-    "client_new_general_description": "", 
+    "added_foreign_entities": [], 
     "removed_lobbyists": [], 
+    "client_city": "", 
+    "client_zip": "", 
+    "client_ppb_zip": "", 
+    "client_ppb_country": "", 
+    "client_ppb_state": "", 
     "removed_lobbying_issues": [], 
-    "client_new_address": "", 
-    "client_new_country": "", 
-    "client_new_state": "", 
+    "client_general_description": "", 
+    "client_state": "", 
     "removed_affiliated_organizations": [], 
-    "client_new_ppb_state": ""
+    "client_address": ""
   }, 
   "client": {
     "client_name": "Coalition for Patent Fairness", 
     "client_self": false, 
     "client_state_or_local_government": false
   }, 
+  "report_type": {
+    "is_amendment": true, 
+    "quarter_one": false, 
+    "no_activity": false, 
+    "quarter_three": false, 
+    "quarter_four": true, 
+    "termination_date": null, 
+    "year": "2013", 
+    "quarter_two": false, 
+    "is_termination": false
+  }, 
   "income": {
     "income_less_than_five_thousand": false, 
     "income_amount": 120000.0, 
     "income_five_thousand_or_more": true
   }, 
-  "report": {
-    "report_quarter_one": false, 
-    "report_quarter_four": true, 
-    "report_no_activity": false, 
-    "report_year": "2013", 
-    "report_quarter_two": false, 
-    "report_termination_date": null, 
-    "report_quarter_three": false, 
-    "report_is_amendment": true, 
-    "report_is_termination": false
-  }, 
   "signature": {
-    "signature_date": "2014-01-20T15:53:32", 
+    "signature_date": "2014-01-20T15:53:32Z", 
     "signature": "Digitally Signed By: MATTHEW TANIELIAN"
   }, 
   "registrant": {
@@ -139,9 +139,9 @@
     "registrant_state": "DC", 
     "registrant_ppb_state": "", 
     "registrant_contact_phone": "2022897223", 
+    "organization_or_lobbying_firm": true, 
     "registrant_country": "USA", 
     "registrant_address_two": "Suite 900", 
-    "organization_lobbying_firm": true, 
     "registrant_ppb_country": "", 
     "registrant_contact_name_prefix": "Mr."
   }, 

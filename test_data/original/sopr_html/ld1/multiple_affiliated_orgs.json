@@ -2,7 +2,7 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "TEC"
+        "general_issue_area": "TEC"
       }
     ]
   }, 
@@ -51,7 +51,7 @@
     "affiliated_organizations_no": false
   }, 
   "datetimes": {
-    "effective_date": "2013-07-16T00:00:00"
+    "effective_date": "2013-07-16T00:00:00Z"
   }, 
   "client": {
     "client_country": "USA", 
@@ -101,38 +101,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2013-08-30T00:00:00", 
+    "signature_date": "2013-08-30T00:00:00Z", 
     "signature": "Digitally Signed By: R. L. (Les) Brownlee,  President"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "Frequency Spectrum Allocation"
   }, 
   "registrant": {
-    "registrant_zip": "22206", 
-    "registrant_general_description": "Lobbying/Consulting", 
-    "registrant_org_name": "Les Brownlee & Associates, LLC", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "VA", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "Arlington", 
-    "registrant_email": "mward@wardlawless.com", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "", 
-    "registrant_country": "USA", 
+    "registrant_zip": "22206", 
+    "registrant_contact_email": "mward@wardlawless.com", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "mward@wardlawless.com", 
+    "registrant_contact_name": "Mr. R.L. (LES) BROWNLEE", 
+    "registrant_contact_phone": "7037510565", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mr. R.L. (LES) BROWNLEE", 
+    "registrant_address_one": "2720 S. Arlington Mill Drive; Suite 501", 
+    "registrant_city": "Arlington", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "Lobbying/Consulting", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "7037510565", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "2720 S. Arlington Mill Drive; Suite 501"
+    "registrant_org_name": "Les Brownlee & Associates, LLC", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "multiple_affiliated_orgs", 
   "registration_type": {
-    "amendment": false, 
+    "is_amendment": false, 
     "new_registrant": false, 
     "new_client_for_existing_registrant": true
   }

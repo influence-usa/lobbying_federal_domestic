@@ -2,7 +2,7 @@
   "lobbying_issues": {
     "lobbying_issues": [
       {
-        "issue_code": "DEF"
+        "general_issue_area": "DEF"
       }
     ]
   }, 
@@ -49,38 +49,39 @@
     ]
   }, 
   "signature": {
-    "signature_date": "2008-04-16T00:00:00", 
+    "signature_date": "2008-04-16T00:00:00Z", 
     "signature": "Digitally Signed By: Alan L. Ross, President"
   }, 
   "lobbying_issues_detail": {
     "lobbying_issues_detail": "Defense appropriations"
   }, 
   "registrant": {
-    "registrant_zip": "20191", 
-    "registrant_general_description": "Business development", 
-    "registrant_org_name": "A.L. Ross Associates", 
+    "registrant_ppb_country": "", 
     "self_employed_individual": false, 
     "registrant_state": "VA", 
-    "registrant_ppb_zip": "", 
-    "registrant_city": "Reston", 
-    "registrant_email": "alross@alra.us", 
-    "registrant_individual_lastname": null, 
     "registrant_ppb_state": "", 
-    "organization_or_lobbying_firm": true, 
     "registrant_individual_prefix": null, 
-    "registrant_address_two": "Suite 520", 
-    "registrant_country": "USA", 
+    "registrant_zip": "20191", 
+    "registrant_contact_email": "alross@alra.us", 
+    "registrant_ppb_zip": "", 
+    "registrant_email": "alross@alra.us", 
+    "registrant_contact_name": "Mr. Alan L. Ross", 
+    "registrant_contact_phone": "7038607600", 
     "registrant_international_phone": false, 
-    "registrant_contact": "Mr. Alan L. Ross", 
+    "registrant_address_one": "1800 Alexander Bell Drive", 
+    "registrant_city": "Reston", 
+    "registrant_country": "USA", 
+    "registrant_general_description": "Business development", 
     "registrant_ppb_city": "", 
-    "registrant_ppb_country": "", 
-    "registrant_phone": "7038607600", 
-    "registrant_individual_firstname": null, 
-    "registrant_address_one": "1800 Alexander Bell Drive"
+    "registrant_org_name": "A.L. Ross Associates", 
+    "registrant_individual_lastname": null, 
+    "organization_or_lobbying_firm": true, 
+    "registrant_address_two": "Suite 520", 
+    "registrant_individual_firstname": null
   }, 
   "document_id": "date_bad", 
   "registration_type": {
-    "amendment": false, 
+    "is_amendment": false, 
     "new_registrant": true, 
     "new_client_for_existing_registrant": false
   }
