@@ -153,6 +153,7 @@ def transform_sopr_html(options):
                      ('report_type.is_termination',                            'report_type.is_termination'),
                      ('report_type.no_activity',                               'report_type.no_activity'),
                      ('signature.signature_date',                              'datetimes.signature_date'),
+                     ('report_type.termination_date',                          'datetimes.termination_date'),
                      ('registrant',                                            'registrant'), 
                      ('identifiers.client_registrant_house_id',                'client_registrant_house_id'),
                      ('identifiers.client_registrant_senate_id',               'client_registrant_senate_id'),
@@ -160,7 +161,7 @@ def transform_sopr_html(options):
                      ('registration_update',                                   'registration_update'),
                      ('client',                                                'client'),
                      ('income.income_amount',                                  'income_amount'),
-                     ('expenses.expense_amount',                               'expense_amount'),]
+                     ('expenses.expense_amount',                               'expense_amount')]
 
     # (orig loc, transformed loc)
     ld1_copy_map = [ ('document_id',                                           'document_id'),

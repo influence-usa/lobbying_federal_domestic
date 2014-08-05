@@ -1092,70 +1092,70 @@ ld2_schema = [
     {
         'section': 'registration_update',
         'lda_question': 20,
-        'field': 'client_new_address',
+        'field': 'client_address',
         'path': '//p[contains(.,"20. Client new address")]/following-sibling::table[1]/tbody/tr[1]/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 20,
-        'field': 'client_new_city',
+        'field': 'client_city',
         'path': '//p[contains(.,"20. Client new address")]/following-sibling::table[1]/tbody/tr[2]/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 20,
-        'field': 'client_new_state',
+        'field': 'client_state',
         'path': '//p[contains(.,"20. Client new address")]/following-sibling::table[1]/tbody/tr[2]/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 20,
-        'field': 'client_new_zip',
+        'field': 'client_zip',
         'path': '//p[contains(.,"20. Client new address")]/following-sibling::table[1]/tbody/tr[2]/td[6]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 20,
-        'field': 'client_new_country',
+        'field': 'client_country',
         'path': '//p[contains(.,"20. Client new address")]/following-sibling::table[1]/tbody/tr[2]/td[8]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 21,
-        'field': 'client_new_ppb_city',
+        'field': 'client_ppb_city',
         'path': '//p[contains(.,"21. Client new principal place")]/following-sibling::table[1]/tbody/tr[1]/td[2]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 21,
-        'field': 'client_new_ppb_state',
+        'field': 'client_ppb_state',
         'path': '//p[contains(.,"21. Client new principal place")]/following-sibling::table[1]/tbody/tr[1]/td[4]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 21,
-        'field': 'client_new_ppb_zip',
+        'field': 'client_ppb_zip',
         'path': '//p[contains(.,"21. Client new principal place")]/following-sibling::table[1]/tbody/tr[1]/td[6]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 21,
-        'field': 'client_new_ppb_country',
+        'field': 'client_ppb_country',
         'path': '//p[contains(.,"21. Client new principal place")]/following-sibling::table[1]/tbody/tr[1]/td[8]/div',
         'parser': clean_text
     },
     {
         'section': 'registration_update',
         'lda_question': 22,
-        'field': 'client_new_general_description',
+        'field': 'client_general_description',
         'path': '//p[contains(.,"22. New General description")]/following-sibling::div[1]',
         'parser': clean_text
     },
@@ -1169,21 +1169,21 @@ ld2_schema = [
             {
                 'section': 'registration_update',
                 'lda_question': 23,
-                'field': 'removed_lobbyist_first_name',
+                'field': 'lobbyist_first_name',
                 'path': 'td[1]/div',
                 'parser': clean_text
             },
             {
                 'section': 'registration_update',
                 'lda_question': 23,
-                'field': 'removed_lobbyist_last_name',
+                'field': 'lobbyist_last_name',
                 'path': 'td[2]/div',
                 'parser': clean_text
             },
             {
                 'section': 'registration_update',
                 'lda_question': 23,
-                'field': 'removed_lobbyist_last_name',
+                'field': 'lobbyist_last_name',
                 'path': 'td[3]/div',
                 'parser': clean_text
             },
