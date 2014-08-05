@@ -474,7 +474,7 @@ ld1_schema = [
             {
                 'section': 'lobbying_issues',
                 'lda_question': '11',
-                'field': 'issue_code',
+                'field': 'general_issue_area',
                 'path': '.',
                 'parser': clean_text
             },
@@ -1199,7 +1199,7 @@ ld2_schema = [
             {
                 'section': 'lobbying_issues',
                 'lda_question': '24',
-                'field': 'issue_code',
+                'field': 'general_issue_area',
                 'path': '.',
                 'parser': clean_text
             },
