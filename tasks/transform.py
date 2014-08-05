@@ -148,11 +148,10 @@ def transform_sopr_html(options):
     # (orig loc, transformed loc)
     ld2_copy_map = [ ('document_id',                                           'document_id'),
                      ('signature.signature',                                   'signature'),
-                     ('report.report_year',                                    'report_year'),
-                     ('report.report_is_amendment',                            'report_is_amendment'),
-                     ('report.report_is_termination',                          'report_is_termination'),
-                     ('report.report_no_activity',                             'report_no_activity'),
-                     ('report.report_termination_date',                        'datetimes.termination_date'),
+                     ('report_type.year',                                      'report_type.year'),
+                     ('report_type.is_amendment',                              'report_type.is_amendment'),
+                     ('report_type.is_termination',                            'report_type.is_termination'),
+                     ('report_type.no_activity',                               'report_type.no_activity'),
                      ('signature.signature_date',                              'datetimes.signature_date'),
                      ('registrant',                                            'registrant'), 
                      ('identifiers.client_registrant_house_id',                'client_registrant_house_id'),
@@ -199,13 +198,13 @@ def transform_sopr_html(options):
         return output_path
 
     def _determine_quarter(record):
-        report = record['report'].copy()
+        report = record['report_type'].copy() 
         quarter_map = {'one': 'Q1',
                        'two': 'Q2',
                        'three': 'Q3',
                        'four': 'Q4'}
         quarter = [v for q, v in quarter_map.items()
-                   if report['report_quarter_'+q]]
+                   if report['quarter_'+q]]
         assert len(quarter) <= 1
         try:
             return quarter[0]
@@ -256,9 +255,9 @@ def transform_sopr_html(options):
 
     def _postprocess_ld2(transformed_ld2, original_ld2):
         _transformed_ld2 = transformed_ld2.copy()
-        _transformed_ld2['report_quarter'] = _determine_quarter(original_ld2)
+        _transformed_ld2['report_type']['quarter'] = _determine_quarter(original_ld2)
         _transformed_ld2['expense_reporting_method'] = _determine_expense_method(original_ld2)
-        if get_key(original_ld2, 'report.report_no_activity'):
+        if get_key(original_ld2, 'report_type.no_activity'):
             _transformed_ld2['lobbying_activities'] = []
         _transformed_ld2['expense_less_than_five_thousand'] = _determine_expense_lt(original_ld2)
         _transformed_ld2['income_less_than_five_thousand'] = _determine_income_lt(original_ld2)
@@ -308,5 +307,5 @@ def transform_sopr_html(options):
     log.info('Finished LD-1 transforms')
     log.info('Beginning LD-2 transforms')
     _transform_all(original_ld2_files, ld2_copy_map, _postprocess_ld2,
-                   {'datetimes': {}}, options)
+                   {'datetimes': {}, 'report_type': {}}, options)
     log.info('Finished LD-2 transforms')

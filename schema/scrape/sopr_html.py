@@ -164,7 +164,7 @@ ld1_schema = [
     {
         'section': 'registration_type',
         'lda_question': None,
-        'field': 'amendment',
+        'field': 'is_amendment',
         'path': '/html/body/div[1]/input[3]',
         'parser': checkbox_boolean
     },
@@ -855,65 +855,65 @@ ld2_schema = [
         'parser': clean_text
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '8',
-        'field': 'report_year',
+        'field': 'year',
         'path': '/html/body/table[2]/tbody/td[3]/div',
         'parser': clean_text
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '8',
-        'field': 'report_quarter_one',
+        'field': 'quarter_one',
         'path': '/html/body/table[2]/tbody/td[4]/input',
         'parser': checkbox_boolean
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '8',
-        'field': 'report_quarter_two',
+        'field': 'quarter_two',
         'path': '/html/body/table[2]/tbody/td[5]/input',
         'parser': checkbox_boolean
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '8',
-        'field': 'report_quarter_three',
+        'field': 'quarter_three',
         'path': '/html/body/table[2]/tbody/td[6]/input',
         'parser': checkbox_boolean
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '8',
-        'field': 'report_quarter_four',
+        'field': 'quarter_four',
         'path': '/html/body/table[2]/tbody/td[7]/input',
         'parser': checkbox_boolean
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '9',
-        'field': 'report_is_amendment',
+        'field': 'is_amendment',
         'path': '/html/body/p[2]/input',
         'parser': checkbox_boolean
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '10',
-        'field': 'report_is_termination',
+        'field': 'is_termination',
         'path': '/html/body/table[3]/tbody/td[1]/input',
         'parser': checkbox_boolean
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '10',
-        'field': 'report_termination_date',
+        'field': 'termination_date',
         'path': '/html/body/table[3]/tbody/td[3]/div',
-        'parser': parse_datetime 
+        'parser': parse_datetime
     },
     {
-        'section': 'report',
+        'section': 'report_type',
         'lda_question': '11',
-        'field': 'report_no_activity',
+        'field': 'no_activity',
         'path': '/html/body/table[3]/tbody/td[4]/input',
         'parser': checkbox_boolean
     },
