@@ -37,8 +37,9 @@ def log_result(result):
         loc = result[1]
         log.debug("valid - {fname}".format(fname=loc))
     elif result[0] == 'invalid':
-        loc, message = result[1:]
-        log.error("invalid - {loc}\n\t{msg}".format(loc=loc, msg=message))
+        loc, fieldname, value, message = result[1:]
+        log.error("invalid - {loc}\n\t{field}: {value}\n\t{msg}".format(
+            loc=loc, field=fieldname, value=value, msg=message))
 
 
 def validate_one(loc, schema):
@@ -47,8 +48,8 @@ def validate_one(loc, schema):
         try:
             validator.validate(data, schema)
             return ('valid', loc)
-        except validictory.MultipleValidationError as e:
-            return ('invalid', loc, e.message)
+        except validictory.ValidationError as e:
+            return ('invalid', loc, e.fieldname, e.value, e.message)
 
 
 def validate_all(locs, schema, options):
