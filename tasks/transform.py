@@ -4,7 +4,7 @@ import json
 import logging
 from glob import glob, iglob
 
-from multiprocessing import Pool as ThreadPool
+from multiprocessing.dummy import Pool as ThreadPool
 
 from lxml import etree
 
