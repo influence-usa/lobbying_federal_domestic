@@ -49,7 +49,8 @@ def validate_one(loc, schema):
             validator.validate(data, schema)
             return ('valid', loc)
         except validictory.ValidationError as e:
-            return ('invalid', loc, e.fieldname, e.value, e.message)
+            msg = e.message.split("errorlist = ")[-1]
+            return ('invalid', loc, e.fieldname, e.value, msg)
 
 
 def validate_all(locs, schema, options):
