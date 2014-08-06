@@ -6,12 +6,12 @@ import validictory
 
 def validate_uuid(validator, fieldname, value, format_option):
 
-    print("*********************")
-    print("validator:", validator)
-    print("fieldname:", fieldname)
-    print("value", value)
-    print("format_option", format_option)
-    print("*********************")
+    # print("*********************")
+    # print("validator:", validator)
+    # print("fieldname:", fieldname)
+    # print("value", value)
+    # print("format_option", format_option)
+    # print("*********************")
 
     if format_option == "uuid_hex":
         try:
@@ -36,12 +36,12 @@ def validate_uuid(validator, fieldname, value, format_option):
 
 def validate_url(validator, fieldname, value, format_option):
 
-    print("*********************")
-    print("validator:", validator)
-    print("fieldname:", fieldname)
-    print("value", value)
-    print("format_option", format_option)
-    print("*********************")
+    # print("*********************")
+    # print("validator:", validator)
+    # print("fieldname:", fieldname)
+    # print("value", value)
+    # print("format_option", format_option)
+    # print("*********************")
 
     # from django.core.validators
     http_regex = re.compile(
@@ -77,12 +77,12 @@ def validate_url(validator, fieldname, value, format_option):
 
 def validate_email(validator, fieldname, value, format_option):
 
-    print("*********************")
-    print("validator:", validator)
-    print("fieldname:", fieldname)
-    print("value", value)
-    print("format_option", format_option)
-    print("*********************")
+    # print("*********************")
+    # print("validator:", validator)
+    # print("fieldname:", fieldname)
+    # print("value", value)
+    # print("format_option", format_option)
+    # print("*********************")
 
     # from django.core.validators
     email_regex = re.compile(
