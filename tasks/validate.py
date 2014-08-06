@@ -5,6 +5,7 @@ from glob import iglob
 from multiprocessing import Pool as ThreadPool
 
 import validictory
+from validictory import SchemaValidator
 
 from schema.validate.sopr_html import transformed_ld1_schema,\
     transformed_ld2_schema
@@ -18,27 +19,38 @@ format_validators = {"uuid_hex": validate_uuid,
 
 log = set_up_logging('validate', loglevel=logging.DEBUG)
 
+required_by_default = True
+
+blank_by_default = False
+
+disallow_unknown_properties = True
+
+apply_default_to_data = False
+
+fail_fast = True
+
+validator = SchemaValidator(format_validators, required_by_default,
+                            blank_by_default, disallow_unknown_properties,
+                            apply_default_to_data, fail_fast)
+
 
 def log_result(result):
     if result[0] == 'valid':
         loc = result[1]
         log.debug("valid - {fname}".format(fname=loc))
     elif result[0] == 'invalid':
-        loc, fieldname, value, message = result[1:]
-        log.error("invalid - {loc}\n\t{field}: {value}\n\t{msg}".format(
-            loc=loc, field=fieldname, value=value, msg=message))
+        loc, message = result[1:]
+        log.error("invalid - {loc}\n\t{msg}".format(loc=loc, msg=message))
 
 
 def validate_one(loc, schema):
     with open(loc, 'r') as json_file:
         data = json.load(json_file)
         try:
-            validictory.validate(data, schema,
-                                 format_validators=format_validators)
-        except validictory.ValidationError as e:
-            return ('invalid', loc, e.fieldname, e.value, e.message)
-        else:
+            validator.validate(data, schema)
             return ('valid', loc)
+        except validictory.MultipleValidationError as e:
+            return ('invalid', loc, e.message)
 
 
 def validate_all(locs, schema, options):
