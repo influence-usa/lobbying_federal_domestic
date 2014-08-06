@@ -38,7 +38,7 @@ def log_result(result):
         log.debug("valid - {fname}".format(fname=loc))
     elif result[0] == 'invalid':
         loc, fieldname, value, message = result[1:]
-        log.error("invalid - {loc}\n\t{field}: {value}\n\t{msg}".format(
+        log.error("invalid - {loc}\n\t**field_info**{field}: {value}\n\t**message**{msg}".format(
             loc=loc, field=fieldname, value=value, msg=message))
 
 
