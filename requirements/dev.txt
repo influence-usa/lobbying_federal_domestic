@@ -25,5 +25,6 @@ scrapelib==0.9.0
 selenium==2.40.0
 stream==0.8
 tornado==3.2
--e git+git@github.com:sunlightlabs/validictory.git@d3afa64f29da48bc86f163a616b1b62d169cf098#egg=validictory-master
+#-e git+git@github.com:sunlightlabs/validictory.git@d3afa64f29da48bc86f163a616b1b62d169cf098#egg=validictory-master
+validictory==0.9.3
 wsgiref==0.1.2
