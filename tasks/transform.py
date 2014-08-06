@@ -4,7 +4,7 @@ import json
 import logging
 from glob import glob, iglob
 
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing import Pool as ThreadPool
 
 from lxml import etree
 
@@ -30,6 +30,9 @@ def log_result(result):
 
 
 def transform_sopr_xml(options):
+    if options.get('loglevel', None):
+        log.setLevel(options['loglevel'])
+
     def _is_array(element):
         return element.getchildren() != []
 
@@ -84,6 +87,9 @@ def transform_sopr_xml(options):
 
 
 def transform_house_xml(options):
+    if options.get('loglevel', None):
+        log.setLevel(options['loglevel'])
+
     ARRAY_FIELDS = ['inactiveOrgs',
                     'inactive_lobbyists',
                     'federal_agencies',
@@ -145,6 +151,10 @@ def transform_house_xml(options):
 
 
 def transform_sopr_html(options):
+    
+    if options.get('loglevel', None):
+        log.setLevel(options['loglevel'])
+
     # (orig loc, transformed loc)
     ld2_copy_map = [ ('document_id',                                           'document_id'),
                      ('signature.signature',                                   'signature'),
@@ -284,17 +294,18 @@ def transform_sopr_html(options):
         threaded = options.get('threaded', False)
         thread_num = options.get('thread_num', 4)
 
-        if threaded:
-            pool = ThreadPool(thread_num)
-            for original_loc in original_locs:
-                pool.apply_async(_transform, args=(original_loc, copy_map,
-                                 postprocess, template), callback=log_result)
-            pool.close()
-            pool.join()
-        else:
-            for original_loc in original_locs:
-                log_result(_transform(original_loc, copy_map, postprocess,
-                                      template))
+        # #methods used can't be pickled, unfortunately
+        # if threaded:
+        #     pool = ThreadPool(thread_num)
+        #     for original_loc in original_locs:
+        #         pool.apply_async(_transform, args=(original_loc, copy_map,
+        #                          postprocess, template), callback=log_result)
+        #     pool.close()
+        #     pool.join()
+        # else:
+        for original_loc in original_locs:
+            log_result(_transform(original_loc, copy_map, postprocess,
+                                  template))
 
     original_ld1_files = iglob(os.path.join(s.ORIG_DIR, 'sopr_html', '*',
                                             'REG', '*.json'))

@@ -70,6 +70,9 @@ def validate_all(locs, schema, options):
 
 
 def validate_sopr_html(options):
+    if options.get('loglevel', None):
+        log.setLevel(options['loglevel'])
+
     ld1_locs = iglob(os.path.join(TRANS_DIR, 'sopr_html', '*', 'REG', '*.json'))
     log.info("beginning LD-1 validation")
     validate_all(ld1_locs, transformed_ld1_schema, options)
