@@ -331,13 +331,6 @@ ld1_schema = [
     },
     {
         'section': 'registrant',
-        'lda_question': '5',
-        'field': 'registrant_email',
-        'path': '/html/body/table[8]/tbody/tr/td[6]/div',
-        'parser': clean_text
-    },
-    {
-        'section': 'registrant',
         'lda_question': '6',
         'field': 'registrant_general_description',
         'path': '/html/body/div[2]',
