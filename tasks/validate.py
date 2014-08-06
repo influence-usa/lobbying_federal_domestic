@@ -27,11 +27,9 @@ disallow_unknown_properties = True
 
 apply_default_to_data = False
 
-fail_fast = True
-
 validator = SchemaValidator(format_validators, required_by_default,
                             blank_by_default, disallow_unknown_properties,
-                            apply_default_to_data, fail_fast)
+                            apply_default_to_data)
 
 
 def log_result(result):
