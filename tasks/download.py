@@ -64,9 +64,9 @@ def download(val, get_response_loc_pair):
                 return ('success', _url, _loc, content_length)
             except Exception:
                 log.warn('{url} something went wrong, trying again ({code} - {reason})'.format(
-                             url=_response.url,
-                             code=_response.status_code,
-                             reason=_response.reason))
+                         url=_response.url,
+                         code=_response.status_code,
+                         reason=_response.reason))
                 time.sleep(5)
         else:
             log.info('cached, not re-downloading')
@@ -96,21 +96,25 @@ def download_all(vals, get_response_loc_pair, options):
 def is_not_cached(response, output_loc):
     response, output_loc
     if os.path.exists(output_loc):
-        downloaded_size = int(os.path.getsize(output_loc))
-        log.debug(
-            'found {output_loc}: {size}'.format(
-                output_loc=output_loc,
-                size=downloaded_size))
-        size_on_server = int(response.headers['content-length'])
-        if downloaded_size != size_on_server:
-            log.debug(
-                're-downloading {url}: {size}'.format(
-                    url=response.url,
-                    size=size_on_server))
-            return True
-        else:
-            response.close()
-            return False
+        return False
+        # Note: this doesn't work for sites that don't respond accurately
+        #       to HEAD requests
+        #
+        # downloaded_size = int(os.path.getsize(output_loc))
+        # log.debug(
+        #     'found {output_loc}: {size}'.format(
+        #         output_loc=output_loc,
+        #         size=downloaded_size))
+        # size_on_server = int(response.headers['content-length'])
+        # if downloaded_size != size_on_server:
+        #     log.debug(
+        #         're-downloading {url}: {size}'.format(
+        #             url=response.url,
+        #             size=size_on_server))
+        #     return True
+        # else:
+        #     response.close()
+        #     return False
     else:
         return True
 

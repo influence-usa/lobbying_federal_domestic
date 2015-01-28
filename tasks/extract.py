@@ -30,6 +30,11 @@ def log_result(result):
         loc, e = result[1:]
         log.error("extracting from {loc} failed: {exception}".format(
             loc=loc, exception=str(e)))
+    elif result[0] == 'no_update':
+        src_dir, dest_dir, num_files = result[1:]
+        log.info("no update to " +
+                 "{dest_dir} ({num} files)".format(
+                     src_dir=src_dir, dest_dir=dest_dir, num=num_files))
     else:
         raise Exception('Result for {loc} was neither success nor failure?')
 
@@ -50,6 +55,10 @@ def extract_zip(cache_path):
         return ('failure', old_path, e)
 
 
+def is_extracted(new_path):
+    return os.path.exists(new_path)
+
+
 def apply_element_node(parsed, node):
     _parse_fct = node['parser']
     _path = node['path']
@@ -68,18 +77,22 @@ def apply_container_node(parsed, node):
     _path = node['path']
     element_array = parsed.xpath(_path)
     if element_array:
-        return [r for r in _parse_fct(element_array, _children) if any(r.values())]
+        return [r for r in _parse_fct(element_array, _children)
+                if any(r.values())]
     else:
         return []
 
 
-def extract_html(cache_path, schema_elements, schema_containers, cache_dir, orig_dir):
+def extract_html(cache_path, schema_elements, schema_containers, cache_dir,
+                 orig_dir, options):
     old_path, new_path = translate_dir(cache_path, from_dir=cache_dir,
                                        to_dir=orig_dir)
     filename = os.path.basename(old_path).split(os.extsep)[0]
     new_path = os.extsep.join([os.path.join(new_path, filename), 'json'])
     # log.info('old: '+old_path)
     # log.info('new: '+new_path)
+    if is_extracted(new_path) and not options['force']:
+        return ('no_update', old_path, new_path, 1)
     record = defaultdict(dict)
     record['document_id'] = filename
     try:
@@ -141,7 +154,9 @@ def extract_all_html(cache_paths, schema_elements, schema_containers, options):
         for path in cache_paths:
             if check_ext(path, ext='.html'):
                 pool.apply_async(extract_html, args=(path, schema_elements,
-                                 schema_containers, cache_dir, orig_dir), 
+                                                     schema_containers,
+                                                     cache_dir, orig_dir,
+                                                     options),
                                  callback=log_result)
             else:
                 raise Exception("{} not an html file!".format(path))
@@ -150,7 +165,7 @@ def extract_all_html(cache_paths, schema_elements, schema_containers, options):
     else:
         for path in cache_paths:
             log_result(extract_html(path, schema_elements, schema_containers,
-                                    cache_dir, orig_dir))
+                                    cache_dir, orig_dir, options))
 
 
 def extract_sopr_xml(options):
