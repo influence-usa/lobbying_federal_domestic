@@ -32,7 +32,7 @@ def log_result(result):
             loc=loc, exception=str(e)))
     elif result[0] == 'no_update':
         src_dir, dest_dir, num_files = result[1:]
-        log.info("no update to " +
+        log.debug("no update to " +
                  "{dest_dir} ({num} files)".format(
                      src_dir=src_dir, dest_dir=dest_dir, num=num_files))
     else:
