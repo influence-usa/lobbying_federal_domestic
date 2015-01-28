@@ -760,7 +760,7 @@ ld2_schema = [
         'section': 'registrant',
         'lda_question': '3',
         'field': 'registrant_ppb_city',
-        'path': '/html/body/div[1]/table[2]/tbody/td[2]/div',
+        'path': '/html/body/div[1]/table[3]/tbody/td[2]/div',
         'parser': clean_text
     },
     {
