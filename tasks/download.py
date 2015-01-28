@@ -138,7 +138,7 @@ def download_sopr_xml(options):
 
     _urls = [_url_template.format(year=year, quarter=quarter)
              for year, quarter in
-             product(xrange(1999, 2015), xrange(1, 5))]
+             product(xrange(1999, 2016), xrange(1, 5))]
 
     # response_loc_pairs = (_get_response_loc_pair(url) for url in _urls)
     download_all(_urls, _get_response_loc_pair, options)
