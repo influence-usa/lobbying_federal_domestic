@@ -846,8 +846,7 @@ def transform_sopr_html(options):
                 output_path = _write_to_file(original_loc, _transformed)
             return ('success', original_loc, output_path)
         except Exception as e:
-            raise e
-            #return ('failure', original_loc, e)
+            return ('failure', original_loc, e)
 
     def _transform_all(original_locs, ocd_fct, options):
         threaded = options.get('threaded', False)
