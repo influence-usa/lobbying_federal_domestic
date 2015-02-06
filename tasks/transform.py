@@ -638,7 +638,7 @@ def transform_sopr_html(options):
                 l['lobbyist_last_name'],
                 l['lobbyist_suffix'],
             ])
-            _lobbyist['id'] = ocd_id('person')
+            _lobbyist['id'] = ocd_id('ocd-person')
             _lobbyist['extras']['lda_covered_official_positions'] = []
             if l['lobbyist_covered_official_position']:
                 _lobbyist['extras']['lda_covered_official_positions'].append({
