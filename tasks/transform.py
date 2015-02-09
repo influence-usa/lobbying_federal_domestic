@@ -167,7 +167,7 @@ def transform_sopr_html(options):
         _path, destination_dir = translate_dir(original_fileloc,
                                                from_dir=s.ORIG_DIR,
                                                to_dir=s.TRANS_DIR)
-        filing_id = json_filing['disclosure']['id'].split('/')[1]
+        filing_id = json_filing['id'].split('/')[1]
         output_path = os.path.join(destination_dir,
                                    '{fid}.json'.format(fid=filing_id))
 
