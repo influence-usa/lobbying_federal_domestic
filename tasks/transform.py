@@ -422,9 +422,17 @@ def transform_sopr_html(options):
             ]
         }
 
-        # add registrant
-        _disclosure['registrant'] = _registrant['name']
-        _disclosure['registrant'] = _registrant['id']
+        # add registrant fields
+        _disclosure['registrant_name'] = _registrant['name']
+        _disclosure['registrant_id'] = _registrant['id']
+        # add registrant as related entity
+        _disclosure['related_entities'].append({
+            'name': _registrant['name'],
+            'entity_type': _registrant['id'].split('/')[0].replace('ocd-',''),
+            'note': 'registrant',
+            'id': _registrant['id'],
+            'obj': _registrant
+        })
 
         # # People
         # build contact
@@ -458,6 +466,14 @@ def transform_sopr_html(options):
             'start_date': _orig['datetimes']['effective_date']
         })
         _main_contact['memberships'].append(_main_contact_membership)
+
+        _disclosure['related_entities'].append({
+            'name': _main_contact['name'],
+            'entity_type': _main_contact['id'].split('/')[0].replace('ocd-',''),
+            'note': 'main_contact',
+            'id': _main_contact['id'],
+            'obj': _main_contact
+        })
 
         # # Client
         # build client
@@ -630,6 +646,23 @@ def transform_sopr_html(options):
 
             _foreign_entities.append(_foreign_entity)
 
+        _disclosure['related_entities'].append({
+            'name': _client['name'],
+            'entity_type': _client['id'].split('/')[0].replace('ocd-',''),
+            'note': 'client',
+            'id': _client['id'],
+            'obj': _client
+        })
+       
+        for foreign_entity in _foreign_entities:
+            _disclosure['related_entities'].append({
+                'name': _foreign_entity['name'],
+                'entity_type': _foreign_entity['id'].split('/')[0].replace('ocd-',''),
+                'note': 'foreign_entity',
+                'id': _foreign_entity['id'],
+                'obj': _foreign_entity
+            })
+
         _lobbyists = []
         for l in _orig['lobbyists']['lobbyists']:
             _lobbyist = deepcopy(ref.ocd.OCD_PERSON)
@@ -662,6 +695,15 @@ def transform_sopr_html(options):
             })
             _lobbyist['memberships'].append(_lobbyist_membership)
             _lobbyists.append(_lobbyist)
+
+        for lobbyist in _lobbyists:
+            _disclosure['related_entities'].append({
+                'name': _lobbyist['name'],
+                'entity_type': _lobbyist['id'].split('/')[0].replace('ocd-',''),
+                'note': 'lobbyist',
+                'id': _lobbyist['id'],
+                'obj': _lobbyist
+            })
 
         # # Document
         # build document
@@ -755,6 +797,15 @@ def transform_sopr_html(options):
                 ],
             }
             _affiliated_organizations.append(_affiliated_organization)
+        
+        for affiliated_organization in _affiliated_organizations:
+            _disclosure['related_entities'].append({
+                'name': _affiliated_organization['name'],
+                'entity_type': _affiliated_organization['id'].split('/')[0].replace('ocd-',''),
+                'note': 'affiliated_organization',
+                'id': _affiliated_organization['id'],
+                'obj': _affiliated_organization
+            })
 
         # # Events & Agendas
         # name (TODO: make fct for name gen)
@@ -826,14 +877,7 @@ def transform_sopr_html(options):
             _agenda['subjects'].append(li['general_issue_area'])
 
         _disclosure['disclosed_events'].append(_event)
-        return {'disclosure': _disclosure.copy(),
-                'registrant': _registrant.copy(),
-                'client': _client.copy(),
-                'lobbyists': [l.copy() for l in _lobbyists],
-                'main_contact': _main_contact.copy(),
-                'affiliated_organizations': [a.copy() for a in _affiliated_organizations],
-                'foreign_entities': [fe.copy() for fe in _foreign_entities]
-                }
+        return _disclosure
 
     def _postprocess_ld1(transformed_ld1, original_ld1):
         return transformed_ld1
