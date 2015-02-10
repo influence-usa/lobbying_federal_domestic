@@ -423,7 +423,7 @@ def transform_sopr_html(options):
         }
 
         # add registrant fields
-        _disclosure['registrant_name'] = _registrant['name']
+        _disclosure['registrant'] = _registrant['name']
         _disclosure['registrant_id'] = _registrant['id']
         # add registrant as related entity
         _disclosure['related_entities'].append({
@@ -467,6 +467,7 @@ def transform_sopr_html(options):
         })
         _main_contact['memberships'].append(_main_contact_membership)
 
+        # add contact
         _disclosure['related_entities'].append({
             'name': _main_contact['name'],
             'entity_type': _main_contact['id'].split('/')[0].replace('ocd-',''),
