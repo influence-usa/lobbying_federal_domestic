@@ -66,7 +66,7 @@ Common  options
 
 The scripts will cache all downloaded pages and zip files, and it will not re-fetch them from the network unless a force flag is passed:
 
-    ./run.py bills --force
+    ./run.py download sopr_html --force
 
 Debugging messages are shown by default. To ignore them, run with --loglevel=warn. To hide even warnings, run with --loglevel=error.
 
